@@ -18,4 +18,5 @@
         android:text="Busca tu evento"
         android:textColor="@color/white"
         android:textSize="24sp" />
+
 </LinearLayout>

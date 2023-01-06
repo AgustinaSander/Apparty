@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(view);
-        setSupportActionBar(binding.materialToolbar);
+        setSupportActionBar(binding.topAppBar);
     }
 
     @Override
