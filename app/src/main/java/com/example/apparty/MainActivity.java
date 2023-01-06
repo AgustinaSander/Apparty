@@ -14,6 +14,11 @@ import android.view.View;
 
 import com.example.apparty.databinding.ActivityMainBinding;
 
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 
