@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/profileMenu"
-        android:title="Mis datos"
+        android:title="@string/mis_datos"
         />
     <item android:id="@+id/ticketsMenu"
-        android:title="Entradas adquiridas"
+        android:title="@string/entradas_adquiridas"
         />
     <item android:icon="@+id/eventsMenu"
-        android:title="Mis eventos"
+        android:title="@string/mis_eventos"
         />
     <item android:id="@+id/logoutMenu"
-        android:title="Cerrar Sesion"
+        android:title="@string/cerrar_sesion"
         />
     <item android:id="@+id/configurationMenu"
-        android:title="Configuracion"
+        android:title="@string/configuracion"
         />
 </menu>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchEvents">
+
+    <fragment
+        android:id="@+id/searchEvents"
+        android:name="com.example.apparty.SearchEvents"
+        android:label="fragment_search_events"
+        tools:layout="@layout/fragment_search_events" />
+    <action
+        android:id="@+id/goToSearchFragment"
+        app:destination="@id/searchEvents" />
+</navigation>
