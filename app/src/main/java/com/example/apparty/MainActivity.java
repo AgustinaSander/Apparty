@@ -1,7 +1,10 @@
 package com.example.apparty;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apparty.databinding.ActivityMainBinding;
+
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(view);
-        setSupportActionBar(binding.materialToolbar);
+        setSupportActionBar(binding.topAppBar);
     }
 
     @Override
@@ -34,8 +42,14 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-   /* @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-    }*/
+        switch (item.getItemId()) {
+            case R.id.searchEvents:
+                NavHostFragment.findNavController(binding.fragmentContainerView.getFragment()).navigate(R.id.goToSearchFragment);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
