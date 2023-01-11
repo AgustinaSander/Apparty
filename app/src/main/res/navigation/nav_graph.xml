@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchEvents"
-        android:name="com.example.apparty.SearchEvents"
+        android:name="com.example.apparty.SearchEventsFragment"
         android:label="fragment_search_events"
         tools:layout="@layout/fragment_search_events" />
     <action

@@ -7,7 +7,7 @@
     android:background="@color/dark_blue"
     android:orientation="vertical"
     android:paddingHorizontal="15sp"
-    tools:context=".SearchEvents">
+    tools:context=".SearchEventsFragment">
 
     <TextView
         android:id="@+id/textView2"
@@ -37,12 +37,17 @@
             app:startIconDrawable="@drawable/ic_baseline_search_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/filterBtn"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="50dp"
             android:layout_height="match_parent"
@@ -95,7 +100,7 @@
         android:id="@+id/carousel2"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="20sp"
+        android:layout_marginVertical="20sp"
         app:captionTextSize="16sp" />
 
 </LinearLayout>
