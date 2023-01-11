@@ -1,18 +1,21 @@
 package com.example.apparty;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
 import android.util.Log;
 import android.util.Pair;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
 
@@ -23,12 +26,12 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchEvents extends Fragment {
+public class SearchEventsFragment extends Fragment {
 
     private FragmentSearchEventsBinding binding;
     private List<CarouselItem> carouselItemList = new ArrayList<>();
 
-    public SearchEvents() {
+    public SearchEventsFragment() {
     }
 
     @Override
@@ -104,5 +107,25 @@ public class SearchEvents extends Fragment {
             public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
             }
         });
+
+        binding.searchInputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Log.i("BUSCAR", "onEditorAction: BUSCAR");
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        binding.filterBtn.setOnClickListener( e -> {
+            showFilterDialog();
+        });
+    }
+
+    private void showFilterDialog() {
+        DialogFragment newFragment = new FilterDialogFragment();
+        newFragment.show(getFragmentManager(), "dialog");
     }
 }

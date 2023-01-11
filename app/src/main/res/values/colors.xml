@@ -2,7 +2,9 @@
 <resources>
     <color name="dark_blue">#301F41</color>
     <color name="pink">#C042D7</color>
+    <color name="dark_pink">#681178</color>
     <color name="cyan">#45E7FE</color>
+    <color name="dark_cyan">#0A7988</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
