@@ -15,13 +15,17 @@ import android.widget.TextView;
 import com.example.apparty.databinding.FragmentFilterDialogBinding;
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class FilterDialogFragment extends DialogFragment {
 
@@ -30,6 +34,10 @@ public class FilterDialogFragment extends DialogFragment {
     private TextView toDateText;
     private Date fromDate;
     private Date toDate;
+
+    private double minPrice;
+    private double maxPrice;
+    private RangeSlider rangePrice;
 
     public FilterDialogFragment() {
     }
@@ -49,7 +57,31 @@ public class FilterDialogFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
+        setRangeSlider();
         setClickEvents();
+
+    }
+
+    private List<Integer> getCheckedChips(){
+        ChipGroup chipGroup = binding.chipGroup;
+        return chipGroup.getCheckedChipIds();
+    }
+
+    private void setRangeSlider() {
+        //MODIFICAR CUANDO ESTEN LOS GESTORES
+        //gestorAlojamiento = GestorAlojamiento.getInstance();
+        //minPrice = gestorAlojamiento.getMinPrice();
+        //maxPrice = gestorAlojamiento.getMaxPrice();
+        minPrice = 100;
+        maxPrice = 1500;
+        rangePrice = binding.rangeSlider;
+        rangePrice.setValues((float) minPrice, (float)maxPrice);
+        rangePrice.setValueFrom((float) minPrice);
+        rangePrice.setValueTo((float) maxPrice);
+        binding.maxPrice.setText("$"+Double.toString(maxPrice));
+        binding.minPrice.setText("$"+Double.toString(minPrice));
+
     }
 
     private void setClickEvents() {
