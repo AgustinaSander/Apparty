@@ -108,17 +108,6 @@ public class SearchEventsFragment extends Fragment {
             }
         });
 
-        binding.searchInputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    Log.i("BUSCAR", "onEditorAction: BUSCAR");
-                    return true;
-                }
-                return false;
-            }
-        });
-
         binding.filterBtn.setOnClickListener( e -> {
             showFilterDialog();
         });

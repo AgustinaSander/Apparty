@@ -141,7 +141,7 @@ public class FilterDialogFragment extends DialogFragment {
         List<Integer> dresscodeIds = getCheckedChips();
         //VER UBICACION
         Filter filters = new Filter(minPriceSelected, maxPriceSelected, dateFromSelected, dateToSelected, dresscodeIds);
-
+        //VER COMO RECIBO ESTO EN SEARCH EVENTS FRAGMENT
     }
 
     private void showFromDatePickerDialog() {
