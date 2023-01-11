@@ -14,8 +14,12 @@ import android.widget.TextView;
 
 import com.example.apparty.databinding.FragmentFilterDialogBinding;
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
+import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.model.DressCode;
+import com.example.apparty.model.Filter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -23,6 +27,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.slider.RangeSlider;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +43,8 @@ public class FilterDialogFragment extends DialogFragment {
     private double minPrice;
     private double maxPrice;
     private RangeSlider rangePrice;
+
+    private GestorEvent gestorEvent = GestorEvent.getInstance();
 
     public FilterDialogFragment() {
     }
@@ -59,8 +66,26 @@ public class FilterDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         setRangeSlider();
+        setDresscodeOptions();
         setClickEvents();
 
+    }
+
+    private void setDresscodeOptions() {
+        ChipGroup chipGroup = binding.chipGroup;
+        List<DressCode> dressCodes = gestorEvent.getDressCodeList();
+        for(DressCode d : dressCodes){
+            Chip chip = new Chip(getContext());
+            ChipDrawable chipDrawable = ChipDrawable.createFromAttributes(getContext(),
+                    null,
+                    0,
+                    R.style.FilterChip);
+            chip.setChipDrawable(chipDrawable);
+            chip.setText(d.getDressCode());
+            chip.setId(d.getId());
+            chip.setCheckedIconEnabled(true);
+            chipGroup.addView(chip);
+        }
     }
 
     private List<Integer> getCheckedChips(){
@@ -92,6 +117,31 @@ public class FilterDialogFragment extends DialogFragment {
         MaterialButton toDateBtn = binding.toDateBtn;
         toDateText = binding.toDate;
         toDateBtn.setOnClickListener(e -> showToDatePickerDialog());
+
+        binding.applyBtn.setOnClickListener(e -> applyFilters());
+        binding.deleteBtn.setOnClickListener(e -> resetFilters());
+    }
+
+    private void resetFilters() {
+        rangePrice = binding.rangeSlider;
+        rangePrice.setValues((float) minPrice, (float)maxPrice);
+        binding.chipGroup.clearCheck();
+        binding.fromDate.setText("");
+        binding.toDate.setText("");
+        fromDate = null;
+        toDate = null;
+        binding.toDateBtn.setEnabled(fromDate != null);
+    }
+
+    private void applyFilters() {
+        double minPriceSelected = binding.rangeSlider.getValueFrom();
+        double maxPriceSelected = binding.rangeSlider.getValueTo();
+        Date dateFromSelected = fromDate;
+        Date dateToSelected = toDate;
+        List<Integer> dresscodeIds = getCheckedChips();
+        //VER UBICACION
+        Filter filters = new Filter(minPriceSelected, maxPriceSelected, dateFromSelected, dateToSelected, dresscodeIds);
+
     }
 
     private void showFromDatePickerDialog() {
@@ -113,7 +163,6 @@ public class FilterDialogFragment extends DialogFragment {
 
                 binding.toDateBtn.setEnabled(fromDate != null);
                 toDate = null;
-                binding.toDate.setText("Fecha de inicio");
             }
         });
         materialDatePicker.show(getActivity().getSupportFragmentManager(), "TAG");
