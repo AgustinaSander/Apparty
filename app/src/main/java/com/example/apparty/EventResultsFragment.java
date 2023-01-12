@@ -6,18 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apparty.databinding.FragmentEventResultsBinding;
 import com.example.apparty.gestores.GestorEvent;
-import com.example.apparty.model.Event;
-
-import java.util.List;
 
 import lombok.NonNull;
 
-public class EventResults extends Fragment {
+public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener {
 
     private GestorEvent gestorEvent;
 
@@ -27,7 +25,7 @@ public class EventResults extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public EventResults() {
+    public EventResultsFragment() {
     }
 
     @Override
@@ -59,5 +57,18 @@ public class EventResults extends Fragment {
 
         recyclerView.setClickable(true);
     }
+
+    @Override
+    public void onNoteClick(int idEvent) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEvent", idEvent);
+    }
+
+    /*@Override
+    public void onNoteClick(int idEvent){
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEvent", idEvent);
+        //NavHostFragment.findNavController(EventResultsFragment.this).navigate;
+    }*/
 
 }
