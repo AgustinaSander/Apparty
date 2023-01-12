@@ -27,6 +27,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.slider.RangeSlider;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -136,12 +137,12 @@ public class FilterDialogFragment extends DialogFragment {
     private void applyFilters() {
         double minPriceSelected = binding.rangeSlider.getValueFrom();
         double maxPriceSelected = binding.rangeSlider.getValueTo();
-        Date dateFromSelected = fromDate;
-        Date dateToSelected = toDate;
+        LocalDate dateFromSelected = LocalDate.of(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay());
+        LocalDate dateToSelected = LocalDate.of(toDate.getYear(), toDate.getMonth(), toDate.getDay());
         List<Integer> dresscodeIds = getCheckedChips();
         //VER UBICACION
         Filter filters = new Filter(minPriceSelected, maxPriceSelected, dateFromSelected, dateToSelected, dresscodeIds);
-
+        //VER COMO RECIBO ESTO EN SEARCH EVENTS FRAGMENT
     }
 
     private void showFromDatePickerDialog() {

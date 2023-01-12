@@ -16,7 +16,8 @@
         android:gravity="center_horizontal"
         android:text="Filtros de busqueda"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,7 +78,9 @@
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp" />
+            android:layout_marginVertical="15dp"
+            app:dividerColor="@color/dark_pink"
+            app:dividerThickness="2dp" />
 
         <TextView
             android:id="@+id/textView8"
@@ -162,7 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:dividerColor="@color/dark_pink" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -197,7 +201,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:dividerColor="@color/dark_pink" />
 
         <TextView
             android:id="@+id/textView12"
