@@ -9,8 +9,18 @@
         android:id="@+id/searchEvents"
         android:name="com.example.apparty.SearchEventsFragment"
         android:label="fragment_search_events"
-        tools:layout="@layout/fragment_search_events" />
+        tools:layout="@layout/fragment_search_events" >
+        <action
+            android:id="@+id/action_searchEvents_to_eventResultsFragment"
+            app:destination="@id/eventResultsFragment" />
+    </fragment>
     <action
         android:id="@+id/goToSearchFragment"
         app:destination="@id/searchEvents" />
+
+    <fragment
+        android:id="@+id/eventResultsFragment"
+        android:name="com.example.apparty.EventResultsFragment"
+        android:label="fragment_event_results"
+        tools:layout="@layout/fragment_event_results"/>
 </navigation>
