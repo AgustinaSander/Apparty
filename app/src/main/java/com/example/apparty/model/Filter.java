@@ -1,5 +1,6 @@
 package com.example.apparty.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import lombok.Setter;
 public class Filter {
     private double minPrice;
     private double maxPrice;
-    private Date fromDate;
-    private Date toDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     private List<Integer> dressCodeList = new ArrayList<>();
 }

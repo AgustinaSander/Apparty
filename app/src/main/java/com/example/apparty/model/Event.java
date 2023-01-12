@@ -10,11 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Event {
     private int id;
     private String name;
@@ -25,4 +27,16 @@ public class Event {
     private DressCode dressCode;
     private User organizer;
     private String comments;
+
+    public Event(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public Event(int id, String name, List<Stock> tickets, LocalDate date){
+        this.id = id;
+        this.name = name;
+        this.tickets = tickets;
+        this.date = date;
+    }
 }
