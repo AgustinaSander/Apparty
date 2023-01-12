@@ -28,6 +28,7 @@ public class Event {
     private User organizer;
     private String comments;
 
+
     public Event(int id, String name){
         this.id = id;
         this.name = name;
@@ -39,4 +40,6 @@ public class Event {
         this.tickets = tickets;
         this.date = date;
     }
+
 }
+
