@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewbinding.ViewBinding;
 
 import android.util.Log;
@@ -68,6 +69,10 @@ public class SearchEventsFragment extends Fragment {
             String wordsFilter = binding.searchInputEditText.getText().toString();
             Filter filters = new Filter(); //AGREGAR FILTROS CUANDO LLEGUEN DEL DIALOG
             showEvents(wordsFilter, filters);
+        });
+
+        binding.searchEventsBtn.setOnClickListener(v -> {
+            NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment);
         });
     }
 
