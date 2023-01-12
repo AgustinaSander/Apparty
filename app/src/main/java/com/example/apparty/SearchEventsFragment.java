@@ -17,7 +17,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.example.apparty.model.Event;
+import com.example.apparty.model.Filter;
+
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
+import com.example.apparty.gestores.GestorEvent;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -30,6 +34,7 @@ public class SearchEventsFragment extends Fragment {
 
     private FragmentSearchEventsBinding binding;
     private List<CarouselItem> carouselItemList = new ArrayList<>();
+    private GestorEvent gestorEvent = GestorEvent.getInstance();
 
     public SearchEventsFragment() {
     }
@@ -48,6 +53,31 @@ public class SearchEventsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        setClickEvents();
+        setCarousels();
+    }
+
+
+    private void setClickEvents() {
+        binding.filterBtn.setOnClickListener(e -> {
+            showFilterDialog();
+        });
+
+        binding.searchEventsBtn.setOnClickListener(e -> {
+            Log.i("BUSCAR EVENTOS", "setClickEvents: ");
+            String wordsFilter = binding.searchInputEditText.getText().toString();
+            Filter filters = new Filter(); //AGREGAR FILTROS CUANDO LLEGUEN DEL DIALOG
+            showEvents(wordsFilter, filters);
+        });
+    }
+
+    private void showEvents(String wordsFilter, Filter filters) {
+        //CON ESTO TENGO QUE IR A LA INTERFAZ DE RESULTADOS
+        List<Event> filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
+        Log.i("filtered", filteredEvents.toString());
+    }
+
+    private void setCarousels() {
         ImageCarousel carousel1 = binding.carousel;
         ImageCarousel carousel2 = binding.carousel2;
         carousel1.registerLifecycle(getLifecycle());
@@ -106,21 +136,6 @@ public class SearchEventsFragment extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
             }
-        });
-
-        binding.searchInputEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    Log.i("BUSCAR", "onEditorAction: BUSCAR");
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        binding.filterBtn.setOnClickListener( e -> {
-            showFilterDialog();
         });
     }
 
