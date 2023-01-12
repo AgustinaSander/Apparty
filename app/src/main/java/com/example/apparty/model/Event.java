@@ -25,4 +25,10 @@ public class Event {
     private DressCode dressCode;
     private User organizer;
     private String comments;
+
+    public Event(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
+
