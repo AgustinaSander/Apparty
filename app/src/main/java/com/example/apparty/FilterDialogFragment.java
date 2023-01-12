@@ -1,6 +1,7 @@
 package com.example.apparty;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -83,6 +84,7 @@ public class FilterDialogFragment extends DialogFragment {
                     R.style.FilterChip);
             chip.setChipDrawable(chipDrawable);
             chip.setText(d.getDressCode());
+            chip.setBackground(new ColorDrawable(getResources().getColor(R.color.dark_pink)));
             chip.setId(d.getId());
             chip.setCheckedIconEnabled(true);
             chipGroup.addView(chip);
