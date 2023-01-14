@@ -1,12 +1,15 @@
 package com.example.apparty;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Filter;
+import com.example.apparty.model.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
@@ -27,7 +31,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.slider.RangeSlider;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -135,14 +141,31 @@ public class FilterDialogFragment extends DialogFragment {
     }
 
     private void applyFilters() {
-        double minPriceSelected = binding.rangeSlider.getValueFrom();
-        double maxPriceSelected = binding.rangeSlider.getValueTo();
-        LocalDate dateFromSelected = LocalDate.of(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay());
-        LocalDate dateToSelected = LocalDate.of(toDate.getYear(), toDate.getMonth(), toDate.getDay());
+        double minPriceSelected = binding.rangeSlider.getValues().get(0);
+        double maxPriceSelected = binding.rangeSlider.getValues().get(1);
+
         List<Integer> dresscodeIds = getCheckedChips();
         //VER UBICACION
-        Filter filters = new Filter(minPriceSelected, maxPriceSelected, dateFromSelected, dateToSelected, dresscodeIds);
-        //VER COMO RECIBO ESTO EN SEARCH EVENTS FRAGMENT
+
+        String fromDateString = "";
+        String toDateString = "";
+        if(fromDate != null){
+            fromDateString = new SimpleDateFormat("MM/dd/yyyy").format(fromDate);
+        }
+        if(toDate != null){
+            toDateString = new SimpleDateFormat("MM/dd/yyyy").format(toDate);
+        }
+
+        Filter filters = new Filter(minPriceSelected, maxPriceSelected, fromDateString, toDateString, dresscodeIds);
+        sendFilters(filters);
+        getDialog().dismiss();
+    }
+
+    private void sendFilters(Filter filters){
+        Bundle bundle = new Bundle();
+        String filterJsonString = Utils.getGsonParser().toJson(filters);
+        bundle.putString("FILTER", filterJsonString);
+        getParentFragmentManager().setFragmentResult("FILTER", bundle);
     }
 
     private void showFromDatePickerDialog() {
