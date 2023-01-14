@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewbinding.ViewBinding;
 
@@ -23,6 +24,8 @@ import com.example.apparty.model.Filter;
 
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.model.Utils;
+import com.google.gson.Gson;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchEventsFragment extends Fragment {
-
+    private Filter filters;
     private FragmentSearchEventsBinding binding;
     private List<CarouselItem> carouselItemList = new ArrayList<>();
     private GestorEvent gestorEvent = GestorEvent.getInstance();
@@ -43,6 +46,14 @@ public class SearchEventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getParentFragmentManager().setFragmentResultListener("FILTER", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                String result = bundle.getString("FILTER");
+                filters = Utils.getGsonParser().fromJson(result, Filter.class);
+            }
+        });
     }
 
     @Override
@@ -67,16 +78,13 @@ public class SearchEventsFragment extends Fragment {
         binding.searchEventsBtn.setOnClickListener(e -> {
             Log.i("BUSCAR EVENTOS", "setClickEvents: ");
             String wordsFilter = binding.searchInputEditText.getText().toString();
-            Filter filters = new Filter(); //AGREGAR FILTROS CUANDO LLEGUEN DEL DIALOG
-            showEvents(wordsFilter, filters);
-        });
+            showEvents(wordsFilter);
 
-        binding.searchEventsBtn.setOnClickListener(v -> {
             NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment);
         });
     }
 
-    private void showEvents(String wordsFilter, Filter filters) {
+    private void showEvents(String wordsFilter) {
         //CON ESTO TENGO QUE IR A LA INTERFAZ DE RESULTADOS
         List<Event> filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
         Log.i("filtered", filteredEvents.toString());
