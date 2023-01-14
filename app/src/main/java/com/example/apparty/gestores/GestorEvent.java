@@ -9,6 +9,8 @@ import com.example.apparty.model.Stock;
 import com.example.apparty.repositories.DresscodeRepository;
 import com.example.apparty.repositories.EventRepository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -52,14 +54,16 @@ public class GestorEvent {
             events = events.stream().filter(e -> dresscodes.contains(e.getDressCode()))
                     .collect(Collectors.toList());;
         }
-        if(filters.getFromDate() != null){
+        if(filters.getFromDate() != null && filters.getFromDate()!=""){
+            LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
             events = events.stream()
-                    .filter(e -> filters.getFromDate().isBefore(e.getDate()) || filters.getFromDate().isEqual(e.getDate()))
+                    .filter(e -> fromDate.isBefore(e.getDate()) || fromDate.isEqual(e.getDate()))
                     .collect(Collectors.toList());
         }
-        if(filters.getToDate() != null){
+        if(filters.getToDate() != null && filters.getToDate()!=""){
+            LocalDate toDate = LocalDate.parse(filters.getToDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
             events = events.stream()
-                    .filter(e -> filters.getToDate().isAfter(e.getDate()) || filters.getToDate().isEqual(e.getDate()))
+                    .filter(e -> toDate.isAfter(e.getDate()) || toDate.isEqual(e.getDate()))
                     .collect(Collectors.toList());
         }
         if(filters.getMinPrice() != 0){
