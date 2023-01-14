@@ -112,6 +112,7 @@ public class SearchEventsFragment extends Fragment {
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
                 //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
                 Log.i("PRESIONADO", "onClick: " + carouselItem.getCaption());
+                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment);
             }
 
             @Override
@@ -134,6 +135,7 @@ public class SearchEventsFragment extends Fragment {
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
                 //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
                 Log.i("PRESIONADO", "onClick: " + carouselItem.getCaption());
+                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment);
             }
 
             @Override

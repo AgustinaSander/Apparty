@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_searchEvents_to_eventResultsFragment"
             app:destination="@id/eventResultsFragment" />
+        <action
+            android:id="@+id/action_searchEvents_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
     </fragment>
     <action
         android:id="@+id/goToSearchFragment"
@@ -22,5 +25,15 @@
         android:id="@+id/eventResultsFragment"
         android:name="com.example.apparty.EventResultsFragment"
         android:label="fragment_event_results"
-        tools:layout="@layout/fragment_event_results"/>
+        tools:layout="@layout/fragment_event_results">
+        <action
+            android:id="@+id/action_eventResultsFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.example.apparty.EventDetailFragment"
+        android:label="fragment_event_detail"
+        tools:layout="@layout/fragment_event_detail"/>
 </navigation>

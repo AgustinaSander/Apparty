@@ -8,4 +8,5 @@
     <style name="FilterChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="checkedIconTint">@color/dark_blue</item>
     </style>
+
 </resources>
