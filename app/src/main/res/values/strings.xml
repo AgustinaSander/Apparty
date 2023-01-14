@@ -6,4 +6,6 @@
     <string name="cerrar_sesion">Cerrar Sesion</string>
     <string name="configuracion">Configuracion</string>
     <string name="fecha_del_evento">Fecha del evento</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
