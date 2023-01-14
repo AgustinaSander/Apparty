@@ -48,31 +48,33 @@ public class GestorEvent {
         events = events.stream().filter(e -> e.getName().toLowerCase().contains(wordsFilter.toLowerCase()))
                 .collect(Collectors.toList());
 
-        //PROBAR FILTROS
-        if(filters.getDressCodeList().size() > 0){
-            List<DressCode> dresscodes = dresscodeRepository.findAllByIds(filters.getDressCodeList());
-            events = events.stream().filter(e -> dresscodes.contains(e.getDressCode()))
-                    .collect(Collectors.toList());;
-        }
-        if(filters.getFromDate() != null && filters.getFromDate()!=""){
-            LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            events = events.stream()
-                    .filter(e -> fromDate.isBefore(e.getDate()) || fromDate.isEqual(e.getDate()))
-                    .collect(Collectors.toList());
-        }
-        if(filters.getToDate() != null && filters.getToDate()!=""){
-            LocalDate toDate = LocalDate.parse(filters.getToDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            events = events.stream()
-                    .filter(e -> toDate.isAfter(e.getDate()) || toDate.isEqual(e.getDate()))
-                    .collect(Collectors.toList());
-        }
-        if(filters.getMinPrice() != 0){
-            events = events.stream().filter(e -> hasMoreExpensiveTickets(e.getTickets(), filters.getMinPrice()))
-                    .collect(Collectors.toList());
-        }
-        if(filters.getMaxPrice() != 0){
-            events = events.stream().filter(e -> hasCheaperTickets(e.getTickets(), filters.getMaxPrice()))
-                    .collect(Collectors.toList());
+        if(filters != null) {
+            if (filters.getDressCodeList().size() > 0) {
+                List<DressCode> dresscodes = dresscodeRepository.findAllByIds(filters.getDressCodeList());
+                events = events.stream().filter(e -> dresscodes.contains(e.getDressCode()))
+                        .collect(Collectors.toList());
+                ;
+            }
+            if (filters.getFromDate() != null && filters.getFromDate() != "") {
+                LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                events = events.stream()
+                        .filter(e -> fromDate.isBefore(e.getDate()) || fromDate.isEqual(e.getDate()))
+                        .collect(Collectors.toList());
+            }
+            if (filters.getToDate() != null && filters.getToDate() != "") {
+                LocalDate toDate = LocalDate.parse(filters.getToDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                events = events.stream()
+                        .filter(e -> toDate.isAfter(e.getDate()) || toDate.isEqual(e.getDate()))
+                        .collect(Collectors.toList());
+            }
+            if (filters.getMinPrice() != 0) {
+                events = events.stream().filter(e -> hasMoreExpensiveTickets(e.getTickets(), filters.getMinPrice()))
+                        .collect(Collectors.toList());
+            }
+            if (filters.getMaxPrice() != 0) {
+                events = events.stream().filter(e -> hasCheaperTickets(e.getTickets(), filters.getMaxPrice()))
+                        .collect(Collectors.toList());
+            }
         }
         return events;
     }

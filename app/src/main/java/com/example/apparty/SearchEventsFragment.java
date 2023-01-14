@@ -52,7 +52,6 @@ public class SearchEventsFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 String result = bundle.getString("FILTER");
                 filters = Utils.getGsonParser().fromJson(result, Filter.class);
-                Log.i("RECUPERO", filters.toString());
             }
         });
     }
@@ -81,7 +80,7 @@ public class SearchEventsFragment extends Fragment {
             String wordsFilter = binding.searchInputEditText.getText().toString();
             showEvents(wordsFilter);
 
-            //NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment);
+            NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment);
         });
     }
 
