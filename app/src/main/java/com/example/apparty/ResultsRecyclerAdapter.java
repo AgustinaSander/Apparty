@@ -45,9 +45,8 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
 
         @Override
         public void onClick (View v){
-            this.onNoteListener.onNoteClick(eventList.get(getAdapterPosition()).getId());
+            this.onNoteListener.onNoteClick(eventList.get(getBindingAdapterPosition()).getId());
         }
-
 
     }
 
@@ -67,7 +66,7 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.eventList.size();
     }
 
     public interface OnNoteListener{
