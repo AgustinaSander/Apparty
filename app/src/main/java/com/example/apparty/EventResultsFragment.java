@@ -52,7 +52,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         //dsp agregar la lista
-        adapter = new ResultsRecyclerAdapter(gestorEvent.getEventList(), (ResultsRecyclerAdapter.OnNoteListener)this);
+        adapter = new ResultsRecyclerAdapter(gestorEvent.getEventList(), this);
         recyclerView.setAdapter(adapter);
 
         recyclerView.setClickable(true);
