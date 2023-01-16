@@ -14,6 +14,6 @@ public class Ticket {
     // QR ???
     private Event event;
     private User user;
-    private int idType;
+    private int idStock;
     private double price;
 }

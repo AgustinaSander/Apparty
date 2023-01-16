@@ -2,6 +2,7 @@ package com.example.apparty;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import com.example.apparty.databinding.FragmentEventDetailBinding;
 
 public class EventDetailFragment extends Fragment {
 
-    private FragmentEventDetailBinding fragmentEventDetailBinding;
+    private FragmentEventDetailBinding binding;
 
     public EventDetailFragment() {}
 
@@ -24,7 +25,16 @@ public class EventDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event_detail, container, false);
+        binding = FragmentEventDetailBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        setClickEvents();
+    }
+
+    private void setClickEvents() {
+
     }
 }
