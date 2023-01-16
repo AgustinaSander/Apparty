@@ -92,4 +92,9 @@ public class GestorEvent {
                 .findAny();
         return hasCheaperTickets.isPresent();
     }
+
+    public Event getEventById(int idEvent) {
+        List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
+        return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
+    }
 }
