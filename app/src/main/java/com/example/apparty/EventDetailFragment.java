@@ -1,25 +1,30 @@
 package com.example.apparty;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Stock;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EventDetailFragment extends Fragment {
 
@@ -27,6 +32,7 @@ public class EventDetailFragment extends Fragment {
     private boolean showTickets = false;
     private GestorEvent gestorEvent = GestorEvent.getInstance();
     private Event event;
+    private List<Integer> quantityList = new ArrayList<>();
 
     public EventDetailFragment() {}
 
@@ -70,11 +76,61 @@ public class EventDetailFragment extends Fragment {
         binding.eventStreet.setText(address.getAddress());
         binding.eventAddress.setText(address.getLocalty()+", "+address.getProvince()+", "+address.getCountry());
         binding.eventOrganizer.setText(event.getOrganizer().getName() + " " + event.getOrganizer().getSurname());
-        //SETEAR ENTRADAS
-        List<Stock> stock = event.getTickets();
-        stock.stream().forEach(s -> {
 
-        });
+        setTicketsInfo();
+    }
+
+    private void setTicketsInfo() {
+        List<Stock> stock = event.getTickets();
+
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        for(int i=0; i < stock.size(); i++){
+            Stock s = stock.get(i);
+            View view =  inflater.inflate(R.layout.fragment_detail_event_item, null);
+            TextView ticketName = view.findViewById(R.id.ticketName);
+            ticketName.setText(s.getType());
+            TextView ticketPrice = view.findViewById(R.id.ticketPrice);
+            ticketPrice.setText("$ "+s.getPrice());
+
+            quantityList.add(0);
+            FloatingActionButton addBtn = view.findViewById(R.id.addBtn);
+            int finalI = i;
+            addBtn.setOnClickListener(e -> addQuantity(view, finalI));
+
+            FloatingActionButton minusBtn = view.findViewById(R.id.minusBtn);
+            minusBtn.setOnClickListener(e -> minusQuantity(view, finalI));
+
+            binding.ticketLayout.addView(view);
+        };
+    }
+
+    private void addQuantity(View view, int idItem){
+        int quantity = quantityList.get(idItem);
+        quantity++;
+        quantityList.set(idItem,quantity);
+        FloatingActionButton addBtn = view.findViewById(R.id.addBtn);
+        addBtn.setEnabled(true);
+        TextView ticketQuantity = view.findViewById(R.id.ticketQuantity);
+        ticketQuantity.setText(String.valueOf(quantity));
+    }
+
+    private void minusQuantity(View view, int idItem){
+        int quantity = quantityList.get(idItem);
+        FloatingActionButton minusBtn = view.findViewById(R.id.minusBtn);
+
+        if(quantity > 0){
+            quantity--;
+            quantityList.set(idItem,quantity);
+        } else {
+            quantity = 0;
+            quantityList.set(idItem, quantity);
+            minusBtn.setEnabled(false);
+        }
+
+        minusBtn.setEnabled(true);
+        TextView ticketQuantity = view.findViewById(R.id.ticketQuantity);
+        ticketQuantity.setText(String.valueOf(quantity));
     }
 
     //CUANDO NO HAY MAS ENTRADAS MOSTRAR UN MENSAJE DE ERROR

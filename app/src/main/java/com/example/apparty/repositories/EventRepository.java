@@ -38,7 +38,9 @@ public class EventRepository {
 
     private List<Stock> getStock() {
         List<Stock> stocks = new ArrayList<>();
-        stocks.add(new Stock(1, 10, 1500));
+        stocks.add(new Stock(1, "Entrada basica", 10, 10, 1500));
+        stocks.add(new Stock(2, "Entrada vip", 5, 5, 1800));
+        stocks.add(new Stock(3, "Entrada vip + consumicion", 2, 2, 2000));
 
         return stocks;
     }
