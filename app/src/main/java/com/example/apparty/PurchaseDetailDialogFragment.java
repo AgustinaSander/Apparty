@@ -3,33 +3,33 @@ package com.example.apparty;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.apparty.databinding.FragmentDetailEventItemBinding;
-import com.example.apparty.databinding.FragmentEventDetailBinding;
+import com.example.apparty.databinding.FragmentPurchaseDetailDialogBinding;
 
-public class DetailEventItem extends Fragment {
+public class PurchaseDetailDialogFragment extends DialogFragment {
 
-    private FragmentDetailEventItemBinding binding;
+    private FragmentPurchaseDetailDialogBinding binding;
 
-    public DetailEventItem() {}
+    public PurchaseDetailDialogFragment() {}
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDetailEventItemBinding.inflate(inflater, container, false);
+        binding = FragmentPurchaseDetailDialogBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 }

@@ -142,7 +142,9 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void getSelectedTickets() {
-        Snackbar.make(getView(), "Funcionalidad de Adquirir Entradas no implementada", Snackbar.LENGTH_SHORT).show();
+        //Mostrar dialog con detalle de compra
+        new PurchaseDetailDialogFragment().show(getChildFragmentManager(), null);
+        //Snackbar.make(getView(), "Funcionalidad de Adquirir Entradas no implementada", Snackbar.LENGTH_SHORT).show();
     }
 
     private void showTickets() {
