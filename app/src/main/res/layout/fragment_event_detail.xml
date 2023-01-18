@@ -38,23 +38,23 @@
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
+                    android:id="@+id/eventTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fiesta en la playa"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <TextView
+                    android:id="@+id/eventComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="15dp"
-                    android:text="Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/eventDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
@@ -62,12 +62,11 @@
                     android:drawableTint="@color/dark_pink"
                     android:gravity="center_vertical"
                     android:paddingRight="5sp"
-                    android:text="Lunes 16 de enero del 2023"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/eventTime"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/ic_baseline_access_time_24"
@@ -75,12 +74,11 @@
                     android:drawableTint="@color/dark_pink"
                     android:gravity="center_vertical"
                     android:paddingRight="5sp"
-                    android:text="1:00 hs"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/eventDresscode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_baseline_checkroom_24"
@@ -88,7 +86,6 @@
                     android:drawableTint="@color/dark_pink"
                     android:gravity="center_vertical"
                     android:paddingRight="5sp"
-                    android:text="Dresscode Formal"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp" />
 
@@ -116,17 +113,15 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView14"
+                            android:id="@+id/eventStreet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Juan Jose Castelli 1621"
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/textView15"
+                            android:id="@+id/eventAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Santa Fe, Santa Fe, Argentina"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -149,7 +144,7 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/ticketBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="8dp"
@@ -164,137 +159,30 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/ticketDivider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        app:dividerColor="@color/dark_blue"
-                        app:dividerThickness="2dp" />
+                        app:dividerColor="@color/dark_pink"
+                        app:dividerThickness="1dp" />
 
                     <ScrollView
+                        android:id="@+id/ticketContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="wrap_content"
                         android:visibility="gone">
 
                         <LinearLayout
+                            android:id="@+id/ticketLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/textView20"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Vip + Consumicion"
-                                    android:textColor="@color/dark_blue"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/textView26"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical|end"
-                                    android:text="$650" />
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:id="@+id/floatingActionButton"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:clickable="true"
-                                    android:src="@drawable/ic_baseline_remove_24"
-                                    app:backgroundTint="@color/dark_blue"
-                                    app:fabCustomSize="30dp" />
-
-                                <TextView
-                                    android:id="@+id/textView21"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="5dp"
-                                    android:gravity="center_vertical"
-                                    android:text="0"
-                                    android:textColor="@color/dark_blue"
-                                    android:textSize="16sp" />
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:id="@+id/floatingActionButton2"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:clickable="true"
-                                    android:src="@drawable/ic_baseline_add_24"
-                                    app:backgroundTint="@color/dark_blue"
-                                    app:fabCustomSize="30dp" />
-
-                            </LinearLayout>
 
                             <com.google.android.material.divider.MaterialDivider
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:dividerThickness="1dp" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/textView24"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Vip + Consumicion"
-                                    android:textColor="@color/dark_blue"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/textView27"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical|end"
-                                    android:text="$7900" />
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:id="@+id/floatingActionButton5"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:clickable="true"
-                                    android:src="@drawable/ic_baseline_remove_24"
-                                    app:backgroundTint="@color/dark_blue"
-                                    app:fabCustomSize="30dp" />
-
-                                <TextView
-                                    android:id="@+id/textView25"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="5dp"
-                                    android:gravity="center_vertical"
-                                    android:text="0"
-                                    android:textColor="@color/dark_blue"
-                                    android:textSize="16sp" />
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:id="@+id/floatingActionButton6"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:clickable="true"
-                                    android:src="@drawable/ic_baseline_add_24"
-                                    app:backgroundTint="@color/dark_blue"
-                                    app:fabCustomSize="30dp" />
-
-                            </LinearLayout>
                         </LinearLayout>
                     </ScrollView>
 
@@ -312,10 +200,11 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:id="@+id/getTicketBtn"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adquirir tickets"
+                    android:text="Adquirir entradas"
                     app:strokeColor="@color/dark_pink" />
 
             </LinearLayout>
@@ -357,10 +246,9 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/eventOrganizer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Agustina Sander"
                     android:textStyle="bold" />
 
                 <TextView
@@ -372,7 +260,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/profileBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ver perfil" />

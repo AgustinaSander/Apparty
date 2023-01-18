@@ -155,7 +155,7 @@ public class SearchEventsFragment extends Fragment {
     }
 
     private void showFilterDialog() {
-        DialogFragment newFragment = new FilterDialogFragment();
-        newFragment.show(getFragmentManager(), "dialog");
+        new FilterDialogFragment().show(getChildFragmentManager(), null);
+
     }
 }

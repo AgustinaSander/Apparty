@@ -101,12 +101,8 @@ public class FilterDialogFragment extends DialogFragment {
     }
 
     private void setRangeSlider() {
-        //MODIFICAR CUANDO ESTEN LOS GESTORES
-        //gestorAlojamiento = GestorAlojamiento.getInstance();
-        //minPrice = gestorAlojamiento.getMinPrice();
-        //maxPrice = gestorAlojamiento.getMaxPrice();
-        minPrice = 100;
-        maxPrice = 1500;
+        minPrice = gestorEvent.getMinPrice();
+        maxPrice = gestorEvent.getMaxPrice();
         rangePrice = binding.rangeSlider;
         rangePrice.setValues((float) minPrice, (float)maxPrice);
         rangePrice.setValueFrom((float) minPrice);
