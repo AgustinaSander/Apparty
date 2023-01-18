@@ -11,6 +11,8 @@ import com.example.apparty.repositories.EventRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -91,5 +93,29 @@ public class GestorEvent {
                 .filter(t -> t.getPrice() <= maxPrice && t.getAvailableQuantity() > 0)
                 .findAny();
         return hasCheaperTickets.isPresent();
+    }
+
+    public Event getEventById(int idEvent) {
+        List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
+        return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
+    }
+
+    private List<Double> getPrices(){
+        List<Event> events = getEventList();
+        List<Stock> stock = new ArrayList<>();
+        for(Event e: events){
+            stock.addAll(e.getTickets());
+        }
+        List<Double> prices = new ArrayList<>();
+        stock.stream().forEach(s -> prices.add(s.getPrice()));
+        return prices;
+    }
+
+    public double getMinPrice() {
+        return Collections.min(getPrices());
+    }
+
+    public double getMaxPrice() {
+        return Collections.max(getPrices());
     }
 }

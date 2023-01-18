@@ -16,9 +16,4 @@ public class Stock {
     private int availableQuantity;
     private double price;
 
-    public Stock(int id, int availableQuantity, double price){
-        this.id = id;
-        this.availableQuantity = availableQuantity;
-        this.price = price;
-    }
 }
