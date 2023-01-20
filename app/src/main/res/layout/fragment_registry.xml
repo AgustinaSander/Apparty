@@ -130,10 +130,11 @@
         android:layout_height="50dp"
         android:layout_marginVertical="10dp"
         android:background="@drawable/custom_edittext"
-        android:paddingStart="10dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
     <Button
@@ -152,6 +153,7 @@
             android:id="@+id/subtitle2"
             android:layout_width="215dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
             android:gravity="center"
             android:text="¿Ya tienes una cuenta?"
             android:textAlignment="center"
