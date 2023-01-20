@@ -1,11 +1,13 @@
 package com.example.apparty;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.apparty.databinding.ActivityLoginBinding;
+import com.example.apparty.databinding.ActivityMainBinding;
 
 public class LoginActivity extends AppCompatActivity {
 

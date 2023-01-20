@@ -16,11 +16,19 @@
         android:layout_margin="10dp"
         app:srcCompat="@drawable/logoapparty"/>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView5"
-        android:name="com.example.apparty.LoginFragment"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_login" />
+        android:layout_height="match_parent">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.example.apparty.LoginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_login"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
+
+    </ScrollView>
 </LinearLayout>
