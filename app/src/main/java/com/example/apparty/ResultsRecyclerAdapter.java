@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.example.apparty.databinding.EventItemBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.NonNull;
@@ -31,6 +33,9 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
 
         CardView card;
         ImageView image;
+        TextView name;
+        TextView date;
+        TextView dressCode;
 
         OnNoteListener onNoteListener;
 
@@ -38,6 +43,9 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
             super(binding.getRoot());
             this.card = binding.cardResult;
             this.image = binding.imageResult;
+            this.name = binding.textEventName;
+            this.date = binding.textEventDate;
+            this.dressCode = binding.textEventDressCode;
 
             this.card.setOnClickListener(this);
             this.onNoteListener = onNoteListener;
@@ -60,6 +68,9 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
     @Override
     public void onBindViewHolder(ResultsViewHolder resultHolder, int position) {
         Event event = this.eventList.get(position);
+        resultHolder.name.setText(event.getName());
+        resultHolder.date.setText(event.getDate().toString());
+        resultHolder.dressCode.setText(event.getDressCode().getDressCode());
         resultHolder.image.setImageResource(R.drawable.party1);
 
     }
