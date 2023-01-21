@@ -7,42 +7,42 @@
     android:orientation="vertical"
     tools:context=".PurchaseFragment">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </androidx.viewpager.widget.ViewPager>
-
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
         style="@style/AppTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginBottom="20dp"
         android:background="@color/dark_pink"
+        android:elevation="0dp"
         app:tabTextAppearance="@style/AppTabTextAppearance">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_baseline_edit_24"
-            android:text="Detalle" />
+            android:text="DETALLE" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_baseline_attach_money_24"
 
-            android:text="Pago" />
+            android:text="PAGO" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/glass_cheers_24"
-            android:text="Listo!" />
+            android:text="LETS PARTY!" />
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>
