@@ -35,6 +35,16 @@
         android:id="@+id/eventDetailFragment"
         android:name="com.example.apparty.EventDetailFragment"
         android:label="fragment_event_detail"
-        tools:layout="@layout/fragment_event_detail"/>
+        tools:layout="@layout/fragment_event_detail">
+        <action
+            android:id="@+id/goToPurchaseFragment"
+            app:destination="@id/purchaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.example.apparty.PurchaseFragment"
+        android:label="fragment_purchase"
+        tools:layout="@layout/fragment_purchase" />
+
 
 </navigation>
