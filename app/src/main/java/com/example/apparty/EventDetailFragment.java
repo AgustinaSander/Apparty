@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class EventDetailFragment extends Fragment {
 
@@ -142,8 +141,8 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void getSelectedTickets() {
-        //Mostrar dialog con detalle de compra
-        new PurchaseDetailDialogFragment().show(getChildFragmentManager(), null);
+        //Ir a fragment de detalle de compra
+        NavHostFragment.findNavController(EventDetailFragment.this).navigate(R.id.goToPurchaseFragment);
         //Snackbar.make(getView(), "Funcionalidad de Adquirir Entradas no implementada", Snackbar.LENGTH_SHORT).show();
     }
 

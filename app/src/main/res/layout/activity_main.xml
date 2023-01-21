@@ -20,7 +20,8 @@
             app:menu="@menu/menu"
             app:navigationIcon="@drawable/glass_cheers_24"
             app:title="Apparty!"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
