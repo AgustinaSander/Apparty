@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardResult"
@@ -14,7 +15,7 @@
         android:layout_marginVertical="5dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp" >
 
 
         <LinearLayout
@@ -27,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="10dp">
 
 
@@ -35,7 +37,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/textEventDate"
@@ -65,7 +68,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/party1" />
+                app:srcCompat="@drawable/party1"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

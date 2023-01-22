@@ -62,6 +62,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onNoteClick(int idEvent) {
         Bundle bundle = new Bundle();
         bundle.putInt("idEvent", idEvent);
+        NavHostFragment.findNavController(EventResultsFragment.this).navigate(R.id.action_eventResultsFragment_to_eventDetailFragment, bundle);
     }
 
     /*@Override
