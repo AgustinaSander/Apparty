@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class EventDetailFragment extends Fragment {
 
@@ -44,9 +45,9 @@ public class EventDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEventDetailBinding.inflate(inflater, container, false);
-
-        //int idEvent = getArguments().getInt("idEvent");
-        event = gestorEvent.getEventById(1);
+        binding.getTicketBtn.setEnabled(false);
+        int idEvent = getArguments().getInt("idEvent");
+        event = gestorEvent.getEventById(idEvent);
 
         return binding.getRoot();
     }
@@ -106,10 +107,11 @@ public class EventDetailFragment extends Fragment {
 
     private void addQuantity(View view, int idItem){
         int quantity = quantityList.get(idItem);
-        quantity++;
-        quantityList.set(idItem,quantity);
+        binding.getTicketBtn.setEnabled(true);
         FloatingActionButton addBtn = view.findViewById(R.id.addBtn);
         addBtn.setEnabled(true);
+        quantity++;
+        quantityList.set(idItem,quantity);
         TextView ticketQuantity = view.findViewById(R.id.ticketQuantity);
         ticketQuantity.setText(String.valueOf(quantity));
     }
@@ -127,6 +129,9 @@ public class EventDetailFragment extends Fragment {
             minusBtn.setEnabled(false);
         }
 
+        List<Integer> tickets = quantityList.stream().filter(q -> q > 0).collect(Collectors.toList());
+        binding.getTicketBtn.setEnabled(tickets.size() > 0);
+
         minusBtn.setEnabled(true);
         TextView ticketQuantity = view.findViewById(R.id.ticketQuantity);
         ticketQuantity.setText(String.valueOf(quantity));
@@ -138,6 +143,11 @@ public class EventDetailFragment extends Fragment {
         binding.ticketBtn.setOnClickListener(e -> showTickets());
         binding.profileBtn.setOnClickListener(e -> Snackbar.make(getView(), "Funcionalidad de Perfil Organizador no implementada", Snackbar.LENGTH_SHORT).show());
         binding.getTicketBtn.setOnClickListener(e -> getSelectedTickets());
+        binding.shareEventBtn.setOnClickListener(e -> shareEvent());
+    }
+
+    private void shareEvent() {
+        Snackbar.make(getView(), "Funcionalidad de Compartir no implementada", Snackbar.LENGTH_SHORT).show();
     }
 
     private void getSelectedTickets() {

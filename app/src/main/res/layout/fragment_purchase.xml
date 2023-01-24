@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:orientation="vertical"
     tools:context=".PurchaseFragment">
 
@@ -13,25 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginBottom="20dp"
         android:background="@color/dark_pink"
         android:elevation="0dp"
+        app:tabInlineLabel="true"
         app:tabTextAppearance="@style/AppTabTextAppearance">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_edit_24"
             android:text="DETALLE" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:icon="@drawable/ic_baseline_attach_money_24"
             android:text="PAGO" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_auto_awesome_24"
             android:text="LETS PARTY!" />
 
 
@@ -40,7 +43,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1">
 
     </androidx.viewpager2.widget.ViewPager2>
