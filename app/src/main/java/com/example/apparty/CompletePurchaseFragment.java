@@ -2,13 +2,14 @@ package com.example.apparty;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CompletePurchaseFragment extends Fragment {
+public class CompletePurchaseFragment extends DialogFragment {
 
     public CompletePurchaseFragment() {
         // Required empty public constructor
