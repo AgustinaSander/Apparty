@@ -1,75 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/dark_blue"
     android:paddingHorizontal="10dp"
     android:paddingTop="30dp"
     android:paddingBottom="10dp"
     tools:context=".PaymentPurchaseFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:text="Metodos de pago"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                style="@style/CustomAccommodationButtonStyle"
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_baseline_attach_money_24"
-                android:drawablePadding="0dp"
-                android:drawableTint="@android:color/white"
-                android:text="Transferencia"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:text="Metodos de pago"
                 android:textColor="@color/white"
-                app:backgroundTint="@color/pink"></com.google.android.material.button.MaterialButton>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/CustomAccommodationButtonStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_baseline_account_balance_24"
-                android:drawablePadding="5sp"
-                android:drawableTint="@android:color/white"
-                android:text="Tarjeta de debito"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/dark_pink"></com.google.android.material.button.MaterialButton>
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/CustomAccommodationButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_baseline_credit_card_24"
-                android:drawablePadding="5sp"
-                android:drawableTint="@android:color/white"
-                android:gravity="center"
-                android:text="Tarjeta de credito"
-                android:textColor="@color/white"></com.google.android.material.button.MaterialButton>
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/CustomAccommodationButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:drawableTop="@drawable/ic_baseline_attach_money_24"
+                    android:drawablePadding="0dp"
+                    android:drawableTint="@android:color/white"
+                    android:text="Transferencia"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/pink"
+                    app:elevation="2dp"></com.google.android.material.button.MaterialButton>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/CustomAccommodationButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_account_balance_24"
+                    android:drawablePadding="5sp"
+                    android:drawableTint="@android:color/white"
+                    android:text="Tarjeta de debito"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/pink"
+                    app:elevation="2dp"></com.google.android.material.button.MaterialButton>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/CustomAccommodationButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baseline_credit_card_24"
+                    android:drawablePadding="5sp"
+                    android:drawableTint="@android:color/white"
+                    android:gravity="center"
+                    android:text="Tarjeta de credito"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/pink"
+                    app:elevation="2dp"></com.google.android.material.button.MaterialButton>
+            </LinearLayout>
 
         <TextView
             android:id="@+id/textView16"
@@ -205,6 +206,4 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/dark_pink"
             app:iconPadding="0dp"></com.google.android.material.button.MaterialButton>
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
