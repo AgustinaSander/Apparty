@@ -37,7 +37,7 @@ import java.util.List;
 public class SearchEventsFragment extends Fragment {
     private Filter filters;
     private FragmentSearchEventsBinding binding;
-    private List<CarouselItem> carouselItemList = new ArrayList<>();
+    private List<CarouselItem> carouselItemList;
     private GestorEvent gestorEvent = GestorEvent.getInstance();
 
     public SearchEventsFragment() {
@@ -91,6 +91,7 @@ public class SearchEventsFragment extends Fragment {
     }
 
     private void setCarousels() {
+        carouselItemList = new ArrayList<>();
         ImageCarousel carousel1 = binding.carousel;
         ImageCarousel carousel2 = binding.carousel2;
         carousel1.registerLifecycle(getLifecycle());
