@@ -5,12 +5,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apparty.databinding.FragmentPurchaseBinding;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class PurchaseFragment extends Fragment {
 
@@ -61,6 +65,12 @@ public class PurchaseFragment extends Fragment {
                 tabLayout.getTabAt(position).select();
             }
         });
+
+
+        int idEvent = getArguments().getInt("idEvent");
+        ArrayList<Pair<Integer, Integer>> tickets = (ArrayList<Pair<Integer, Integer>>) getArguments().getSerializable("tickets");
+        Log.i("EVENTO", String.valueOf(idEvent));
+        Log.i("TICKETS", String.valueOf(tickets));
 
         return binding.getRoot();
     }

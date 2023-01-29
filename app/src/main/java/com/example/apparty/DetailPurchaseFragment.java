@@ -5,11 +5,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailPurchaseFragment extends Fragment {
 
@@ -21,7 +26,6 @@ public class DetailPurchaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
