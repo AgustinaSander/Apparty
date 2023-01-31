@@ -19,6 +19,8 @@ import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Stock;
+import com.example.apparty.model.Ticket;
+import com.example.apparty.model.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -85,6 +87,7 @@ public class EventDetailFragment extends Fragment {
 
     private void setTicketsInfo() {
         List<Stock> stock = event.getTickets();
+        quantityList = new ArrayList<>();
         //Si no hay tickets disponibles
         if(stock.stream().filter(s -> s.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
             binding.ticketsAvailable.setVisibility(View.VISIBLE);
@@ -173,19 +176,25 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void getSelectedTickets() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("idEvent", idEvent);
-        ArrayList<Pair<Integer,Integer>> tickets = new ArrayList<>();
+        Ticket ticket = new Ticket();
+        ticket.setEvent(event);
+        //SETEAR USER QUE ESTA LOGUEADO
+
+        ArrayList<Pair<Integer,Integer>> selectedTickets = new ArrayList<>();
         for(int q=0; q < quantityList.size(); q++){
             if(quantityList.get(q) > 0){
                 int idStock = event.getTickets().get(q).getId();
-                tickets.add(Pair.create(idStock, quantityList.get(q)));
+                selectedTickets.add(Pair.create(idStock, quantityList.get(q)));
             }
         };
-        bundle.putSerializable("tickets", tickets);
+        ticket.setTickets(selectedTickets);
+        String ticketJson = Utils.getGsonParser().toJson(ticket);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("ticket", ticketJson);
 
         //Ir a fragment de detalle de compra
-        NavHostFragment.findNavController(EventDetailFragment.this).navigate(R.id.goToPurchaseFragment, bundle);
+        NavHostFragment.findNavController(EventDetailFragment.this).navigate(R.id.goToDetailPurchase, bundle);
     }
 
     private void showTickets() {

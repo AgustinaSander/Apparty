@@ -113,8 +113,6 @@ public class SearchEventsFragment extends Fragment {
         carousel1.setCarouselListener(new CarouselListener() {
             @Override
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
-                //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
-                Log.i("PRESIONADO", "onClick: " + i);
                 int idEvent = carouselInfo.get(i).first;
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", idEvent);
@@ -139,8 +137,6 @@ public class SearchEventsFragment extends Fragment {
         carousel2.setCarouselListener(new CarouselListener() {
             @Override
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
-                //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
-                Log.i("PRESIONADO", "onClick: " + i);
                 int idEvent = carouselInfo.get(i).first;
                 Bundle bundle = new Bundle();
                 bundle.putInt("idEvent", idEvent);

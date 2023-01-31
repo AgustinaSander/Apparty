@@ -118,4 +118,14 @@ public class GestorEvent {
     public double getMaxPrice() {
         return Collections.max(getPrices());
     }
+
+    public Stock getStockByIdByEvent(int idStock, int idEvent) {
+        Event event = getEventById(idEvent);
+        if(event != null){
+            List<Stock> stockList = event.getTickets();
+            List<Stock> filteredStock = stockList.stream().filter(s -> s.getId()==idStock).collect(Collectors.toList());
+            return filteredStock.size() > 0 ? filteredStock.get(0) : null;
+        }
+        return null;
+    }
 }

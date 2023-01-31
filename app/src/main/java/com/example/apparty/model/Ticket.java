@@ -1,5 +1,9 @@
 package com.example.apparty.model;
 
+import android.util.Pair;
+
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +18,6 @@ public class Ticket {
     // QR ???
     private Event event;
     private User user;
-    private int idStock;
+    private List<Pair<Integer, Integer>> tickets;
     private double price;
 }
