@@ -1,5 +1,7 @@
 package com.example.apparty.model;
 
+import androidx.room.Entity;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor

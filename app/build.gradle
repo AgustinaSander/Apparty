@@ -1,6 +1,5 @@
 plugins {
-    id 'com.android.application'
-}
+    id 'com.android.application'}
 
 android {
     namespace 'com.example.apparty'
@@ -38,11 +37,26 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    /*Room components*/
+    def room_version = "1.1.1"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version" // use kapt for Kotlin
+    // optional - RxJava support for Room
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "android.arch.persistence.room:guava:$room_version"
+    // Test helpers
+    testImplementation "android.arch.persistence.room:testing:$room_version"
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    annotationProcessor 'androidx.room:room-compiler:2.2.5'
     compileOnly "org.projectlombok:lombok:1.18.24"
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    //Navigation components
     def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
@@ -50,6 +64,10 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0'
 
+    //Recycler components
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+
+
 }

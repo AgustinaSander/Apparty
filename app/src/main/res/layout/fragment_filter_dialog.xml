@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".FilterDialogFragment">
+    tools:context=".fragments.FilterDialogFragment">
 
     <TextView
         android:layout_width="match_parent"

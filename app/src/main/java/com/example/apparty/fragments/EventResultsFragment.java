@@ -1,4 +1,4 @@
-package com.example.apparty;
+package com.example.apparty.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,17 +10,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apparty.databinding.FragmentEventResultsBinding;
+import com.example.apparty.R;
 import com.example.apparty.gestores.GestorEvent;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import lombok.NonNull;
 
 public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener {
 
     private GestorEvent gestorEvent;
-
     private FragmentEventResultsBinding binding;
 
     private RecyclerView recyclerView;
@@ -34,7 +31,9 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
+
         gestorEvent = GestorEvent.getInstance();
+
     }
 
     @Override

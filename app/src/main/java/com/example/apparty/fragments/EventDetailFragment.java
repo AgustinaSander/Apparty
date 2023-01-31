@@ -1,4 +1,4 @@
-package com.example.apparty;
+package com.example.apparty.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.apparty.R;
 import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;

@@ -1,4 +1,4 @@
-package com.example.apparty;
+package com.example.apparty.fragments;
 
 import android.os.Bundle;
 
@@ -8,25 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.apparty.databinding.FragmentDetailEventItemBinding;
+import com.example.apparty.R;
 
-public class DetailEventItemFragment extends Fragment {
+public class DetailPurchaseFragment extends Fragment {
 
-    private FragmentDetailEventItemBinding binding;
-
-    public DetailEventItemFragment() {}
+    public DetailPurchaseFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDetailEventItemBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_detail_purchase, container, false);
     }
 }
