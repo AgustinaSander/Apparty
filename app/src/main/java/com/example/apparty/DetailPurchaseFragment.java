@@ -36,7 +36,6 @@ import java.util.List;
 public class DetailPurchaseFragment extends Fragment {
 
     private FragmentDetailPurchaseBinding binding;
-    private Bundle bundle = new Bundle();
     private GestorEvent gestorEvent = GestorEvent.getInstance();
     private Ticket ticket;
 
@@ -53,7 +52,6 @@ public class DetailPurchaseFragment extends Fragment {
         binding = FragmentDetailPurchaseBinding.inflate(inflater, container, false);
 
         String ticketJson = getArguments().getString("ticket");
-        bundle.putString("ticket", ticketJson);
         ticket = Utils.getGsonParser().fromJson(ticketJson, Ticket.class);
         return binding.getRoot();
     }
@@ -69,10 +67,13 @@ public class DetailPurchaseFragment extends Fragment {
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.detailBtn:
+                    binding.paymentLayout.setVisibility(View.GONE);
+                    binding.detailLayout.setVisibility(View.VISIBLE);
                     return true;
 
                 case R.id.paymentBtn:
-                    NavHostFragment.findNavController(getParentFragment()).navigate(R.id.goToPayment, bundle);
+                    binding.detailLayout.setVisibility(View.GONE);
+                    binding.paymentLayout.setVisibility(View.VISIBLE);
                     return true;
             }
             return false;

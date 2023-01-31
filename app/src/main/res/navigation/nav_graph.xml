@@ -44,20 +44,7 @@
         android:id="@+id/detailPurchaseFragment"
         android:name="com.example.apparty.DetailPurchaseFragment"
         android:label="fragment_detail_purchase"
-        tools:layout="@layout/fragment_detail_purchase" >
-        <action
-            android:id="@+id/goToPayment"
-            app:destination="@id/paymentPurchaseFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/paymentPurchaseFragment"
-        android:name="com.example.apparty.PaymentPurchaseFragment"
-        android:label="fragment_payment_purchase"
-        tools:layout="@layout/fragment_payment_purchase" >
-        <action
-            android:id="@+id/goBackToDetailPurchase"
-            app:destination="@id/detailPurchaseFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_detail_purchase" />
 
 
 </navigation>
