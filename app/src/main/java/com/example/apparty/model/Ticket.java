@@ -11,9 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Ticket {
     private int id;
-    // QR ???
-    private Event event;
-    private User user;
-    private int idStock;
+    private String type;
+    private int totalQuantity;
+    private int availableQuantity;
     private double price;
+
 }

@@ -1,5 +1,9 @@
 package com.example.apparty.model;
 
+import android.util.Pair;
+
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +13,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Stock {
+public class Purchase {
     private int id;
-    private String type;
-    private int totalQuantity;
-    private int availableQuantity;
+    // QR ???
+    private Event event;
+    private User user;
+    //Lista tickets y cantidad asociada
+    private List<Pair<Integer, Integer>> purchases;
     private double price;
-
 }
