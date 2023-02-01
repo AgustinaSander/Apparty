@@ -17,8 +17,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         switch(position){
             case 1:
                 return new PaymentPurchaseFragment();
-            case 2:
-                return new CompletePurchaseFragment();
             case 0:
             default:
                 return new DetailPurchaseFragment();
@@ -27,6 +25,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }

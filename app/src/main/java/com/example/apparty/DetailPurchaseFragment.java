@@ -2,29 +2,48 @@ package com.example.apparty;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailPurchaseFragment extends Fragment {
 
-    public DetailPurchaseFragment() {
-        // Required empty public constructor
-    }
+    FragmentDetailPurchaseBinding binding;
+
+    public DetailPurchaseFragment() {}
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_purchase, container, false);
+        binding = FragmentDetailPurchaseBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        setValues();
+        setClickEvents();
+    }
+
+    private void setClickEvents() {
+    }
+
+    private void setValues() {
     }
 }

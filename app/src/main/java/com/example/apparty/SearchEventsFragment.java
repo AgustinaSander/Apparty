@@ -37,7 +37,7 @@ import java.util.List;
 public class SearchEventsFragment extends Fragment {
     private Filter filters;
     private FragmentSearchEventsBinding binding;
-    private List<CarouselItem> carouselItemList = new ArrayList<>();
+    private List<CarouselItem> carouselItemList;
     private GestorEvent gestorEvent = GestorEvent.getInstance();
 
     public SearchEventsFragment() {
@@ -91,18 +91,21 @@ public class SearchEventsFragment extends Fragment {
     }
 
     private void setCarousels() {
+        carouselItemList = new ArrayList<>();
         ImageCarousel carousel1 = binding.carousel;
         ImageCarousel carousel2 = binding.carousel2;
         carousel1.registerLifecycle(getLifecycle());
         carousel2.registerLifecycle(getLifecycle());
 
-        List<Pair<Integer, String>> carouselInfo = new ArrayList<>();
+        List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
         //INICIALIZAR CAROUSEL
-        carouselInfo.add(Pair.create(R.drawable.party1, "Fiesta en Salones del puerto"));
-        carouselInfo.add(Pair.create(R.drawable.party2, "Poolparty en ATE"));
+        List<Event> events = gestorEvent.getEventList();
+        events.stream().forEach(e -> {
+            carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+        });
 
-        for (Pair<Integer, String> info : carouselInfo) {
-            carouselItemList.add(new CarouselItem(info.first, info.second));
+        for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
+            carouselItemList.add(new CarouselItem(info.second.first, info.second.second));
         }
         carousel1.setData(carouselItemList);
         carousel2.setData(carouselItemList);
@@ -111,8 +114,11 @@ public class SearchEventsFragment extends Fragment {
             @Override
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
                 //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
-                Log.i("PRESIONADO", "onClick: " + carouselItem.getCaption());
-                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment);
+                Log.i("PRESIONADO", "onClick: " + i);
+                int idEvent = carouselInfo.get(i).first;
+                Bundle bundle = new Bundle();
+                bundle.putInt("idEvent", idEvent);
+                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
             }
 
             @Override
@@ -134,8 +140,11 @@ public class SearchEventsFragment extends Fragment {
             @Override
             public void onClick(int i, @NonNull CarouselItem carouselItem) {
                 //CON ESTO VAMOS A REDIRECCIONAR AL DETALLE DEL EVENTO SELECCIONADO
-                Log.i("PRESIONADO", "onClick: " + carouselItem.getCaption());
-                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment);
+                Log.i("PRESIONADO", "onClick: " + i);
+                int idEvent = carouselInfo.get(i).first;
+                Bundle bundle = new Bundle();
+                bundle.putInt("idEvent", idEvent);
+                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
             }
 
             @Override

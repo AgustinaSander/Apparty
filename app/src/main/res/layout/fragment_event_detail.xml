@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,262 +9,304 @@
     android:padding="10dp"
     tools:context=".EventDetailFragment">
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="0dp"
-        app:strokeColor="#ccc"
-        app:strokeWidth="1dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Media -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="194dp"
-                android:contentDescription="Fiesta en la playa muy buena"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/party1" />
+            app:cardElevation="0dp"
+            app:strokeColor="#ccc"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp"
-                android:paddingTop="15dp">
+                android:orientation="vertical">
 
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/eventTitle"
+                <!-- Media -->
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                <TextView
-                    android:id="@+id/eventComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="15dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/eventDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
-                    android:drawablePadding="5sp"
-                    android:drawableTint="@color/dark_pink"
-                    android:gravity="center_vertical"
-                    android:paddingRight="5sp"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/eventTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/ic_baseline_access_time_24"
-                    android:drawablePadding="5sp"
-                    android:drawableTint="@color/dark_pink"
-                    android:gravity="center_vertical"
-                    android:paddingRight="5sp"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/eventDresscode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_checkroom_24"
-                    android:drawablePadding="5sp"
-                    android:drawableTint="@color/dark_pink"
-                    android:gravity="center_vertical"
-                    android:paddingRight="5sp"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:text="Ubicacion"
-                    android:textColor="@color/dark_pink"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_height="194dp"
+                    android:contentDescription="Fiesta en la playa muy buena"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/party1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="15dp">
+
+                    <!-- Title, secondary and supporting text -->
+                    <TextView
+                        android:id="@+id/eventTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:id="@+id/eventComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="15dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/eventDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                        android:drawablePadding="5sp"
+                        android:drawableTint="@color/dark_pink"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5sp"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/eventTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                        android:drawablePadding="5sp"
+                        android:drawableTint="@color/dark_pink"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5sp"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/eventDresscode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_checkroom_24"
+                        android:drawablePadding="5sp"
+                        android:drawableTint="@color/dark_pink"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5sp"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:text="Ubicacion"
+                        android:textColor="@color/dark_pink"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="top"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/eventStreet"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="top"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/eventAddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/eventStreet"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/eventAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp" />
+                        </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!-- Buttons -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#ccc"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/notTicketsAvailable"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:visibility="gone"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#ccc"
+                    app:strokeWidth="1dp">
 
                     <TextView
-                        android:id="@+id/ticketBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="8dp"
                         android:layout_marginEnd="10dp"
-                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:drawablePadding="5sp"
-                        android:drawableTint="@color/dark_blue"
+                        android:gravity="center"
                         android:paddingStart="5dp"
-                        android:text="ENTRADAS DISPONIBLES"
+                        android:text="NO HAY ENTRADAS DISPONIBLES"
                         android:textColor="@color/dark_pink"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
 
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/ticketDivider"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/ticketsAvailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#ccc"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:dividerColor="@color/dark_pink"
-                        app:dividerThickness="1dp" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
-                    <ScrollView
-                        android:id="@+id/ticketContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:id="@+id/ticketLayout"
+                        <TextView
+                            android:id="@+id/ticketBtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_marginVertical="8dp"
+                            android:layout_marginEnd="10dp"
+                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="5sp"
+                            android:drawableTint="@color/dark_blue"
+                            android:paddingStart="5dp"
+                            android:text="ENTRADAS DISPONIBLES"
+                            android:textColor="@color/dark_pink"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-                            <com.google.android.material.divider.MaterialDivider
+                        <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/ticketDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:dividerColor="@color/dark_pink"
+                            app:dividerThickness="1dp" />
+
+                        <ScrollView
+                            android:id="@+id/ticketContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/ticketLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:dividerThickness="1dp" />
+                                android:orientation="vertical">
 
-                        </LinearLayout>
-                    </ScrollView>
+                                <com.google.android.material.divider.MaterialDivider
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:dividerThickness="1dp" />
+
+                            </LinearLayout>
+                        </ScrollView>
 
 
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/getTicketBtn"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Adquirir entradas"
+                        app:strokeColor="@color/dark_pink" />
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/getTicketBtn"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Adquirir entradas"
-                    app:strokeColor="@color/dark_pink" />
-
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="5dp">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_gravity="center_vertical"
-                android:adjustViewBounds="false"
-                android:background="@color/dark_blue"
-                android:padding="5dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
-                app:srcCompat="@drawable/ic_baseline_person_24"
-                app:strokeColor="@color/dark_pink"
-                app:strokeWidth="1dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp">
 
-                <TextView
-                    android:id="@+id/eventOrganizer"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center_vertical"
+                    android:adjustViewBounds="false"
+                    android:background="@color/dark_blue"
+                    android:padding="5dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:srcCompat="@drawable/ic_baseline_person_24"
+                    app:strokeColor="@color/dark_pink"
+                    app:strokeWidth="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/eventOrganizer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Organizador" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/profileBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Organizador" />
-
+                    android:text="Ver perfil" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/profileBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ver perfil" />
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shareEventBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription=""
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/dark_pink"
+        app:srcCompat="@drawable/ic_baseline_share_24" />
+</RelativeLayout>

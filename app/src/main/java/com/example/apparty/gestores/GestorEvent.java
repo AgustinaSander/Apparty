@@ -1,11 +1,9 @@
 package com.example.apparty.gestores;
 
-import android.util.Log;
-
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
-import com.example.apparty.model.Stock;
+import com.example.apparty.model.Ticket;
 import com.example.apparty.repositories.DresscodeRepository;
 import com.example.apparty.repositories.EventRepository;
 
@@ -14,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -81,15 +78,15 @@ public class GestorEvent {
         return events;
     }
 
-    private boolean hasMoreExpensiveTickets(List<Stock> tickets, double minPrice) {
-        Optional<Stock> hasMoreExpensiveTickets = tickets.stream()
+    private boolean hasMoreExpensiveTickets(List<Ticket> tickets, double minPrice) {
+        Optional<Ticket> hasMoreExpensiveTickets = tickets.stream()
                 .filter(t -> t.getPrice() >= minPrice && t.getAvailableQuantity() > 0)
                 .findAny();
         return hasMoreExpensiveTickets.isPresent();
     }
 
-    private boolean hasCheaperTickets(List<Stock> tickets, double maxPrice) {
-        Optional<Stock> hasCheaperTickets = tickets.stream()
+    private boolean hasCheaperTickets(List<Ticket> tickets, double maxPrice) {
+        Optional<Ticket> hasCheaperTickets = tickets.stream()
                 .filter(t -> t.getPrice() <= maxPrice && t.getAvailableQuantity() > 0)
                 .findAny();
         return hasCheaperTickets.isPresent();
@@ -102,12 +99,12 @@ public class GestorEvent {
 
     private List<Double> getPrices(){
         List<Event> events = getEventList();
-        List<Stock> stock = new ArrayList<>();
+        List<Ticket> ticket = new ArrayList<>();
         for(Event e: events){
-            stock.addAll(e.getTickets());
+            ticket.addAll(e.getTickets());
         }
         List<Double> prices = new ArrayList<>();
-        stock.stream().forEach(s -> prices.add(s.getPrice()));
+        ticket.stream().forEach(s -> prices.add(s.getPrice()));
         return prices;
     }
 

@@ -1,9 +1,7 @@
 package com.example.apparty.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +19,7 @@ public class Event {
     private int id;
     private String name;
     private Address address;
-    private List<Stock> tickets;
+    private List<Ticket> tickets;
     private LocalDate date;
     private LocalTime time;
     private DressCode dressCode;
@@ -34,7 +32,7 @@ public class Event {
         this.name = name;
     }
 
-    public Event(int id, String name, List<Stock> tickets, LocalDate date){
+    public Event(int id, String name, List<Ticket> tickets, LocalDate date){
         this.id = id;
         this.name = name;
         this.tickets = tickets;
