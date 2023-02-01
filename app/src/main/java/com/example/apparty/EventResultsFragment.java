@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apparty.databinding.FragmentEventResultsBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import lombok.NonNull;
 
@@ -64,12 +66,5 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         bundle.putInt("idEvent", idEvent);
         NavHostFragment.findNavController(EventResultsFragment.this).navigate(R.id.action_eventResultsFragment_to_eventDetailFragment, bundle);
     }
-
-    /*@Override
-    public void onNoteClick(int idEvent){
-        Bundle bundle = new Bundle();
-        bundle.putInt("idEvent", idEvent);
-        //NavHostFragment.findNavController(EventResultsFragment.this).navigate;
-    }*/
 
 }

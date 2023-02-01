@@ -86,7 +86,7 @@
     private int id;
     private String name;
     private Address address;
-    private List<Stock> tickets;
+    private List<Ticket> tickets;
 private LocalDate date;
 private LocalTime time;
 private DressCode dressCode;

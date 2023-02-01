@@ -18,7 +18,7 @@ import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
-import com.example.apparty.model.Stock;
+import com.example.apparty.model.Ticket;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -84,16 +84,16 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void setTicketsInfo() {
-        List<Stock> stock = event.getTickets();
+        List<Ticket> ticket = event.getTickets();
         //Si no hay tickets disponibles
-        if(stock.stream().filter(s -> s.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
+        if(ticket.stream().filter(s -> s.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
             binding.ticketsAvailable.setVisibility(View.VISIBLE);
             binding.notTicketsAvailable.setVisibility(View.GONE);
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            for(int i=0; i < stock.size(); i++){
+            for(int i = 0; i < ticket.size(); i++){
                 //NO MOSTRAR SI NO HAY STOCK DE UN TIPO Y DESHABILITAR ADD CUANDO SE LLEGUE AL MAX
-                Stock s = stock.get(i);
+                Ticket s = ticket.get(i);
                 View view =  inflater.inflate(R.layout.fragment_detail_event_item, null);
                 TextView ticketName = view.findViewById(R.id.ticketName);
                 ticketName.setText(s.getType());
