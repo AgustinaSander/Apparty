@@ -3,7 +3,7 @@ package com.example.apparty.repositories;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
-import com.example.apparty.model.Stock;
+import com.example.apparty.model.Ticket;
 import com.example.apparty.model.User;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public class EventRepository {
    /* private int id;
     private String name;
     private Address address;
-    private List<Stock> tickets;
+    private List<Ticket> tickets;
     private LocalDate date;
     private LocalTime time;
     private DressCode dressCode;
@@ -36,13 +36,13 @@ public class EventRepository {
         return "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas";
     }
 
-    private List<Stock> getStock() {
-        List<Stock> stocks = new ArrayList<>();
-        stocks.add(new Stock(1, "Entrada basica", 10, 10, 1500));
-        stocks.add(new Stock(2, "Entrada vip", 5, 5, 1800));
-        stocks.add(new Stock(3, "Entrada vip + consumicion", 2, 2, 2000));
+    private List<Ticket> getStock() {
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket(1, "Entrada basica", 10, 10, 1500));
+        tickets.add(new Ticket(2, "Entrada vip", 5, 5, 1800));
+        tickets.add(new Ticket(3, "Entrada vip + consumicion", 2, 2, 2000));
 
-        return stocks;
+        return tickets;
     }
 
     private Address getAddress(){
