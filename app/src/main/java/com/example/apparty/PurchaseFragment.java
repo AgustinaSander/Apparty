@@ -1,4 +1,4 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import android.os.Bundle;
 

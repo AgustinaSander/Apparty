@@ -1,12 +1,5 @@
 package com.example.apparty.repositories;
 
-import android.content.Context;
-
-import androidx.room.Database;
-import androidx.room.Room;
-
-import com.example.apparty.dao.EventDAO;
-import com.example.apparty.db.RoomDB;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
@@ -19,28 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventRepository {
-    private static EventRepository _REPO=null;
-    private EventDAO eventDAO;
-
-    //Patron Singleton. Metodo constructor privado
-    private EventRepository(Context ctx){
-        RoomDB db = Room.databaseBuilder(ctx, RoomDB.class, "apparty_db").fallbackToDestructiveMigration().build();
-        eventDAO = db.eventDAO();
-
-    }
-
-    public static EventRepository getInstance(Context ctx){
-        if(_REPO==null) _REPO = new EventRepository(ctx);
-        return _REPO;
-    }
-
-    public void createEvent(Event event){
-        eventDAO.insertEvent(event);
-    }
-
-}
-    /*public EventRepository(){
-   private int id;
+    public EventRepository(){}
+   /* private int id;
     private String name;
     private Address address;
     private List<Stock> tickets;
@@ -49,7 +22,7 @@ public class EventRepository {
     private DressCode dressCode;
     private User organizer;
     private String comments;*/
-    /*private List<Event> _EVENTS = List.of(
+    private List<Event> _EVENTS = List.of(
             new Event(1, "Fiesta en Salones del puerto", getAddress(), getStock(), LocalDate.of(2023, 1, 15), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments()),
             new Event(2, "Poolparty en ATE", getAddress(), getStock(), LocalDate.of(2023, 1, 20), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments()),
             new Event(3, "Fiesta en la playa", getAddress(), getStock(), LocalDate.of(2023, 1, 13), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments())
@@ -79,4 +52,4 @@ public class EventRepository {
     public List<Event> getEvents(){
         return _EVENTS;
     }
-}*/
+}

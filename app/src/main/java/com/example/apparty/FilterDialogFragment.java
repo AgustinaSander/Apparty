@@ -1,4 +1,4 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.apparty.R;
 import com.example.apparty.databinding.FragmentFilterDialogBinding;
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;

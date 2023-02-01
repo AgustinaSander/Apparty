@@ -1,12 +1,9 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import com.example.apparty.fragments.CompletePurchaseFragment;
-import com.example.apparty.fragments.DetailPurchaseFragment;
-import com.example.apparty.fragments.PaymentPurchaseFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 

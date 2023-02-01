@@ -1,4 +1,4 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +9,11 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apparty.R;
 import com.example.apparty.databinding.EventItemBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.NonNull;

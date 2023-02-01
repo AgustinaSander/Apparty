@@ -1,4 +1,4 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.apparty.R;
+import com.example.apparty.databinding.FragmentRegistryBinding;
 
 
 public class RegistryFragment extends Fragment {

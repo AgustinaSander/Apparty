@@ -1,9 +1,10 @@
-package com.example.apparty.fragments;
+package com.example.apparty;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.fragment.NavHostFragment;
@@ -11,17 +12,20 @@ import androidx.viewbinding.ViewBinding;
 
 import android.util.Log;
 import android.util.Pair;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
-import com.example.apparty.R;
-import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 
+import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Utils;
+import com.google.gson.Gson;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
