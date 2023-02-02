@@ -37,14 +37,14 @@
         android:label="fragment_event_detail"
         tools:layout="@layout/fragment_event_detail">
         <action
-            android:id="@+id/goToPurchaseFragment"
-            app:destination="@id/purchaseFragment" />
+            android:id="@+id/goToDetailPurchase"
+            app:destination="@id/detailPurchaseFragment" />
     </fragment>
     <fragment
-        android:id="@+id/purchaseFragment"
-        android:name="com.example.apparty.PurchaseFragment"
-        android:label="fragment_purchase"
-        tools:layout="@layout/fragment_purchase" />
+        android:id="@+id/detailPurchaseFragment"
+        android:name="com.example.apparty.DetailPurchaseFragment"
+        android:label="fragment_detail_purchase"
+        tools:layout="@layout/fragment_detail_purchase" />
 
 
 </navigation>

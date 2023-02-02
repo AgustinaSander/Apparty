@@ -3,20 +3,20 @@ package com.example.apparty;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.apparty.databinding.FragmentPaymentPurchaseBinding;
-import com.example.apparty.databinding.FragmentSearchEventsBinding;
+import com.example.apparty.databinding.FragmentCompletePurchaseDialogBinding;
+import com.google.android.material.snackbar.Snackbar;
 
-public class PaymentPurchaseFragment extends Fragment {
+public class CompletePurchaseDialogFragment extends DialogFragment {
 
-    private FragmentPaymentPurchaseBinding binding;
+    private FragmentCompletePurchaseDialogBinding binding;
 
-    public PaymentPurchaseFragment() {}
+    public CompletePurchaseDialogFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class PaymentPurchaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPaymentPurchaseBinding.inflate(inflater, container, false);
+        binding = FragmentCompletePurchaseDialogBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -36,11 +36,10 @@ public class PaymentPurchaseFragment extends Fragment {
     }
 
     private void setClickEvents() {
-        binding.payBtn.setOnClickListener(e -> {doPayment();});
+        binding.downloadBtn.setOnClickListener(e -> downloadQR());
     }
 
-    private void doPayment() {
-        new CompletePurchaseFragment().show(getChildFragmentManager(), null);
+    private void downloadQR() {
+        Snackbar.make(getView(), "Funcionalidad de Descargar no implementada", Snackbar.LENGTH_SHORT).show();
     }
-
 }
