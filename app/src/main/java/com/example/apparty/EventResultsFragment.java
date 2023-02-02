@@ -37,7 +37,6 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentEventResultsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -64,12 +63,5 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         bundle.putInt("idEvent", idEvent);
         NavHostFragment.findNavController(EventResultsFragment.this).navigate(R.id.action_eventResultsFragment_to_eventDetailFragment, bundle);
     }
-
-    /*@Override
-    public void onNoteClick(int idEvent){
-        Bundle bundle = new Bundle();
-        bundle.putInt("idEvent", idEvent);
-        //NavHostFragment.findNavController(EventResultsFragment.this).navigate;
-    }*/
 
 }
