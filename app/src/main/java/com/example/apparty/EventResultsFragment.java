@@ -39,7 +39,6 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentEventResultsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

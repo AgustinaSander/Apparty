@@ -1,5 +1,7 @@
 package com.example.apparty.gestores;
 
+import android.text.method.TimeKeyListener;
+
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
@@ -114,5 +116,15 @@ public class GestorEvent {
 
     public double getMaxPrice() {
         return Collections.max(getPrices());
+    }
+
+    public Ticket getTicketByIdByEvent(int idTicket, int idEvent) {
+        Event event = getEventById(idEvent);
+        if(event != null){
+            List<Ticket> ticketList = event.getTickets();
+            List<Ticket> filteredTicket = ticketList.stream().filter(s -> s.getId()==idTicket).collect(Collectors.toList());
+            return filteredTicket.size() > 0 ? filteredTicket.get(0) : null;
+        }
+        return null;
     }
 }
