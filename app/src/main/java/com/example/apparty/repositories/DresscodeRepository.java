@@ -1,5 +1,7 @@
 package com.example.apparty.repositories;
 
+import android.util.Log;
+
 import com.example.apparty.model.DressCode;
 
 import java.util.ArrayList;

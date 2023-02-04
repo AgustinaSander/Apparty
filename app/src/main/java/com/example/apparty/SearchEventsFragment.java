@@ -47,12 +47,9 @@ public class SearchEventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getParentFragmentManager().setFragmentResultListener("FILTER", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                String result = bundle.getString("FILTER");
-                filters = Utils.getGsonParser().fromJson(result, Filter.class);
-            }
+        getChildFragmentManager().setFragmentResultListener("requestFilter", this, (requestKey, bundle) -> {
+            String result = bundle.getString("filters");
+            filters = Utils.getGsonParser().fromJson(result, Filter.class);
         });
     }
 
@@ -65,6 +62,7 @@ public class SearchEventsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        filters = null;
         setClickEvents();
         setCarousels();
     }
@@ -76,18 +74,17 @@ public class SearchEventsFragment extends Fragment {
         });
 
         binding.searchEventsBtn.setOnClickListener(e -> {
-            Log.i("BUSCAR EVENTOS", "setClickEvents: ");
             String wordsFilter = binding.searchInputEditText.getText().toString();
             showEvents(wordsFilter);
-
-            NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment);
         });
     }
 
     private void showEvents(String wordsFilter) {
-        //CON ESTO TENGO QUE IR A LA INTERFAZ DE RESULTADOS
-        List<Event> filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
-        Log.i("filtered", filteredEvents.toString());
+        Bundle bundle = new Bundle();
+        bundle.putString("filters", Utils.getGsonParser().toJson(filters));
+        bundle.putString("wordsFilter", wordsFilter);
+
+        NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment, bundle);
     }
 
     private void setCarousels() {
