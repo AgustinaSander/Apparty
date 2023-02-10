@@ -1,6 +1,8 @@
 package com.example.apparty;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +14,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apparty.databinding.FragmentEventResultsBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.model.Event;
+import com.example.apparty.model.Filter;
+import com.example.apparty.model.Utils;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.NonNull;
 
 public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener {
 
-    private GestorEvent gestorEvent;
+    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private Filter filters;
+    private String wordsFilter;
+    private List<Event> filteredEvents = new ArrayList<>();
 
     private FragmentEventResultsBinding binding;
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -34,13 +44,15 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        gestorEvent = GestorEvent.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentEventResultsBinding.inflate(inflater, container, false);
+
+        String filterString = getArguments().getString("filters");
+        wordsFilter = getArguments().getString("wordsFilter");
+        filters = Utils.getGsonParser().fromJson(filterString, Filter.class);
         return binding.getRoot();
     }
 
@@ -53,11 +65,26 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        //dsp agregar la lista
-        adapter = new ResultsRecyclerAdapter(gestorEvent.getEventList(), this);
+
+        setEventList();
+        if(filteredEvents.size()==0){
+            binding.noResults.setVisibility(View.VISIBLE);
+            binding.textResume.setVisibility(View.GONE);
+        } else {
+            binding.noResults.setVisibility(View.GONE);
+            binding.textResume.setVisibility(View.VISIBLE);
+        }
+
+
+        adapter = new ResultsRecyclerAdapter(filteredEvents, this);
         recyclerView.setAdapter(adapter);
 
         recyclerView.setClickable(true);
+    }
+
+    private void setEventList() {
+        filteredEvents = new ArrayList<>();
+        filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
     }
 
     @Override

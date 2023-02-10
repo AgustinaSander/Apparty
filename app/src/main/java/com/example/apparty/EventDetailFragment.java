@@ -18,7 +18,10 @@ import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
+import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
+
+import com.example.apparty.model.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -84,16 +87,17 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void setTicketsInfo() {
-        List<Ticket> ticket = event.getTickets();
+        List<Ticket> tickets = event.getTickets();
+        quantityList = new ArrayList<>();
         //Si no hay tickets disponibles
-        if(ticket.stream().filter(s -> s.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
+        if(tickets.stream().filter(t -> t.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
             binding.ticketsAvailable.setVisibility(View.VISIBLE);
             binding.notTicketsAvailable.setVisibility(View.GONE);
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            for(int i = 0; i < ticket.size(); i++){
+            for(int i = 0; i < tickets.size(); i++){
                 //NO MOSTRAR SI NO HAY STOCK DE UN TIPO Y DESHABILITAR ADD CUANDO SE LLEGUE AL MAX
-                Ticket s = ticket.get(i);
+                Ticket s = tickets.get(i);
                 View view =  inflater.inflate(R.layout.fragment_detail_event_item, null);
                 TextView ticketName = view.findViewById(R.id.ticketName);
                 ticketName.setText(s.getType());
@@ -173,19 +177,25 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void getSelectedTickets() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("idEvent", idEvent);
-        ArrayList<Pair<Integer,Integer>> tickets = new ArrayList<>();
+        Purchase purchase = new Purchase();
+        purchase.setEvent(event);
+        //SETEAR USER QUE ESTA LOGUEADO
+
+        ArrayList<Pair<Integer,Integer>> selectedTickets = new ArrayList<>();
         for(int q=0; q < quantityList.size(); q++){
             if(quantityList.get(q) > 0){
                 int idStock = event.getTickets().get(q).getId();
-                tickets.add(Pair.create(idStock, quantityList.get(q)));
+                selectedTickets.add(Pair.create(idStock, quantityList.get(q)));
             }
         };
-        bundle.putSerializable("tickets", tickets);
+        purchase.setPurchases(selectedTickets);
+        String ticketJson = Utils.getGsonParser().toJson(purchase);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("ticket", ticketJson);
 
         //Ir a fragment de detalle de compra
-        NavHostFragment.findNavController(EventDetailFragment.this).navigate(R.id.goToPurchaseFragment, bundle);
+        NavHostFragment.findNavController(EventDetailFragment.this).navigate(R.id.goToDetailPurchase, bundle);
     }
 
     private void showTickets() {

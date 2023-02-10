@@ -160,8 +160,9 @@ public class FilterDialogFragment extends DialogFragment {
     private void sendFilters(Filter filters){
         Bundle bundle = new Bundle();
         String filterJsonString = Utils.getGsonParser().toJson(filters);
-        bundle.putString("FILTER", filterJsonString);
-        getParentFragmentManager().setFragmentResult("FILTER", bundle);
+
+        bundle.putString("filters", filterJsonString);
+        getParentFragmentManager().setFragmentResult("requestFilter", bundle);
     }
 
     private void showFromDatePickerDialog() {

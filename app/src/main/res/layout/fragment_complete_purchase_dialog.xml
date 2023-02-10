@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="0dp"
     android:orientation="vertical"
-    tools:context=".CompletePurchaseFragment">
+    tools:context=".CompletePurchaseDialogFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             app:tint="@color/dark_blue" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/payBtn"
+            android:id="@+id/downloadBtn"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

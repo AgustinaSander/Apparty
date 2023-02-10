@@ -12,20 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventRepository {
+
+    DresscodeRepository dresscodeRepository = new DresscodeRepository();
+
     public EventRepository(){}
-   /* private int id;
-    private String name;
-    private Address address;
-    private List<Ticket> tickets;
-    private LocalDate date;
-    private LocalTime time;
-    private DressCode dressCode;
-    private User organizer;
-    private String comments;*/
+
     private List<Event> _EVENTS = List.of(
-            new Event(1, "Fiesta en Salones del puerto", getAddress(), getStock(), LocalDate.of(2023, 1, 15), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments()),
-            new Event(2, "Poolparty en ATE", getAddress(), getStock(), LocalDate.of(2023, 1, 20), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments()),
-            new Event(3, "Fiesta en la playa", getAddress(), getStock(), LocalDate.of(2023, 1, 13), LocalTime.of(17,30), new DressCode(1,"Formal"), getUser(), getComments())
+            new Event(1, "Fiesta en Salones del puerto", getAddress(), getStock(), LocalDate.of(2023, 1, 15), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
+            new Event(2, "Poolparty en ATE", getAddress(), getStock(), LocalDate.of(2023, 1, 20), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
+            new Event(3, "Fiesta en la playa", getAddress(), getStock(), LocalDate.of(2023, 1, 13), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(1), getUser(), getComments())
     );
 
     private User getUser() {
@@ -51,5 +46,15 @@ public class EventRepository {
 
     public List<Event> getEvents(){
         return _EVENTS;
+    }
+
+    public List<Event> findByDresscodes(List<Integer> dressCodeList) {
+        List<Event> events = new ArrayList<>();
+        getEvents().stream().forEach(e -> {
+            if(dressCodeList.contains(e.getDressCode().getId())){
+                events.add(e);
+            }
+        });
+        return events;
     }
 }

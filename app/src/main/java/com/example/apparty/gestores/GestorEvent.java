@@ -1,5 +1,8 @@
 package com.example.apparty.gestores;
 
+import android.text.method.TimeKeyListener;
+import android.util.Log;
+
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
@@ -42,25 +45,19 @@ public class GestorEvent {
     public List<Event> getEventList(){ return this.eventList; }
 
     public List<Event> getFilteredEvents(String wordsFilter, Filter filters){
-        List<Event> events = getEventList();
-
-        events = events.stream().filter(e -> e.getName().toLowerCase().contains(wordsFilter.toLowerCase()))
-                .collect(Collectors.toList());
+        List<Event> events = new ArrayList<>();
 
         if(filters != null) {
             if (filters.getDressCodeList().size() > 0) {
-                List<DressCode> dresscodes = dresscodeRepository.findAllByIds(filters.getDressCodeList());
-                events = events.stream().filter(e -> dresscodes.contains(e.getDressCode()))
-                        .collect(Collectors.toList());
-                ;
+                events = eventRepository.findByDresscodes(filters.getDressCodeList());
             }
-            if (filters.getFromDate() != null && filters.getFromDate() != "") {
+            if (filters.getFromDate() != null && filters.getFromDate() != "" && filters.getFromDate().length() != 0) {
                 LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 events = events.stream()
                         .filter(e -> fromDate.isBefore(e.getDate()) || fromDate.isEqual(e.getDate()))
                         .collect(Collectors.toList());
             }
-            if (filters.getToDate() != null && filters.getToDate() != "") {
+            if (filters.getToDate() != null && filters.getToDate() != ""&& filters.getToDate().length() != 0) {
                 LocalDate toDate = LocalDate.parse(filters.getToDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 events = events.stream()
                         .filter(e -> toDate.isAfter(e.getDate()) || toDate.isEqual(e.getDate()))
@@ -74,7 +71,13 @@ public class GestorEvent {
                 events = events.stream().filter(e -> hasCheaperTickets(e.getTickets(), filters.getMaxPrice()))
                         .collect(Collectors.toList());
             }
+        } else {
+            events = getEventList();
         }
+
+        events = events.stream().filter(e -> e.getName().toLowerCase().contains(wordsFilter.toLowerCase()))
+                .collect(Collectors.toList());
+
         return events;
     }
 
@@ -114,5 +117,15 @@ public class GestorEvent {
 
     public double getMaxPrice() {
         return Collections.max(getPrices());
+    }
+
+    public Ticket getTicketByIdByEvent(int idTicket, int idEvent) {
+        Event event = getEventById(idEvent);
+        if(event != null){
+            List<Ticket> ticketList = event.getTickets();
+            List<Ticket> filteredTicket = ticketList.stream().filter(s -> s.getId()==idTicket).collect(Collectors.toList());
+            return filteredTicket.size() > 0 ? filteredTicket.get(0) : null;
+        }
+        return null;
     }
 }
