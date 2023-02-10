@@ -12,12 +12,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity (tableName = "ticket")
 public class TicketEntity {
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "id_ticket")
     private int id;
     private String type;

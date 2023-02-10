@@ -13,13 +13,11 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity(tableName = "dressCode")
 public class DressCodeEntity {
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "id_dressCode")
     private int id;
     private String dressCode;

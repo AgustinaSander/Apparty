@@ -13,11 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity(tableName = "user")
 public class UserEntity {
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "id_user")
     private int id;
     private String name;
