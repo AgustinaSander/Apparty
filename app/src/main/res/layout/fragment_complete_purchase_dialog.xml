@@ -79,9 +79,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:contentDescription="Qr"
-            app:srcCompat="@drawable/ic_baseline_qr_code_24"
-            app:tint="@color/dark_blue" />
+            android:contentDescription="Qr" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/downloadBtn"

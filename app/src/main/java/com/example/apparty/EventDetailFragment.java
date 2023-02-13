@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,8 +190,10 @@ public class EventDetailFragment extends Fragment {
             }
         };
         purchase.setPurchases(selectedTickets);
+
         String ticketJson = Utils.getGsonParser().toJson(purchase);
 
+        Log.i("PURCHASE EN EVENT DETAIL" , ticketJson);
         Bundle bundle = new Bundle();
         bundle.putString("ticket", ticketJson);
 

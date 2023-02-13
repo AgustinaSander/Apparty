@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,11 +19,14 @@ import android.widget.TextView;
 
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.model.Filter;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.Utils;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class DetailPurchaseFragment extends Fragment {
@@ -36,6 +40,14 @@ public class DetailPurchaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getChildFragmentManager().setFragmentResultListener("purchaseCompleted", this, (requestKey, bundle) -> {
+            String result = bundle.getString("purchase");
+            purchase = Utils.getGsonParser().fromJson(result, Purchase.class);
+            Log.i("PURCHASE", String.valueOf(purchase));
+            //GUARDAR PURCHASE
+            //gestorPurchase.savePurchase()....
+        });
     }
 
     @Override
@@ -75,10 +87,22 @@ public class DetailPurchaseFragment extends Fragment {
     }
 
     private void doPayment() {
-        new CompletePurchaseDialogFragment().show(getChildFragmentManager(), null);
+        Bundle bundle = new Bundle();
+        bundle.putString("purchase", Utils.getGsonParser().toJson(purchase));
+        CompletePurchaseDialogFragment completePurchaseDialogFragment = new CompletePurchaseDialogFragment();
+        completePurchaseDialogFragment.setArguments(bundle);
+        completePurchaseDialogFragment.show(getChildFragmentManager(), null);
     }
 
     private void setValues() {
+        //FALTA SETEAR EL USER QUE LO COMPRO
+        binding.textEventName.setText(purchase.getEvent().getName());
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
+        String date = purchase.getEvent().getDate().format(dateFormat);
+        date = date.substring(0, 1).toUpperCase() + date.substring(1);
+        binding.textEventDate.setText(date);
+        binding.textEventDressCode.setText("Dresscode "+purchase.getEvent().getDressCode().getDressCode());
+
         List<Pair<Integer, Integer>> ticketsList = purchase.getPurchases();
         double servicePrice = 3000;
         AtomicReference<Double> total = new AtomicReference<>((double) servicePrice);
@@ -121,5 +145,6 @@ public class DetailPurchaseFragment extends Fragment {
 
         binding.servicePrice.setText("$ "+servicePrice);
         binding.totalPrice.setText("$ "+total);
+        purchase.setPrice(total.get());
     }
 }

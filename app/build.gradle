@@ -53,7 +53,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
-    implementation 'com.github.androidmads:QRGenerator:1.0.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
     //RoomDB
     implementation "androidx.room:room-runtime:2.2.5"
