@@ -1,20 +1,40 @@
 package com.example.apparty;
 
+import static android.content.Context.WINDOW_SERVICE;
+
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.apparty.databinding.FragmentCompletePurchaseDialogBinding;
+import com.example.apparty.model.Purchase;
+import com.example.apparty.model.PurchaseInfoQR;
+import com.example.apparty.model.Utils;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class CompletePurchaseDialogFragment extends DialogFragment {
 
     private FragmentCompletePurchaseDialogBinding binding;
+    private Purchase purchase;
+    private String purchaseJson;
+
+    private PurchaseInfoQR purchaseInfoQR;
 
     public CompletePurchaseDialogFragment() {}
 
@@ -27,12 +47,34 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCompletePurchaseDialogBinding.inflate(inflater, container, false);
+        purchaseJson = getArguments().getString("purchase");
+        purchase = Utils.getGsonParser().fromJson(purchaseJson, Purchase.class);
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
+        purchaseInfoQR = new PurchaseInfoQR(purchase.getEvent().getId(), purchase.getEvent().getName(), purchase.getEvent().getDate().format(dateFormat), "PONER NOMBRE USER", purchase.getPurchases(), purchase.getPrice());
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        generateQR();
         setClickEvents();
+    }
+
+    private void generateQR() {
+        try{
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(String.valueOf(purchaseInfoQR), BarcodeFormat.QR_CODE, 750, 750);
+            binding.qrImage.setImageBitmap(bitmap);
+            purchase.setQr(String.valueOf(purchaseInfoQR));
+
+            Bundle bundle = new Bundle();
+            bundle.putString("purchase", Utils.getGsonParser().toJson(purchase));
+            getParentFragmentManager().setFragmentResult("purchaseCompleted", bundle);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void setClickEvents() {

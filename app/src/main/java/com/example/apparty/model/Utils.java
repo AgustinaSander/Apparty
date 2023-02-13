@@ -13,6 +13,8 @@ public class Utils {
     public static Gson getGsonParser() {
         if(null == gson) {
             GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
+            builder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
             gson = builder.create();
         }
         return gson;
@@ -23,4 +25,5 @@ public class Utils {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
     }
+
 }
