@@ -2,6 +2,7 @@ package com.example.apparty.persistence.room.entities;
 import android.util.Pair;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -11,6 +12,7 @@ import com.example.apparty.model.Event;
 import com.example.apparty.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +36,7 @@ public class PurchaseEntity {
     private int idEvent;
     @ColumnInfo(name = "id_user")
     private int idUser;
-    //Lista tickets y cantidad asociada
-    //private List<Pair<Integer, Integer>> purchases;
+    //Lista tickets y cantidad asociada en un string que se genera
+    private Set<String> purchases;
     private double price;
 }
