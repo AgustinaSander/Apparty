@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_searchEvents_to_eventDetailFragment"
             app:destination="@id/eventDetailFragment" />
+        <action
+            android:id="@+id/action_searchEvents_to_scanQRFragment"
+            app:destination="@id/scanQRFragment" />
     </fragment>
     <action
         android:id="@+id/goToSearchFragment"
@@ -45,6 +48,11 @@
         android:name="com.example.apparty.DetailPurchaseFragment"
         android:label="fragment_detail_purchase"
         tools:layout="@layout/fragment_detail_purchase" />
+    <fragment
+        android:id="@+id/scanQRFragment"
+        android:name="com.example.apparty.ScanQRFragment"
+        android:label="fragment_scan_q_r"
+        tools:layout="@layout/fragment_scan_q_r" />
 
 
 </navigation>

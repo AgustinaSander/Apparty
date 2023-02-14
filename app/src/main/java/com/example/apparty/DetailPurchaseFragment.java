@@ -96,13 +96,12 @@ public class DetailPurchaseFragment extends Fragment {
 
     private void setValues() {
         //FALTA SETEAR EL USER QUE LO COMPRO
-        binding.textEventName.setText(purchase.getEvent().getName());
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
-        String date = purchase.getEvent().getDate().format(dateFormat);
-        date = date.substring(0, 1).toUpperCase() + date.substring(1);
-        binding.textEventDate.setText(date);
-        binding.textEventDressCode.setText("Dresscode "+purchase.getEvent().getDressCode().getDressCode());
 
+        setEventValues();
+        setTicketPrices();
+    }
+
+    private void setTicketPrices() {
         List<Pair<Integer, Integer>> ticketsList = purchase.getPurchases();
         double servicePrice = 3000;
         AtomicReference<Double> total = new AtomicReference<>((double) servicePrice);
@@ -146,5 +145,14 @@ public class DetailPurchaseFragment extends Fragment {
         binding.servicePrice.setText("$ "+servicePrice);
         binding.totalPrice.setText("$ "+total);
         purchase.setPrice(total.get());
+    }
+
+    private void setEventValues() {
+        binding.textEventName.setText(purchase.getEvent().getName());
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
+        String date = purchase.getEvent().getDate().format(dateFormat);
+        date = date.substring(0, 1).toUpperCase() + date.substring(1);
+        binding.textEventDate.setText(date);
+        binding.textEventDressCode.setText("Dresscode "+purchase.getEvent().getDressCode().getDressCode());
     }
 }
