@@ -32,6 +32,7 @@ public class PurchaseEntity {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_purchase")
     private int id;
+    private String qr;
     @ColumnInfo(name = "id_event")
     private int idEvent;
     @ColumnInfo(name = "id_user")

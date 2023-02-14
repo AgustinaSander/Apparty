@@ -60,7 +60,6 @@ public abstract class RoomDB extends RoomDatabase {
                         super.onCreate(db);
                     }
                 })
-                .addTypeConverter(converters)
                 .fallbackToDestructiveMigration()
                 .build();
     }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "33b5a6b0747b8e6494fc49475c3a2c94",
+    "identityHash": "15ab45854389b51ce4ff5cb0ea2bce9e",
     "entities": [
       {
         "tableName": "event",
@@ -72,7 +72,6 @@
               "id_user",
               "id_dressCode"
             ],
-            "orders": [],
             "createSql": "CREATE INDEX IF NOT EXISTS `index_event_id_address_id_user_id_dressCode` ON `${TABLE_NAME}` (`id_address`, `id_user`, `id_dressCode`)"
           }
         ],
@@ -278,13 +277,19 @@
       },
       {
         "tableName": "purchase",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id_purchase",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "qr",
+            "columnName": "qr",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "idEvent",
@@ -325,7 +330,6 @@
               "id_event",
               "id_user"
             ],
-            "orders": [],
             "createSql": "CREATE INDEX IF NOT EXISTS `index_purchase_id_event_id_user` ON `${TABLE_NAME}` (`id_event`, `id_user`)"
           }
         ],
@@ -358,7 +362,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '33b5a6b0747b8e6494fc49475c3a2c94')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '15ab45854389b51ce4ff5cb0ea2bce9e')"
     ]
   }
 }

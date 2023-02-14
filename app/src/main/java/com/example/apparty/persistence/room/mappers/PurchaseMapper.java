@@ -30,6 +30,7 @@ public class PurchaseMapper {
     public static PurchaseEntity toEntity(Purchase purchase) {
         return new PurchaseEntity(
                 purchase.getId(),
+                purchase.getQr(),
                 purchase.getEvent().getId(),
                 purchase.getUser().getId(),
                 listOfPairToString(purchase.getPurchases()),
@@ -49,6 +50,7 @@ public class PurchaseMapper {
     public static Purchase fromEntity(PurchaseEntity purchaseEntity){
         return new Purchase(
                 purchaseEntity.getId(),
+                purchaseEntity.getQr(),
                 EventMapper.fromEntity(eventDAO.getEvent(purchaseEntity.getIdEvent())),
                 UserMapper.fromEntity(userDAO.getUser(purchaseEntity.getIdUser())),
                 listOfStringToPair(purchaseEntity.getPurchases()),
