@@ -2,6 +2,7 @@ package com.example.apparty;
 
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
@@ -26,6 +28,9 @@ import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Utils;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -76,6 +81,10 @@ public class SearchEventsFragment extends Fragment {
         binding.searchEventsBtn.setOnClickListener(e -> {
             String wordsFilter = binding.searchInputEditText.getText().toString();
             showEvents(wordsFilter);
+        });
+
+        binding.scanQRTest.setOnClickListener(e -> {
+            NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_scanQRFragment);
         });
     }
 
