@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c04d360838d8f0456bf40eec13038245",
+    "identityHash": "33b5a6b0747b8e6494fc49475c3a2c94",
     "entities": [
       {
         "tableName": "event",
@@ -278,7 +278,7 @@
       },
       {
         "tableName": "purchase",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -297,6 +297,12 @@
             "columnName": "id_user",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "purchases",
+            "columnName": "purchases",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "price",
@@ -352,7 +358,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c04d360838d8f0456bf40eec13038245')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '33b5a6b0747b8e6494fc49475c3a2c94')"
     ]
   }
 }

@@ -2,10 +2,12 @@ package com.example.apparty.persistence.room;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.apparty.persistence.room.daos.AddressDAO;
 import com.example.apparty.persistence.room.daos.DressCodeDAO;
@@ -31,6 +33,7 @@ public abstract class RoomDB extends RoomDatabase {
 
     private static final String DATABASE_NAME = "apparty_db";
     private static RoomDB instance;
+    private static Converters converters;
 
     //Create DAO
     public abstract EventDAO eventDAO();
@@ -51,7 +54,13 @@ public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB buildDatabase(final Context context){
         return Room.databaseBuilder(context, RoomDB.class, DATABASE_NAME)
-                //.addCallback()
+                .addCallback(new Callback() {
+                    @Override
+                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                        super.onCreate(db);
+                    }
+                })
+                .addTypeConverter(converters)
                 .fallbackToDestructiveMigration()
                 .build();
     }

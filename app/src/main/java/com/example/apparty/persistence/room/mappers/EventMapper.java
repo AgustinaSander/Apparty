@@ -13,10 +13,15 @@ import com.example.apparty.persistence.room.entities.UserEntity;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventMapper {
+
+    private static AddressDAO addressDAO;
+    private static DressCodeDAO dressCodeDAO;
+    private static UserDAO userDAO;
 
     private EventMapper () {}
 
@@ -25,25 +30,23 @@ public class EventMapper {
                 event.getId(),
                 event.getName(),
                 event.getAddress().getId(),
-                event.getDate(),
-                event.getTime(),
+                event.getDate().getLong(ChronoField.EPOCH_DAY),
+                event.getTime().getLong(ChronoField.EPOCH_DAY),
                 event.getDressCode().getId(),
                 event.getOrganizer().getId(),
                 event.getComments()
         );
     }
 
-    public static Event fromEntity (EventEntity event, AddressEntity address, DressCodeEntity dressCode, UserEntity user){
-
-
+    public static Event fromEntity (EventEntity event){
         return new Event(
                 event.getId(),
                 event.getName(),
-                AddressMapper.fromEntity(address),
+                AddressMapper.fromEntity(addressDAO.getAddress(event.getIdAddress())),
                 new Date(event.getDate()),
                 new Time(event.getTime()),
-                DressCodeMapper.fromEntity(dressCode),
-                UserMapper.fromEntity(user),
+                DressCodeMapper.fromEntity(dressCodeDAO.getDressCode(event.getIdDressCode())),
+                UserMapper.fromEntity(userDAO.getUser(event.getIdUserOrganizer())),
                 event.getComments()
         );
     }
