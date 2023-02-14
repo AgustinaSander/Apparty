@@ -1,5 +1,7 @@
 package com.example.apparty.model;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Event {
     private String comments;
 
 
-    public Event(int id, String name){
+    public Event(int id, String name, Address address, Date date, Time time, DressCode dressCode, User user, String comments){
         this.id = id;
         this.name = name;
     }
