@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity(tableName = "address")
 public class AddressEntity {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id_address")
     private int id;
     private String address;
