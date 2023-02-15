@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.apparty.persistence.room.entities.AddressEntity;
-import com.example.apparty.persistence.room.entities.EventEntity;
 
 import java.util.List;
 
