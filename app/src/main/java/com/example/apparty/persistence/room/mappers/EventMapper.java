@@ -5,6 +5,7 @@ import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.persistence.room.daos.AddressDAO;
 import com.example.apparty.persistence.room.daos.DressCodeDAO;
+import com.example.apparty.persistence.room.daos.TicketDAO;
 import com.example.apparty.persistence.room.daos.UserDAO;
 import com.example.apparty.persistence.room.entities.AddressEntity;
 import com.example.apparty.persistence.room.entities.DressCodeEntity;
@@ -22,6 +23,7 @@ public class EventMapper {
     private static AddressDAO addressDAO;
     private static DressCodeDAO dressCodeDAO;
     private static UserDAO userDAO;
+    private static TicketDAO ticketDAO;
 
     private EventMapper () {}
 

@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apparty.databinding.ActivityMainBinding;
+import com.example.apparty.persistence.room.RoomDB;
+import com.example.apparty.persistence.room.daos.EventDAO;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        //EventDAO dao = RoomDB.getInstance(this).eventDAO();
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(view);

@@ -18,7 +18,7 @@ public interface DressCodeDAO {
     DressCodeEntity getDressCode(int id);
 
     @Insert
-    void insertEventDressCode(DressCodeEntity dressCode);
+    void insertDressCode(DressCodeEntity dressCode);
 
     @Delete
     void deleteDressCode(DressCodeEntity dressCode);

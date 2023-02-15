@@ -7,6 +7,7 @@ import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Ticket;
+import com.example.apparty.persistence.repos.EventRepositoryImpl;
 import com.example.apparty.repositories.DresscodeRepository;
 import com.example.apparty.repositories.EventRepository;
 
@@ -21,13 +22,16 @@ import java.util.stream.Collectors;
 public class GestorEvent {
     private static GestorEvent gestorEvent;
     private DresscodeRepository dresscodeRepository = new DresscodeRepository();
-    private EventRepository eventRepository = new EventRepository();
+    private com.example.apparty.repositories.EventRepository eventRepository = new EventRepository();
+
+
     private List<Event> eventList;
     private List<DressCode> dressCodeList;
 
     private GestorEvent(){
         eventList = eventRepository.getEvents();
         dressCodeList = dresscodeRepository.getDresscodes();
+
     }
 
     public static GestorEvent getInstance(){

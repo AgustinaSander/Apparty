@@ -16,11 +16,18 @@ import android.widget.Button;
 
 import com.example.apparty.databinding.FragmentLoginBinding;
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
+import com.example.apparty.model.Address;
+import com.example.apparty.persistence.repos.AddressRepository;
+import com.example.apparty.persistence.repos.AddressRepositoryImpl;
+import com.example.apparty.persistence.repos.EventRepository;
+import com.example.apparty.persistence.repos.EventRepositoryImpl;
+import com.example.apparty.persistence.room.entities.AddressEntity;
 
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
+    private AddressRepositoryImpl addressRepository;
 
     public LoginFragment() {
     }
@@ -38,6 +45,13 @@ public class LoginFragment extends Fragment {
         binding.loginBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(),MainActivity.class);
             startActivity(intent);
+            new Thread( () -> {
+                addressRepository = new AddressRepositoryImpl(this.getContext());
+                Address address1 = new Address(4, "Breas 6475", "Argentina", "Santa Fe", "Santa Fe");
+                //addressRepository.insertAddress(address1);
+                System.out.println(addressRepository.getAddressById(4));
+                Log.d("LOGINFRAG",addressRepository.getAddressById(4).toString());
+            }).start();
         });
 
         return binding.getRoot();
