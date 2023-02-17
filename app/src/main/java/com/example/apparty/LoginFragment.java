@@ -45,13 +45,13 @@ public class LoginFragment extends Fragment {
         binding.loginBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(),MainActivity.class);
             startActivity(intent);
-            new Thread( () -> {
+            /*new Thread( () -> {
                 addressRepository = new AddressRepositoryImpl(this.getContext());
                 Address address1 = new Address(4, "Breas 6475", "Argentina", "Santa Fe", "Santa Fe");
                 //addressRepository.insertAddress(address1);
                 System.out.println(addressRepository.getAddressById(4));
                 Log.d("LOGINFRAG",addressRepository.getAddressById(4).toString());
-            }).start();
+            }).start();*/
         });
 
         return binding.getRoot();
