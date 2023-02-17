@@ -36,8 +36,15 @@ public class ScanQRFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         //escanear QR
+        ScanOptions options = new ScanOptions();
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+        options.setOrientationLocked(false);
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+        options.setPrompt("Escanea el codigo QR de la entrada");
+        options.setBarcodeImageEnabled(true);
+
         binding.scanQR.setOnClickListener(e -> {
-            barcodeLauncher.launch(new ScanOptions());
+            barcodeLauncher.launch(options);
         });
 
     }
@@ -51,8 +58,4 @@ public class ScanQRFragment extends Fragment {
                 }
             });
 
-    // Launch
-    public void onButtonClick(View view) {
-        barcodeLauncher.launch(new ScanOptions());
-    }
 }
