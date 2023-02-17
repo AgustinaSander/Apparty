@@ -82,10 +82,6 @@ public class SearchEventsFragment extends Fragment {
             String wordsFilter = binding.searchInputEditText.getText().toString();
             showEvents(wordsFilter);
         });
-
-        binding.scanQRTest.setOnClickListener(e -> {
-            NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_scanQRFragment);
-        });
     }
 
     private void showEvents(String wordsFilter) {
