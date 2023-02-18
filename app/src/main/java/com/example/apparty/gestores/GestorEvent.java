@@ -132,4 +132,8 @@ public class GestorEvent {
         }
         return null;
     }
+
+    public List<Event> getEventsOrganizedByUser(int idUser){
+        return getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList());
+    }
 }
