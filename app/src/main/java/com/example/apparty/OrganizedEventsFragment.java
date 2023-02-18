@@ -86,6 +86,7 @@ public class OrganizedEventsFragment extends Fragment implements ResultsRecycler
         recyclerView.setAdapter(adapter);
         recyclerViewToday.setAdapter(adapterToday);
 
+        //DESHABILITAR CLICK DE LOS ITEMS FUTUROS
         recyclerView.setClickable(true);
         recyclerViewToday.setClickable(true);
     }

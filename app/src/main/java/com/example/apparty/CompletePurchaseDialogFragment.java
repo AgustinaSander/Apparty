@@ -34,7 +34,8 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     private Purchase purchase;
     private String purchaseJson;
 
-    private PurchaseInfoQR purchaseInfoQR;
+    private PurchaseInfoQR purchaseInfo;
+    private String purchaseQR;
 
     public CompletePurchaseDialogFragment() {}
 
@@ -49,9 +50,8 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
         binding = FragmentCompletePurchaseDialogBinding.inflate(inflater, container, false);
         purchaseJson = getArguments().getString("purchase");
         purchase = Utils.getGsonParser().fromJson(purchaseJson, Purchase.class);
-
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
-        purchaseInfoQR = new PurchaseInfoQR(purchase.getEvent().getId(), purchase.getEvent().getName(), purchase.getEvent().getDate().format(dateFormat), "PONER NOMBRE USER", purchase.getPurchases(), purchase.getPrice());
+        purchaseInfo = new PurchaseInfoQR(purchase.getId(), purchase.getEvent().getId(),"PONER NOMBRE USER", purchase.getPurchases());
+        purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
 
         return binding.getRoot();
     }
@@ -65,9 +65,9 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     private void generateQR() {
         try{
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.encodeBitmap(String.valueOf(purchaseInfoQR), BarcodeFormat.QR_CODE, 750, 750);
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(purchaseQR, BarcodeFormat.QR_CODE, 750, 750);
             binding.qrImage.setImageBitmap(bitmap);
-            purchase.setQr(String.valueOf(purchaseInfoQR));
+            purchase.setQr(String.valueOf(purchaseQR));
 
             Bundle bundle = new Bundle();
             bundle.putString("purchase", Utils.getGsonParser().toJson(purchase));

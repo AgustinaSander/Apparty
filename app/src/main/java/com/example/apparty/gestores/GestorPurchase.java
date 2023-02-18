@@ -31,4 +31,9 @@ public class GestorPurchase {
         });
         //Hay que agregar la purchase a la db
     }
+
+    public boolean isPurchaseScannedById(int id){
+        //BUSCAR PURCHASE Y DEVOLVER EL ATRIBUTO IS_SCANNED
+        return false;
+    }
 }
