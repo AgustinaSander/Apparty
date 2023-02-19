@@ -6,6 +6,7 @@ import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class GestorPurchase {
@@ -32,8 +33,27 @@ public class GestorPurchase {
         //Hay que agregar la purchase a la db
     }
 
+    public Purchase getPurchaseById(int id){
+        //HACER!!!!!
+        return new Purchase();
+    }
+
     public boolean isPurchaseScannedById(int id){
+        Purchase purchase = getPurchaseById(id);
         //BUSCAR PURCHASE Y DEVOLVER EL ATRIBUTO IS_SCANNED
-        return false;
+        //SACAR ESTO DESPUES
+        purchase.setScanned(false);
+
+        return purchase.isScanned();
+    }
+
+    public void updateQrToScanned(int id) {
+        Purchase purchase = getPurchaseById(id);
+        purchase.setScanned(true);
+        updatePurchase(purchase);
+    }
+
+    private void updatePurchase(Purchase purchase) {
+        //HACER!!!!!
     }
 }

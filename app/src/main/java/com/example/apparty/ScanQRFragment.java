@@ -140,6 +140,9 @@ public class ScanQRFragment extends Fragment {
             binding.ticketContainer.addView(linearLayout);
         });
 
+        //ACTUALIZAR EL PURCHASE QR A SCANNED TRUE
+        gestorPurchase.updateQrToScanned(purchaseInfoQR.getId());
+
     }
 
 }
