@@ -62,7 +62,7 @@ public class ScanQRFragment extends Fragment {
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
         options.setOrientationLocked(false);
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-        options.setPrompt("Escanea el codigo QR de la entrada");
+        options.setPrompt("");
         options.setBarcodeImageEnabled(true);
 
         binding.scanQR.setOnClickListener(e -> {
@@ -120,6 +120,7 @@ public class ScanQRFragment extends Fragment {
         binding.invalidQR.setVisibility(View.GONE);
 
         List<Pair<Integer, Integer>> tickets = purchaseInfoQR.getPurchases();
+        binding.ticketContainer.removeAllViews();
         tickets.stream().forEach(t -> {
             Ticket ticket = gestorEvent.getTicketByIdByEvent(t.first, event.getId());
 
