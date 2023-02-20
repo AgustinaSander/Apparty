@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.gestores.GestorPurchase;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
@@ -33,6 +34,7 @@ public class DetailPurchaseFragment extends Fragment {
 
     private FragmentDetailPurchaseBinding binding;
     private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
     private Purchase purchase;
 
     public DetailPurchaseFragment(){};
@@ -87,6 +89,9 @@ public class DetailPurchaseFragment extends Fragment {
     }
 
     private void doPayment() {
+        //GUARDAR LA COMPRAAAAA!!!!! PARA QUE ME GENERE EL ID SOBRE TODO Y PODER SETEARLO EN EL NOMBRE DEL PDF
+        //purchase = gestorPurchase.savePurchase(purchase);
+
         Bundle bundle = new Bundle();
         bundle.putString("purchase", Utils.getGsonParser().toJson(purchase));
         CompletePurchaseDialogFragment completePurchaseDialogFragment = new CompletePurchaseDialogFragment();

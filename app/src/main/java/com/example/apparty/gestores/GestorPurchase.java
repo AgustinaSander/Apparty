@@ -23,7 +23,7 @@ public class GestorPurchase {
         return gestorPurchase;
     }
 
-    public void savePurchase(Purchase purchase){
+    public Purchase savePurchase(Purchase purchase){
         Event event = purchase.getEvent();
         //Recorro los tickets comprados y disminuyo la cantidad
         List<Pair<Integer, Integer>> purchaseList = purchase.getPurchases();
@@ -31,6 +31,8 @@ public class GestorPurchase {
 
         });
         //Hay que agregar la purchase a la db
+
+        return purchase;
     }
 
     public Purchase getPurchaseById(int id){
@@ -53,7 +55,7 @@ public class GestorPurchase {
         updatePurchase(purchase);
     }
 
-    private void updatePurchase(Purchase purchase) {
+    public void updatePurchase(Purchase purchase) {
         //HACER!!!!!
     }
 }
