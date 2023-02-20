@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "68e807d6c292e5217e40cc91a588932b",
+    "identityHash": "be791a53ec523a0b7b4c3383b0ebd3d7",
     "entities": [
       {
         "tableName": "event",
@@ -277,7 +277,7 @@
       },
       {
         "tableName": "purchase",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, `isScanned` INTEGER NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -313,6 +313,12 @@
             "fieldPath": "price",
             "columnName": "price",
             "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isScanned",
+            "columnName": "isScanned",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -362,7 +368,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '68e807d6c292e5217e40cc91a588932b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be791a53ec523a0b7b4c3383b0ebd3d7')"
     ]
   }
 }

@@ -180,6 +180,7 @@ public class EventDetailFragment extends Fragment {
     private void getSelectedTickets() {
         Purchase purchase = new Purchase();
         purchase.setEvent(event);
+        purchase.setScanned(false);
         //SETEAR USER QUE ESTA LOGUEADO
 
         ArrayList<Pair<Integer,Integer>> selectedTickets = new ArrayList<>();

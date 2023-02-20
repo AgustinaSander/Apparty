@@ -67,6 +67,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         recyclerView.setLayoutManager(layoutManager);
 
         setEventList();
+
         if(filteredEvents.size()==0){
             binding.noResults.setVisibility(View.VISIBLE);
             binding.textResume.setVisibility(View.GONE);

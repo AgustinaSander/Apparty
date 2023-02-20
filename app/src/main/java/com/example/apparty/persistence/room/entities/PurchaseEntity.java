@@ -40,4 +40,5 @@ public class PurchaseEntity {
     //Lista tickets y cantidad asociada en un string que se genera
     private Set<String> purchases;
     private double price;
+    private boolean isScanned;
 }

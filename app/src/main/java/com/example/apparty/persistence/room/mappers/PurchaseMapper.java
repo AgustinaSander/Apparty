@@ -34,7 +34,8 @@ public class PurchaseMapper {
                 purchase.getEvent().getId(),
                 purchase.getUser().getId(),
                 listOfPairToString(purchase.getPurchases()),
-                purchase.getPrice()
+                purchase.getPrice(),
+                purchase.isScanned()
         );
     }
 
@@ -54,7 +55,8 @@ public class PurchaseMapper {
                 EventMapper.fromEntity(eventDAO.getEvent(purchaseEntity.getIdEvent())),
                 UserMapper.fromEntity(userDAO.getUser(purchaseEntity.getIdUser())),
                 listOfStringToPair(purchaseEntity.getPurchases()),
-                purchaseEntity.getPrice()
+                purchaseEntity.getPrice(),
+                purchaseEntity.isScanned()
         );
     }
 

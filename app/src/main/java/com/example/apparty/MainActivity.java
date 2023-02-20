@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Log.i("chau","JJ");
+        Log.i("chau", String.valueOf(item.getItemId()));
         NavController navController = Navigation.findNavController(this, R.id.fragmentContainerView);
         return NavigationUI.onNavDestinationSelected(item, navController)
                 || super.onOptionsItemSelected(item);

@@ -24,4 +24,5 @@ public class Purchase {
     //Lista tickets y cantidad asociada
     private List<Pair<Integer, Integer>> purchases;
     private double price;
+    private boolean isScanned;
 }
