@@ -18,9 +18,9 @@ public class EventRepository {
     public EventRepository(){}
 
     private List<Event> _EVENTS = List.of(
-            new Event(1, "Fiesta en Salones del puerto", getAddress(), getStock(), LocalDate.of(2023, 1, 15), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
-            new Event(2, "Poolparty en ATE", getAddress(), getStock(), LocalDate.of(2023, 1, 20), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
-            new Event(3, "Fiesta en la playa", getAddress(), getStock(), LocalDate.of(2023, 1, 13), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(1), getUser(), getComments())
+            new Event(1, "Fiesta en Salones del puerto", getAddress(), getStock(), LocalDate.of(2023, 3, 15), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
+            new Event(2, "Poolparty en ATE", getAddress(), getStock(), LocalDate.of(2023, 3, 20), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(0), getUser(), getComments()),
+            new Event(3, "Fiesta en la playa", getAddress(), getStock(), LocalDate.now(), LocalTime.of(17,30), dresscodeRepository.getDresscodes().get(1), getUser(), getComments())
     );
 
     private User getUser() {

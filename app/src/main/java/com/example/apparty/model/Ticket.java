@@ -21,5 +21,4 @@ public class Ticket {
     private int totalQuantity;
     private int availableQuantity;
     private double price;
-
 }

@@ -3,12 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <item android:title="Buscar eventos"
-        android:icon="@drawable/glass_cheers_24"
+        android:icon="@drawable/ic_baseline_search_24"
         android:id="@+id/searchEvents"/>
-    <item
-        android:title="Escanear QRs"
-        android:icon="@drawable/ic_baseline_qr_code_24"
-        android:id="@+id/scanQRFragment"/>
+
+    <group>
+        <item android:title="Mis eventos"
+            android:icon="@drawable/glass_cheers_24"
+            android:id="@+id/organizedEventsFragment"/>
+        <item
+            android:title="Mis compras"
+            android:icon="@drawable/ic_baseline_shopping_cart_24"
+            android:id="@+id/purchasedEvents"/>
+    </group>
 
     <item android:title="">
         <menu>

@@ -19,18 +19,6 @@ import lombok.ToString;
 public class PurchaseInfoQR {
     private int id;
     private int idEvent;
-    private String nameEvent;
-    private String dateEvent;
     private String username;
     private List<Pair<Integer, Integer>> purchases;
-    private double price;
-
-    public PurchaseInfoQR(int idEvent, String nameEvent, String dateEvent, String username, List<Pair<Integer, Integer>> purchases, double price) {
-        this.idEvent = idEvent;
-        this.nameEvent = nameEvent;
-        this.dateEvent = dateEvent;
-        this.username = username;
-        this.price = price;
-        this.purchases = purchases;
-    }
 }
