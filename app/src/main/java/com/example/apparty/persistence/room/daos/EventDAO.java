@@ -20,7 +20,6 @@ public interface EventDAO {
     @Query("SELECT * FROM event WHERE id_dressCode = :id")
     List<EventEntity> getEventByDressCode(int id);
 
-
     @Insert
     void insertEvent(EventEntity event);
 

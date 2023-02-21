@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,4 +19,6 @@ public class DressCodeEntity {
     @ColumnInfo(name = "id_dressCode")
     private int id;
     private String dressCode;
+
+
 }

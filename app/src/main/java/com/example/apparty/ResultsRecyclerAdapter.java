@@ -13,7 +13,6 @@ import com.example.apparty.databinding.EventItemBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 
-import java.util.Date;
 import java.util.List;
 
 import lombok.NonNull;
@@ -61,16 +60,20 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
     @NonNull
     @Override
     public ResultsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        gestorEvent = GestorEvent.getInstance();
+        gestorEvent = GestorEvent.getInstance(parent.getContext());
         return new ResultsViewHolder (EventItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), this.onNoteListener);
     }
 
+
     @Override
     public void onBindViewHolder(ResultsViewHolder resultHolder, int position) {
+
         Event event = this.eventList.get(position);
         resultHolder.name.setText(event.getName());
         resultHolder.date.setText(event.getDate().toString());
+        //resultHolder.date.setText("Date");
         resultHolder.dressCode.setText(event.getDressCode().getDressCode());
+        //resultHolder.dressCode.setText("Formalito");
         resultHolder.image.setImageResource(R.drawable.party1);
 
     }

@@ -1,11 +1,6 @@
 package com.example.apparty;
 
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -14,14 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.apparty.databinding.FragmentScanQRBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
-import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
-import com.example.apparty.model.Purchase;
 import com.example.apparty.model.PurchaseInfoQR;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.Utils;
@@ -36,8 +32,8 @@ public class ScanQRFragment extends Fragment {
 
     private FragmentScanQRBinding binding;
     private Event event;
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
-    private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
+    private GestorEvent gestorEvent;
+    private GestorPurchase gestorPurchase;
 
     public ScanQRFragment() {}
 
@@ -51,6 +47,7 @@ public class ScanQRFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentScanQRBinding.inflate(inflater, container, false);
         int idEvent = getArguments().getInt("idEvent");
+        gestorEvent = GestorEvent.getInstance(getContext());
         event = gestorEvent.getEventById(idEvent);
         return binding.getRoot();
     }
@@ -58,6 +55,7 @@ public class ScanQRFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         //escanear QR
+        gestorPurchase = GestorPurchase.getInstance();
         ScanOptions options = new ScanOptions();
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
         options.setOrientationLocked(false);

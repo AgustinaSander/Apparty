@@ -3,6 +3,9 @@ package com.example.apparty.persistence.room.mappers;
 import com.example.apparty.model.User;
 import com.example.apparty.persistence.room.entities.UserEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserMapper {
 
     private UserMapper() {}
@@ -28,4 +31,25 @@ public class UserMapper {
                 user.getPassword()
         );
     }
+
+    public static List<User> fromEntityList (List<UserEntity> users){
+
+        List<User> userList = new ArrayList<>();
+
+        for (UserEntity u : users) {
+            userList.add(UserMapper.fromEntity(u));
+        }
+        return userList;
+    }
+
+    public static List<UserEntity> toEntityList (List<User> users){
+
+        List<UserEntity> userList = new ArrayList<>();
+
+        for (User u : users) {
+            userList.add(UserMapper.toEntity(u));
+        }
+        return userList;
+    }
+
 }

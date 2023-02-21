@@ -3,10 +3,6 @@ package com.example.apparty;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -17,10 +13,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
-import com.example.apparty.model.Filter;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.Utils;
@@ -33,8 +31,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailPurchaseFragment extends Fragment {
 
     private FragmentDetailPurchaseBinding binding;
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    //Arreglar esta llamada al gestor
     private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
+
+    private GestorEvent gestorEvent;
+
     private Purchase purchase;
 
     public DetailPurchaseFragment(){};
@@ -64,6 +65,7 @@ public class DetailPurchaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        gestorEvent = GestorEvent.getInstance(this.getContext());
         setValues();
         setClickEvents();
     }

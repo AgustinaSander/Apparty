@@ -1,16 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-<<<<<<< HEAD
-    "identityHash": "be791a53ec523a0b7b4c3383b0ebd3d7",
-=======
-    "identityHash": "15ab45854389b51ce4ff5cb0ea2bce9e",
->>>>>>> AraSarina
+    "version": 5,
+    "identityHash": "ce78804074a3c1d3804845699f3e14d3",
     "entities": [
       {
         "tableName": "event",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_event` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `id_address` INTEGER NOT NULL, `date` INTEGER, `time` INTEGER, `id_dressCode` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `comments` TEXT, FOREIGN KEY(`id_address`) REFERENCES `address`(`id_address`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_dressCode`) REFERENCES `dressCode`(`id_dressCode`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_event` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `id_address` INTEGER NOT NULL, `date` TEXT, `time` TEXT, `id_dressCode` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `comments` TEXT, FOREIGN KEY(`id_address`) REFERENCES `address`(`id_address`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_dressCode`) REFERENCES `dressCode`(`id_dressCode`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -33,13 +29,13 @@
           {
             "fieldPath": "date",
             "columnName": "date",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
             "fieldPath": "time",
             "columnName": "time",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
@@ -281,7 +277,7 @@
       },
       {
         "tableName": "purchase",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, `isScanned` INTEGER NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -317,12 +313,6 @@
             "fieldPath": "price",
             "columnName": "price",
             "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isScanned",
-            "columnName": "isScanned",
-            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -372,11 +362,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-<<<<<<< HEAD
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be791a53ec523a0b7b4c3383b0ebd3d7')"
-=======
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '15ab45854389b51ce4ff5cb0ea2bce9e')"
->>>>>>> AraSarina
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ce78804074a3c1d3804845699f3e14d3')"
     ]
   }
 }
