@@ -18,11 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
-<<<<<<< HEAD
 import com.example.apparty.gestores.GestorPurchase;
-import com.example.apparty.model.Filter;
-=======
->>>>>>> AraSarina
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.Utils;
@@ -38,7 +34,7 @@ public class DetailPurchaseFragment extends Fragment {
     //Arreglar esta llamada al gestor
     private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
 
-    private GestorEvent gestorEvent = GestorEvent.getInstance(this.getContext());
+    private GestorEvent gestorEvent;
 
     private Purchase purchase;
 
@@ -69,6 +65,7 @@ public class DetailPurchaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        gestorEvent = GestorEvent.getInstance(this.getContext());
         setValues();
         setClickEvents();
     }

@@ -11,13 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.apparty.databinding.FragmentLoginBinding;
-import com.example.apparty.persistence.repos.AddressRepositoryImpl;
 
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    private AddressRepositoryImpl addressRepository;
 
     public LoginFragment() {
     }

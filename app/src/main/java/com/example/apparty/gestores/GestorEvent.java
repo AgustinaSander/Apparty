@@ -186,6 +186,7 @@ public class GestorEvent {
     }
 
     public List<Event> getEventsOrganizedByUser(int idUser){
+        Log.i("Event List",getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList()).toString());
         return getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList());
     }
 }
