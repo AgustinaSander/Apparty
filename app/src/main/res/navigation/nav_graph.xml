@@ -19,7 +19,10 @@
     </fragment>
     <action
         android:id="@+id/goToSearchFragment"
-        app:destination="@id/searchEvents" />
+        app:destination="@id/searchEvents"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/searchEvents"
+        />
 
     <fragment
         android:id="@+id/eventResultsFragment"
@@ -63,7 +66,11 @@
             android:id="@+id/action_organizedEventsFragment_to_fragmentRegisterEvent"
             app:destination="@id/fragmentRegisterEvent" />
     </fragment>
-    <action android:id="@+id/action_global_organizedEventsFragment" app:destination="@id/organizedEventsFragment"/>
+    <action
+        android:id="@+id/action_global_organizedEventsFragment"
+        app:destination="@id/organizedEventsFragment"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/organizedEventsFragment"/>
 
     <fragment
         android:id="@+id/fragmentRegisterEvent"
@@ -76,7 +83,12 @@
         android:name="com.example.apparty.PurchasedEventsFragment"
         android:label="fragment_purchased_events"
         tools:layout="@layout/fragment_purchased_events" />
-    <action android:id="@+id/action_global_purchasedEventsFragment" app:destination="@id/purchasedEventsFragment"/>
+
+    <action
+        android:id="@+id/action_global_purchasedEventsFragment"
+        app:destination="@id/purchasedEventsFragment"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/purchasedEventsFragment"/>
 
 
 
