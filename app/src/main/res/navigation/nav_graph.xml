@@ -45,6 +45,11 @@
         android:name="com.example.apparty.PurchaseFragment"
         android:label="fragment_purchase"
         tools:layout="@layout/fragment_purchase" />
+    <fragment
+        android:id="@+id/fragmentRegisterEvent"
+        android:name="com.example.apparty.FragmentRegisterEvent"
+        android:label="fragment_register_event"
+        tools:layout="@layout/fragment_register_event" />
 
 
 </navigation>
