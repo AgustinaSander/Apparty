@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -22,4 +20,6 @@ public class TicketEntity {
     private int totalQuantity;
     private int availableQuantity;
     private double price;
+
+
 }

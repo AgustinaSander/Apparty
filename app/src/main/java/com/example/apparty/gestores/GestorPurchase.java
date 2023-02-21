@@ -4,14 +4,13 @@ import android.util.Pair;
 
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
-import com.example.apparty.model.Ticket;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class GestorPurchase {
     private static GestorPurchase gestorPurchase;
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    //private GestorEvent gestorEvent = GestorEvent.getInstance();
 
     private GestorPurchase(){}
 
