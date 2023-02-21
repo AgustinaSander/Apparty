@@ -2,6 +2,7 @@ package com.example.apparty.gestores;
 
 import android.content.Context;
 
+import com.example.apparty.model.User;
 import com.example.apparty.persistence.repos.UserRepositoryImpl;
 
 public class GestorUser {
@@ -21,5 +22,10 @@ public class GestorUser {
         return gestorUser;
     }
 
+    public User getUserByEmailByPassword(String email, String password){
+        //SEGUIR
+        //userRepository.getUserByEmailByPassword();
+        return null;
+    }
 
 }

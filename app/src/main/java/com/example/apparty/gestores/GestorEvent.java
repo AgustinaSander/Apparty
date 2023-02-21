@@ -41,7 +41,6 @@ public class GestorEvent {
     }
 
     public void insertEvent (Event event){
-
         eventRepository.insertEvent(event);
     }
 
@@ -77,9 +76,7 @@ public class GestorEvent {
     }
 
     public List<Event> getFilteredEvents(String wordsFilter, Filter filters){
-        List<Event> events = new ArrayList<>();
-
-        events = getEventList();
+        List<Event> events = getEventList();
 
         if(filters != null) {
             if (filters.getDressCodeList().size() > 0) {
@@ -88,7 +85,6 @@ public class GestorEvent {
                             .filter(event -> dc == event.getDressCode().getId())
                             .collect(Collectors.toList());
                 }
-                //events = eventRepository.findByDresscodes(filters.getDressCodeList());
                 Log.i("Event List", "Filtered Events: " + events.toString());
             }
             if (filters.getFromDate() != null && filters.getFromDate() != "" && filters.getFromDate().length() != 0) {
@@ -112,9 +108,6 @@ public class GestorEvent {
                         .collect(Collectors.toList());
             }
         }
-        /*else {
-            events = getEventList();
-        }*/
 
         events = events.stream().filter(e -> e.getName().toLowerCase().contains(wordsFilter.toLowerCase()))
                 .collect(Collectors.toList());
@@ -137,8 +130,6 @@ public class GestorEvent {
     }
 
     public Event getEventById(int idEvent) {
-        //List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
-
         Thread hilo1 = new Thread( () -> {
             eventById = eventRepository.getEventById(idEvent);
 
@@ -152,8 +143,6 @@ public class GestorEvent {
         }
 
         return eventById;
-
-        //return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
     }
 
     private List<Double> getPrices(){
