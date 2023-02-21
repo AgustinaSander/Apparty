@@ -1,8 +1,6 @@
 package com.example.apparty;
 
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +15,6 @@ import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +23,7 @@ import lombok.NonNull;
 
 public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener {
 
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
     private Filter filters;
     private String wordsFilter;
     private List<Event> filteredEvents = new ArrayList<>();
@@ -60,13 +56,14 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        gestorEvent = GestorEvent.getInstance(this.getContext());
         recyclerView = binding.recyclerResult;
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         setEventList();
+
         if(filteredEvents.size()==0){
             binding.noResults.setVisibility(View.VISIBLE);
             binding.textResume.setVisibility(View.GONE);
@@ -85,6 +82,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     private void setEventList() {
         filteredEvents = new ArrayList<>();
         filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
+        //filteredEvents = gestorEvent.getEventList();
     }
 
     @Override

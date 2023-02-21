@@ -3,7 +3,6 @@ package com.example.apparty.model;
 import android.util.Pair;
 
 import java.util.List;
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,3 +24,4 @@ public class Purchase {
     private List<Pair<Integer, Integer>> purchases;
     private double price;
 }
+

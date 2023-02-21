@@ -3,11 +3,6 @@ package com.example.apparty;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -15,13 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
-
 import com.example.apparty.model.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,7 +34,7 @@ public class EventDetailFragment extends Fragment {
 
     private FragmentEventDetailBinding binding;
     private boolean showTickets = false;
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
     private Event event;
     private int idEvent;
     private List<Integer> quantityList = new ArrayList<>();
@@ -52,10 +50,11 @@ public class EventDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEventDetailBinding.inflate(inflater, container, false);
+        gestorEvent = GestorEvent.getInstance(this.getContext());
         binding.getTicketBtn.setEnabled(false);
         idEvent = getArguments().getInt("idEvent");
         event = gestorEvent.getEventById(idEvent);
-
+        Log.i("Event List", "EVENT DETAIL" + event.toString());
         return binding.getRoot();
     }
 
@@ -71,12 +70,14 @@ public class EventDetailFragment extends Fragment {
     }
 
     private void setValues() {
+
         binding.eventTitle.setText(event.getName());
         binding.eventComment.setText(event.getComments());
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
         String date = event.getDate().format(dateFormat);
         date = date.substring(0, 1).toUpperCase() + date.substring(1);
         binding.eventDate.setText(date);
+        //binding.eventDate.setText(event.getDate().toString());
         binding.eventTime.setText(event.getTime().toString() + " hs");
         binding.eventDresscode.setText("Dresscode " + event.getDressCode().getDressCode());
         Address address = event.getAddress();

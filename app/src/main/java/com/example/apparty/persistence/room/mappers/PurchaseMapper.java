@@ -2,22 +2,16 @@ package com.example.apparty.persistence.room.mappers;
 
 import android.util.Pair;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
-import com.example.apparty.model.User;
 import com.example.apparty.persistence.room.daos.EventDAO;
 import com.example.apparty.persistence.room.daos.UserDAO;
 import com.example.apparty.persistence.room.entities.PurchaseEntity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class PurchaseMapper {
 
@@ -51,7 +45,8 @@ public class PurchaseMapper {
         return new Purchase(
                 purchaseEntity.getId(),
                 purchaseEntity.getQr(),
-                EventMapper.fromEntity(eventDAO.getEvent(purchaseEntity.getIdEvent())),
+                //EventMapper.fromEntity(eventDAO.getEvent(purchaseEntity.getIdEvent())),
+                new Event(),
                 UserMapper.fromEntity(userDAO.getUser(purchaseEntity.getIdUser())),
                 listOfStringToPair(purchaseEntity.getPurchases()),
                 purchaseEntity.getPrice()

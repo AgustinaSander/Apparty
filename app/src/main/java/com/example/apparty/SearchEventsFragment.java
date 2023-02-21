@@ -1,36 +1,22 @@
 package com.example.apparty;
 
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.viewbinding.ViewBinding;
-
-import android.util.Log;
 import android.util.Pair;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.apparty.model.Event;
-import com.example.apparty.model.Filter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.model.Event;
+import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
-import com.google.gson.Gson;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -43,7 +29,7 @@ public class SearchEventsFragment extends Fragment {
     private Filter filters;
     private FragmentSearchEventsBinding binding;
     private List<CarouselItem> carouselItemList;
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
 
     public SearchEventsFragment() {
     }
@@ -67,6 +53,8 @@ public class SearchEventsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        gestorEvent = GestorEvent.getInstance(getContext());
+
         filters = null;
         setClickEvents();
         setCarousels();
@@ -106,10 +94,10 @@ public class SearchEventsFragment extends Fragment {
         List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
         //INICIALIZAR CAROUSEL
         List<Event> events = gestorEvent.getEventList();
+
         events.stream().forEach(e -> {
             carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
         });
-
         for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
             carouselItemList.add(new CarouselItem(info.second.first, info.second.second));
         }

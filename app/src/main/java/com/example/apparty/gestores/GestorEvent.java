@@ -1,15 +1,14 @@
 package com.example.apparty.gestores;
 
-import android.text.method.TimeKeyListener;
+import android.content.Context;
 import android.util.Log;
 
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Ticket;
+import com.example.apparty.persistence.repos.DressCodeRepositoryImpl;
 import com.example.apparty.persistence.repos.EventRepositoryImpl;
-import com.example.apparty.repositories.DresscodeRepository;
-import com.example.apparty.repositories.EventRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,39 +20,76 @@ import java.util.stream.Collectors;
 
 public class GestorEvent {
     private static GestorEvent gestorEvent;
-    private DresscodeRepository dresscodeRepository = new DresscodeRepository();
-    private com.example.apparty.repositories.EventRepository eventRepository = new EventRepository();
-
+    private DressCodeRepositoryImpl dresscodeRepository;
+    private EventRepositoryImpl eventRepository;
 
     private List<Event> eventList;
     private List<DressCode> dressCodeList;
+    private Event eventById;
 
-    private GestorEvent(){
-        eventList = eventRepository.getEvents();
-        dressCodeList = dresscodeRepository.getDresscodes();
+    public GestorEvent(Context context){
 
+        eventRepository = new EventRepositoryImpl(context);
+        dresscodeRepository = new DressCodeRepositoryImpl(context);
     }
 
-    public static GestorEvent getInstance(){
+    public static GestorEvent getInstance(Context context){
         if(gestorEvent == null){
-            gestorEvent = new GestorEvent();
+            gestorEvent = new GestorEvent(context);
         }
-
         return gestorEvent;
     }
 
+    public void insertEvent (Event event){
+
+        eventRepository.insertEvent(event);
+    }
+
     public List<DressCode> getDressCodeList(){
+        Thread hilo1 = new Thread( () -> {
+            this.dressCodeList = dresscodeRepository.getAllDressCodes();
+
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return this.dressCodeList;
     }
 
-    public List<Event> getEventList(){ return this.eventList; }
+    public List<Event> getEventList(){
+        Thread hilo1 = new Thread( () -> {
+            this.eventList = eventRepository.getAllEvents();
+
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.eventList;
+    }
 
     public List<Event> getFilteredEvents(String wordsFilter, Filter filters){
         List<Event> events = new ArrayList<>();
 
+        events = getEventList();
+
         if(filters != null) {
             if (filters.getDressCodeList().size() > 0) {
-                events = eventRepository.findByDresscodes(filters.getDressCodeList());
+                for (Integer dc: filters.getDressCodeList()){
+                    events = events.stream()
+                            .filter(event -> dc == event.getDressCode().getId())
+                            .collect(Collectors.toList());
+                }
+                //events = eventRepository.findByDresscodes(filters.getDressCodeList());
+                Log.i("Event List", "Filtered Events: " + events.toString());
             }
             if (filters.getFromDate() != null && filters.getFromDate() != "" && filters.getFromDate().length() != 0) {
                 LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
@@ -75,9 +111,10 @@ public class GestorEvent {
                 events = events.stream().filter(e -> hasCheaperTickets(e.getTickets(), filters.getMaxPrice()))
                         .collect(Collectors.toList());
             }
-        } else {
-            events = getEventList();
         }
+        /*else {
+            events = getEventList();
+        }*/
 
         events = events.stream().filter(e -> e.getName().toLowerCase().contains(wordsFilter.toLowerCase()))
                 .collect(Collectors.toList());
@@ -100,8 +137,23 @@ public class GestorEvent {
     }
 
     public Event getEventById(int idEvent) {
-        List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
-        return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
+        //List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
+
+        Thread hilo1 = new Thread( () -> {
+            eventById = eventRepository.getEventById(idEvent);
+
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return eventById;
+
+        //return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
     }
 
     private List<Double> getPrices(){
