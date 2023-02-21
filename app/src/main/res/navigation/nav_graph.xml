@@ -61,5 +61,11 @@
     </fragment>
     <action android:id="@+id/action_global_organizedEventsFragment" app:destination="@id/organizedEventsFragment"/>
 
+    <fragment
+        android:id="@+id/fragmentRegisterEvent"
+        android:name="com.example.apparty.FragmentRegisterEvent"
+        android:label="fragment_register_event"
+        tools:layout="@layout/fragment_register_event" />
+
 
 </navigation>
