@@ -1,16 +1,15 @@
 package com.example.apparty;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.apparty.databinding.FragmentOrganizedEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
@@ -34,7 +33,7 @@ public class OrganizedEventsFragment extends Fragment implements ResultsRecycler
     private RecyclerView.LayoutManager layoutManagerToday;
     private List<Event> myEvents = new ArrayList<>();
     private List<Event> todayEvents = new ArrayList<>();
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
 
     public OrganizedEventsFragment() {}
 
@@ -54,7 +53,7 @@ public class OrganizedEventsFragment extends Fragment implements ResultsRecycler
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        gestorEvent = GestorEvent.getInstance(getContext());
         recyclerView = binding.recyclerOrganizedEvents;
         recyclerViewToday = binding.recyclerTodayOrganizedEvents;
         recyclerView.setHasFixedSize(true);
