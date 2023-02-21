@@ -50,6 +50,7 @@
         android:name="com.example.apparty.ScanQRFragment"
         android:label="fragment_scan_q_r"
         tools:layout="@layout/fragment_scan_q_r" />
+
     <fragment
         android:id="@+id/organizedEventsFragment"
         android:name="com.example.apparty.OrganizedEventsFragment"
@@ -60,6 +61,13 @@
             app:destination="@id/scanQRFragment" />
     </fragment>
     <action android:id="@+id/action_global_organizedEventsFragment" app:destination="@id/organizedEventsFragment"/>
+
+    <fragment
+        android:id="@+id/purchasedEventsFragment"
+        android:name="com.example.apparty.PurchasedEventsFragment"
+        android:label="fragment_purchased_events"
+        tools:layout="@layout/fragment_purchased_events" />
+    <action android:id="@+id/action_global_purchasedEventsFragment" app:destination="@id/purchasedEventsFragment"/>
 
 
 </navigation>
