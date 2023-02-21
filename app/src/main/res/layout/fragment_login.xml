@@ -72,11 +72,25 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
 
+    <TextView
+        android:id="@+id/wrongCredentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_warning_amber_24"
+        android:drawablePadding="5sp"
+        android:gravity="center_vertical"
+        android:paddingRight="5sp"
+        android:text="Credenciales invalidas."
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginVertical="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:text="Iniciar sesión" />
 
     <LinearLayout

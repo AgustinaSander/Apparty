@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_blue"
     tools:context=".EventResultsFragment">
 
     <LinearLayout
@@ -15,24 +16,24 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:text="Resultados"
             android:textAlignment="center"
-            android:textColor="@color/white"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textSize="20sp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/textResume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adquirí las entradas para los eventos de tu zona. Hace click para más información"
-            android:textAlignment="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
+            android:text="Adquirí las entradas para los eventos de tu zona. Hace click para más información"
+            android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody2"
-            />
+            android:textColor="@color/white" />
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
@@ -53,7 +54,7 @@
             android:id="@+id/recyclerResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 
