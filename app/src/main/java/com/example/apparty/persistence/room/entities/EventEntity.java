@@ -6,10 +6,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -37,9 +33,9 @@ public class EventEntity {
     private String name;
     @ColumnInfo(name = "id_address")
     private int idAddress;
-    //private Set<Integer> tickets;
-    private Long date;
-    private Long time;
+    private Set<String> tickets;
+    private String date;
+    private String time;
     @ColumnInfo(name = "id_dressCode")
     private int idDressCode;
     @ColumnInfo(name = "id_user")

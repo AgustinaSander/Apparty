@@ -1,22 +1,15 @@
 package com.example.apparty;
 
-import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+
 import com.example.apparty.databinding.FragmentFilterDialogBinding;
-import com.example.apparty.databinding.FragmentSearchEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.DressCode;
 import com.example.apparty.model.Filter;
@@ -32,9 +25,6 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.slider.RangeSlider;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +41,7 @@ public class FilterDialogFragment extends DialogFragment {
     private double maxPrice;
     private RangeSlider rangePrice;
 
-    private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
 
     public FilterDialogFragment() {
     }
@@ -71,7 +61,7 @@ public class FilterDialogFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
+        gestorEvent = GestorEvent.getInstance(this.getContext());
         setRangeSlider();
         setDresscodeOptions();
         setClickEvents();
@@ -109,7 +99,6 @@ public class FilterDialogFragment extends DialogFragment {
         rangePrice.setValueTo((float) maxPrice);
         binding.maxPrice.setText("$"+Double.toString(maxPrice));
         binding.minPrice.setText("$"+Double.toString(minPrice));
-
     }
 
     private void setClickEvents() {

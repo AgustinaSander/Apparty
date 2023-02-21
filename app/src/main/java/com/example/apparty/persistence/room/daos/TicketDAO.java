@@ -15,7 +15,7 @@ public interface TicketDAO {
     List<TicketEntity> getAllTickets();
 
     @Query("SELECT * FROM ticket WHERE id_ticket = :id")
-    TicketEntity getEvent(int id);
+    TicketEntity getTicket(int id);
 
     @Insert
     void insertTicket(TicketEntity ticket);
