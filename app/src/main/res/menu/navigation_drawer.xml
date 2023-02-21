@@ -13,7 +13,7 @@
         <item
             android:title="Mis compras"
             android:icon="@drawable/ic_baseline_shopping_cart_24"
-            android:id="@+id/purchasedEvents"/>
+            android:id="@+id/purchasedEventsFragment"/>
     </group>
 
     <item android:title="">

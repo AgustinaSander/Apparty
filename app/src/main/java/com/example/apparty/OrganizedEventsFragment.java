@@ -91,7 +91,7 @@ public class OrganizedEventsFragment extends Fragment implements ResultsRecycler
         recyclerViewToday.setClickable(true);
 
         binding.createEventBtn.setOnClickListener(e -> {
-            //IR A PANTALLA DE AGUS DE CREAR EVENTO
+            NavHostFragment.findNavController(OrganizedEventsFragment.this).navigate(R.id.action_organizedEventsFragment_to_fragmentRegisterEvent);
         });
     }
 
