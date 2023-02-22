@@ -130,6 +130,7 @@ public class GestorEvent {
     }
 
     public Event getEventById(int idEvent) {
+
         Thread hilo1 = new Thread( () -> {
             eventById = eventRepository.getEventById(idEvent);
 

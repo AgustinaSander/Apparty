@@ -1,50 +1,38 @@
 package com.example.apparty;
 
-import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.content.Context.WINDOW_SERVICE;
 
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import android.os.Environment;
-import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.example.apparty.databinding.FragmentCompletePurchaseDialogBinding;
 import com.example.apparty.gestores.GestorPurchase;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.PurchaseInfoQR;
 import com.example.apparty.model.Utils;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class CompletePurchaseDialogFragment extends DialogFragment {
 
@@ -54,7 +42,7 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     private Bitmap bitmap;
     private PurchaseInfoQR purchaseInfo;
     private String purchaseQR;
-    private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
+    private GestorPurchase gestorPurchase;
 
     private static final int PERMISSION_REQUEST_CODE = 200;
 
@@ -73,7 +61,7 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
         purchase = Utils.getGsonParser().fromJson(purchaseJson, Purchase.class);
         purchaseInfo = new PurchaseInfoQR(purchase.getId(), purchase.getEvent().getId(),"PONER NOMBRE USER", purchase.getPurchases());
         purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
-
+        gestorPurchase = GestorPurchase.getInstance(getContext());
         //ACTUALIZAR PURCHASE CON EL STRING DEL QR
         purchase.setQr(purchaseQR);
         gestorPurchase.updatePurchase(purchase);

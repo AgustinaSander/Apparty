@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.apparty.persistence.room.entities.EventEntity;
 
@@ -19,6 +20,9 @@ public interface EventDAO {
 
     @Query("SELECT * FROM event WHERE id_dressCode = :id")
     List<EventEntity> getEventByDressCode(int id);
+
+    @Update
+    void updateEvent(EventEntity event);
 
     @Insert
     void insertEvent(EventEntity event);

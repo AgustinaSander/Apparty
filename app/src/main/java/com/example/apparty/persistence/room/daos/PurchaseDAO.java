@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.apparty.persistence.room.entities.PurchaseEntity;
 
@@ -18,8 +19,11 @@ public interface PurchaseDAO {
     PurchaseEntity getPurchase(int id);
 
     @Insert
-    void insertPurchase(PurchaseEntity purchase);
+    long insertPurchase(PurchaseEntity purchase);
 
     @Delete
     void deletePurchase(PurchaseEntity purchase);
+
+    @Update
+    void updatePurchase(PurchaseEntity purchase);
 }
