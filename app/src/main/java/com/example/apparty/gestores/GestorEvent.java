@@ -41,7 +41,6 @@ public class GestorEvent {
     }
 
     public void insertEvent (Event event){
-
         eventRepository.insertEvent(event);
     }
 
@@ -137,7 +136,6 @@ public class GestorEvent {
     }
 
     public Event getEventById(int idEvent) {
-        //List<Event> filteredEvents = getEventList().stream().filter(e -> e.getId() == idEvent).collect(Collectors.toList());
 
         Thread hilo1 = new Thread( () -> {
             eventById = eventRepository.getEventById(idEvent);
@@ -153,7 +151,6 @@ public class GestorEvent {
 
         return eventById;
 
-        //return filteredEvents.size() > 0 ? filteredEvents.get(0) : null;
     }
 
     private List<Double> getPrices(){

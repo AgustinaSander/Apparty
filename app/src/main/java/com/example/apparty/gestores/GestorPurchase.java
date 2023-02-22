@@ -1,60 +1,89 @@
 package com.example.apparty.gestores;
 
+import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
-import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
+import com.example.apparty.model.Ticket;
+import com.example.apparty.persistence.repos.EventRepositoryImpl;
+import com.example.apparty.persistence.repos.PurchaseRepositoryImpl;
+import com.example.apparty.persistence.repos.TicketRepositoryImpl;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class GestorPurchase {
     private static GestorPurchase gestorPurchase;
-    //private GestorEvent gestorEvent = GestorEvent.getInstance();
+    private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
+    private PurchaseRepositoryImpl purchaseRepository;
+    private EventRepositoryImpl eventRepository;
+    private TicketRepositoryImpl ticketRepository;
+    private Purchase purchaseById;
 
-    private GestorPurchase(){}
 
-    public static GestorPurchase getInstance(){
+    private GestorPurchase(Context context){
+        this.purchaseRepository = new PurchaseRepositoryImpl(context);
+        this.eventRepository = new EventRepositoryImpl(context);
+        this.ticketRepository = new TicketRepositoryImpl(context);
+        this.gestorTicket = GestorTicket.getInstance(context);
+    }
+
+    public static GestorPurchase getInstance(Context context){
         if(gestorPurchase == null){
-            gestorPurchase = new GestorPurchase();
+            gestorPurchase = new GestorPurchase(context);
         }
-
         return gestorPurchase;
     }
 
     public Purchase savePurchase(Purchase purchase){
-        Event event = purchase.getEvent();
+
+        long idPurchase = purchaseRepository.insertPurchase(purchase);
+
         //Recorro los tickets comprados y disminuyo la cantidad
+        Log.i("Tickets", "Tickets: "+purchase.getPurchases().toString());
         List<Pair<Integer, Integer>> purchaseList = purchase.getPurchases();
         purchaseList.stream().forEach(p -> {
-
+            Ticket ticket = gestorTicket.getTicketById(p.first);
+            int quantity = ticket.getAvailableQuantity() - p.second;
+            ticket.setAvailableQuantity(quantity);
+            gestorTicket.updateTicket(ticket);
         });
-        //Hay que agregar la purchase a la db
-
+        purchase.setId((int) idPurchase);
+        //Purchase purchase1 = getPurchaseById((int) idPurchase);
         return purchase;
     }
 
     public Purchase getPurchaseById(int id){
-        //HACER!!!!!
-        return new Purchase();
+
+        Thread hilo1 = new Thread( () -> {
+            purchaseById = purchaseRepository.getPurchaseById(id);
+        });
+        hilo1.start();
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return purchaseById;
     }
 
     public boolean isPurchaseScannedById(int id){
         Purchase purchase = getPurchaseById(id);
-        //BUSCAR PURCHASE Y DEVOLVER EL ATRIBUTO IS_SCANNED
-        //SACAR ESTO DESPUES
-        purchase.setScanned(false);
-
         return purchase.isScanned();
     }
 
     public void updateQrToScanned(int id) {
         Purchase purchase = getPurchaseById(id);
         purchase.setScanned(true);
+
         updatePurchase(purchase);
     }
 
     public void updatePurchase(Purchase purchase) {
-        //HACER!!!!!
+
+        purchaseRepository.updatePurchase(purchase);
+
     }
 }

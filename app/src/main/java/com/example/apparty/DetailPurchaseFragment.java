@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
+import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.Utils;
@@ -31,11 +32,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailPurchaseFragment extends Fragment {
 
     private FragmentDetailPurchaseBinding binding;
-    //Arreglar esta llamada al gestor
-    private GestorPurchase gestorPurchase = GestorPurchase.getInstance();
-
+    private GestorPurchase gestorPurchase;
     private GestorEvent gestorEvent;
-
+    private GestorUser gestorUser;
     private Purchase purchase;
 
     public DetailPurchaseFragment(){};
@@ -43,13 +42,10 @@ public class DetailPurchaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        gestorPurchase = GestorPurchase.getInstance(getContext());
         getChildFragmentManager().setFragmentResultListener("purchaseCompleted", this, (requestKey, bundle) -> {
             String result = bundle.getString("purchase");
             purchase = Utils.getGsonParser().fromJson(result, Purchase.class);
-            Log.i("PURCHASE", String.valueOf(purchase));
-            //GUARDAR PURCHASE
-            //gestorPurchase.savePurchase()....
         });
     }
 
@@ -60,12 +56,15 @@ public class DetailPurchaseFragment extends Fragment {
 
         String ticketJson = getArguments().getString("ticket");
         purchase = Utils.getGsonParser().fromJson(ticketJson, Purchase.class);
+
+        Log.i("DETAIL PURCHASE", "Detail purchase: " + purchase);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         gestorEvent = GestorEvent.getInstance(this.getContext());
+        gestorUser = GestorUser.getInstance(this.getContext());
         setValues();
         setClickEvents();
     }
@@ -91,8 +90,9 @@ public class DetailPurchaseFragment extends Fragment {
     }
 
     private void doPayment() {
-        //GUARDAR LA COMPRAAAAA!!!!! PARA QUE ME GENERE EL ID SOBRE TODO Y PODER SETEARLO EN EL NOMBRE DEL PDF
-        //purchase = gestorPurchase.savePurchase(purchase);
+
+        purchase.setUser(gestorUser.getUserById(1));
+        purchase = gestorPurchase.savePurchase(purchase);
 
         Bundle bundle = new Bundle();
         bundle.putString("purchase", Utils.getGsonParser().toJson(purchase));

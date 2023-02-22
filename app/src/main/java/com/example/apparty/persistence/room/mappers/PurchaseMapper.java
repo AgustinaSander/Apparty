@@ -7,6 +7,7 @@ import com.example.apparty.model.Purchase;
 import com.example.apparty.persistence.room.daos.EventDAO;
 import com.example.apparty.persistence.room.daos.UserDAO;
 import com.example.apparty.persistence.room.entities.PurchaseEntity;
+import com.example.apparty.persistence.room.entities.UserEntity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class PurchaseMapper {
 
     public static PurchaseEntity toEntity(Purchase purchase) {
         return new PurchaseEntity(
-                purchase.getId(),
+                //purchase.getId(),
                 purchase.getQr(),
                 purchase.getEvent().getId(),
                 purchase.getUser().getId(),
@@ -42,13 +43,12 @@ public class PurchaseMapper {
         return stringSet;
     }
 
-    public static Purchase fromEntity(PurchaseEntity purchaseEntity){
+    public static Purchase fromEntity(PurchaseEntity purchaseEntity, Event event, UserEntity user){
         return new Purchase(
                 purchaseEntity.getId(),
                 purchaseEntity.getQr(),
-                //EventMapper.fromEntity(eventDAO.getEvent(purchaseEntity.getIdEvent())),
-                new Event(),
-                UserMapper.fromEntity(userDAO.getUser(purchaseEntity.getIdUser())),
+                event,
+                UserMapper.fromEntity(user),
                 listOfStringToPair(purchaseEntity.getPurchases()),
                 purchaseEntity.getPrice(),
                 purchaseEntity.isScanned()
@@ -66,3 +66,27 @@ public class PurchaseMapper {
         return pairList;
     }
 }
+/*
+    Entity
+
+    private int id;
+    private String qr;
+    private int idEvent;
+    private int idUser;
+    //Lista tickets y cantidad asociada en un string que se genera
+    private Set<String> purchases;
+    private double price;
+    private boolean isScanned;
+
+    Model
+
+    private int id;
+    private String qr;
+    private Event event;
+    private User user;
+    //Lista tickets y cantidad asociada
+    private List<Pair<Integer, Integer>> purchases;
+    private double price;
+    private boolean isScanned;
+}
+ */
