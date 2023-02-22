@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.apparty.persistence.room.entities.TicketEntity;
 
@@ -22,4 +23,7 @@ public interface TicketDAO {
 
     @Delete
     void deleteTicket(TicketEntity ticket);
+
+    @Update
+    void updateTicket(TicketEntity ticket);
 }

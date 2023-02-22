@@ -88,6 +88,15 @@ public class EventRepositoryImpl implements EventRepository {
 
     }
 
+    @Override
+    public void updateEvent(Event event) {
+        RoomDB.EXECUTOR_DB.execute(
+                () -> dao.updateEvent(EventMapper.toEntity(event))
+        );
+    }
+
+
+    @Override
     public List<Event> findByDresscodes(List<Integer> dressCodeList){
         List<Event> eventList = new ArrayList<>();
         for (Integer dc : dressCodeList){

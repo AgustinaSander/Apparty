@@ -24,5 +24,15 @@ public class Purchase {
     private List<Pair<Integer, Integer>> purchases;
     private double price;
     private boolean isScanned;
+
+    public Purchase(String qr, Event event, User user, List<Pair<Integer, Integer>> purchases, double price, boolean isScanned) {
+        this.qr = qr;
+        this.event = event;
+        this.user = user;
+        this.purchases = purchases;
+        this.price = price;
+        this.isScanned = isScanned;
+    }
 }
+
 

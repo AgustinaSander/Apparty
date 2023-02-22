@@ -55,7 +55,7 @@ public class ScanQRFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         //escanear QR
-        gestorPurchase = GestorPurchase.getInstance();
+        gestorPurchase = GestorPurchase.getInstance(getContext());
         ScanOptions options = new ScanOptions();
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
         options.setOrientationLocked(false);
