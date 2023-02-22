@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey;
 
 import java.util.Set;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @Entity(tableName = "purchase",
         indices = @Index(value = {"id_event", "id_user"}),
         foreignKeys = {
@@ -34,4 +34,12 @@ public class PurchaseEntity {
     private double price;
     private boolean isScanned;
 
+    public PurchaseEntity(String qr, int idEvent, int idUser, Set<String> purchases, double price, boolean isScanned) {
+        this.qr = qr;
+        this.idEvent = idEvent;
+        this.idUser = idUser;
+        this.purchases = purchases;
+        this.price = price;
+        this.isScanned = isScanned;
+    }
 }

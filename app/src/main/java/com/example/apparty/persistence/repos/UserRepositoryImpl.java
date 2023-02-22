@@ -30,11 +30,20 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void insertUser(User user) {
-        dao.insertUser(UserMapper.toEntity(user));
+
+        RoomDB.EXECUTOR_DB.execute(
+                () -> dao.insertUser(UserMapper.toEntity(user))
+        );
+
     }
 
     @Override
     public void deleteUser(User user) {
-        dao.deleteUser(UserMapper.toEntity(user));
+        RoomDB.EXECUTOR_DB.execute(
+
+                () -> dao.deleteUser(UserMapper.toEntity(user))
+        );
     }
+
+
 }
