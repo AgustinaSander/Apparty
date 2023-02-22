@@ -18,7 +18,7 @@ import com.example.apparty.model.User;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    //private GestorUser gestorUser = GestorUser.getInstance(this.getContext());
+    private GestorUser gestorUser;
 
     public LoginFragment() {
     }
@@ -43,17 +43,25 @@ public class LoginFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private boolean validateUser() {
-        String email = (String) binding.userEmail.getText();
-        String password = (String) binding.userPassword.getText();
 
-        /* DESCOMENTAR CUANDO ESTE HECHO EL METODO DEL GESTOR
+    public void onViewCreated (@NonNull View view, Bundle savedInstanceState){
+        binding.registryBtn.setOnClickListener(v -> {
+            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.registryFragment);
+        });
+
+        gestorUser = GestorUser.getInstance(this.getContext());
+    }
+
+
+    private boolean validateUser() {
+        String email = String.valueOf(binding.emailInput.getText());
+        String password = String.valueOf(binding.passwordInput.getText());
 
         User user = gestorUser.getUserByEmailByPassword(email, password);
         if(user == null){
             binding.wrongCredentials.setVisibility(View.VISIBLE);
             return false;
-        } */
+        }
 
         binding.wrongCredentials.setVisibility(View.INVISIBLE);
         //HAY QUE METER EL ID USER EN PREFERENCES PARA TENERLO EN TODA LA APP
@@ -62,10 +70,5 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public void onViewCreated (@NonNull View view, Bundle savedInstanceState){
-        binding.registryBtn.setOnClickListener(v -> {
-            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.registryFragment);
-        });
-    }
 
 }
