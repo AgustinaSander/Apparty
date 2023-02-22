@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.apparty.model.User;
 import com.example.apparty.persistence.room.entities.UserEntity;
 
 import java.util.List;
@@ -23,4 +24,9 @@ public interface UserDAO {
     @Delete
     void deleteUser(UserEntity user);
 
+    @Query("SELECT * FROM user WHERE email = :email AND password = :password")
+    UserEntity getUserByEmailByPassword(String email, String password);
+
+    @Query("SELECT * FROM user WHERE email = :email")
+    List<UserEntity> getUsersByEmail(String email);
 }
