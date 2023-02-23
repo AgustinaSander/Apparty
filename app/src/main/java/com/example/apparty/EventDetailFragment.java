@@ -61,7 +61,6 @@ public class EventDetailFragment extends Fragment {
         binding.getTicketBtn.setEnabled(false);
         idEvent = getArguments().getInt("idEvent");
         event = gestorEvent.getEventById(idEvent);
-        Log.i("Event List", "EVENT DETAIL" + event.toString());
         return binding.getRoot();
     }
 
@@ -186,9 +185,7 @@ public class EventDetailFragment extends Fragment {
 
     private void getSelectedTickets() {
         Purchase purchase = new Purchase();
-        Log.i("Event Purchase Set", "SET EVENT: " + event);
         purchase.setEvent(event);
-        Log.i("Event Purchase Set", "SET EVENT: " + purchase.getEvent());
         purchase.setScanned(false);
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loginInfo",MODE_PRIVATE);
@@ -207,7 +204,6 @@ public class EventDetailFragment extends Fragment {
 
         String ticketJson = Utils.getGsonParser().toJson(purchase);
 
-        Log.i("PURCHASE EN EVENT DETAIL" , ticketJson);
         Bundle bundle = new Bundle();
         bundle.putString("ticket", ticketJson);
 

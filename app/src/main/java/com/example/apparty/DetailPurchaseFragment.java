@@ -60,7 +60,6 @@ public class DetailPurchaseFragment extends Fragment {
         String ticketJson = getArguments().getString("ticket");
         purchase = Utils.getGsonParser().fromJson(ticketJson, Purchase.class);
 
-        Log.i("DETAIL PURCHASE", "Detail purchase: " + purchase);
         return binding.getRoot();
     }
 
