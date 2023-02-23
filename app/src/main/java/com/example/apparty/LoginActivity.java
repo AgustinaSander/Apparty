@@ -5,14 +5,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.apparty.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
 
     private ActivityLoginBinding binding;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +26,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         NavHostFragment.findNavController(binding.fragmentContainerView.getFragment()).navigate(R.id.goToLoginFragment);
+
+        sharedPreferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
+
+        if(sharedPreferences.contains("idUser")){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public void setUserLogged(int idUser) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("idUser", idUser);
+        editor.commit();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
