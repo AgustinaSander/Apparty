@@ -1,7 +1,10 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -16,10 +19,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.apparty.databinding.FragmentEventDetailBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.Address;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
+import com.example.apparty.model.User;
 import com.example.apparty.model.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,6 +40,7 @@ public class EventDetailFragment extends Fragment {
     private FragmentEventDetailBinding binding;
     private boolean showTickets = false;
     private GestorEvent gestorEvent;
+    private GestorUser gestorUser;
     private Event event;
     private int idEvent;
     private List<Integer> quantityList = new ArrayList<>();
@@ -51,6 +57,7 @@ public class EventDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentEventDetailBinding.inflate(inflater, container, false);
         gestorEvent = GestorEvent.getInstance(this.getContext());
+        gestorUser = GestorUser.getInstance(this.getContext());
         binding.getTicketBtn.setEnabled(false);
         idEvent = getArguments().getInt("idEvent");
         event = gestorEvent.getEventById(idEvent);
@@ -77,7 +84,6 @@ public class EventDetailFragment extends Fragment {
         String date = event.getDate().format(dateFormat);
         date = date.substring(0, 1).toUpperCase() + date.substring(1);
         binding.eventDate.setText(date);
-        //binding.eventDate.setText(event.getDate().toString());
         binding.eventTime.setText(event.getTime().toString() + " hs");
         binding.eventDresscode.setText("Dresscode " + event.getDressCode().getDressCode());
         Address address = event.getAddress();
@@ -184,7 +190,11 @@ public class EventDetailFragment extends Fragment {
         purchase.setEvent(event);
         Log.i("Event Purchase Set", "SET EVENT: " + purchase.getEvent());
         purchase.setScanned(false);
-        //SETEAR USER QUE ESTA LOGUEADO
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loginInfo",MODE_PRIVATE);
+        int idUser = sharedPreferences.getInt("idUser", 0);
+        User user = gestorUser.getUserById(idUser);
+        purchase.setUser(user);
 
         ArrayList<Pair<Integer,Integer>> selectedTickets = new ArrayList<>();
         for(int q=0; q < quantityList.size(); q++){

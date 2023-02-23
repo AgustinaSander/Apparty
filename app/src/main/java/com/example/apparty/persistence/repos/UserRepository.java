@@ -10,5 +10,7 @@ public interface UserRepository {
     User getUserById(int id);
     void insertUser(User user);
     void deleteUser(User user);
+    User getUserByEmailByPassword(String email, String password);
 
+    List<User> userWithEmailExists(String email);
 }

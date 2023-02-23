@@ -1,6 +1,9 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +21,9 @@ import com.example.apparty.model.User;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    //private GestorUser gestorUser = GestorUser.getInstance(this.getContext());
+    private GestorUser gestorUser;
 
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,31 +36,10 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         binding.loginBtn.setOnClickListener(view -> {
-            if (validateUser()) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
+            validateUser();
         });
 
         return binding.getRoot();
-    }
-
-    private boolean validateUser() {
-        String email = (String) binding.userEmail.getText();
-        String password = (String) binding.userPassword.getText();
-
-        /* DESCOMENTAR CUANDO ESTE HECHO EL METODO DEL GESTOR
-
-        User user = gestorUser.getUserByEmailByPassword(email, password);
-        if(user == null){
-            binding.wrongCredentials.setVisibility(View.VISIBLE);
-            return false;
-        } */
-
-        binding.wrongCredentials.setVisibility(View.INVISIBLE);
-        //HAY QUE METER EL ID USER EN PREFERENCES PARA TENERLO EN TODA LA APP
-
-        return true;
     }
 
 
@@ -66,6 +47,22 @@ public class LoginFragment extends Fragment {
         binding.registryBtn.setOnClickListener(v -> {
             NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.registryFragment);
         });
+
+        gestorUser = GestorUser.getInstance(this.getContext());
     }
 
+
+    private void validateUser() {
+        String email = String.valueOf(binding.emailInput.getText());
+        String password = String.valueOf(binding.passwordInput.getText());
+
+        User user = gestorUser.getUserByEmailByPassword(email, password);
+        if(user == null){
+            binding.wrongCredentials.setVisibility(View.VISIBLE);
+
+        } else {
+            binding.wrongCredentials.setVisibility(View.INVISIBLE);
+            ((LoginActivity) getActivity()).setUserLogged(user.getId());
+        }
+    }
 }

@@ -59,12 +59,12 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
         binding = FragmentCompletePurchaseDialogBinding.inflate(inflater, container, false);
         purchaseJson = getArguments().getString("purchase");
         purchase = Utils.getGsonParser().fromJson(purchaseJson, Purchase.class);
-        purchaseInfo = new PurchaseInfoQR(purchase.getId(), purchase.getEvent().getId(),"PONER NOMBRE USER", purchase.getPurchases());
-        purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
         gestorPurchase = GestorPurchase.getInstance(getContext());
-        //ACTUALIZAR PURCHASE CON EL STRING DEL QR
         purchase.setQr(purchaseQR);
         gestorPurchase.updatePurchase(purchase);
+
+        purchaseInfo = new PurchaseInfoQR(purchase.getId(), purchase.getEvent().getId(),purchase.getUser().getName()+" "+purchase.getUser().getSurname(), purchase.getPurchases());
+        purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
 
         return binding.getRoot();
     }
