@@ -28,11 +28,12 @@ public class TicketRepositoryImpl implements TicketRepository{
     }
 
     @Override
-    public void insertTicket(Ticket ticket) {
-        RoomDB.EXECUTOR_DB.execute(
-                () -> ticketDAO.insertTicket(TicketMapper.toEntity(ticket))
-        );
+    public long insertTicket(Ticket ticket) {
+
+        long idTicket = ticketDAO.insertTicket(TicketMapper.toEntity(ticket));
+        return ticket.getId();
     }
+
 
     @Override
     public void deleteTicket(Ticket ticket) {

@@ -20,6 +20,7 @@ public class GestorPurchase {
     private EventRepositoryImpl eventRepository;
     private TicketRepositoryImpl ticketRepository;
     private Purchase purchaseById;
+    private long idPurchaseInserted;
 
 
     private GestorPurchase(Context context){
@@ -37,8 +38,15 @@ public class GestorPurchase {
     }
 
     public Purchase savePurchase(Purchase purchase){
-
-        long idPurchase = purchaseRepository.insertPurchase(purchase);
+        Thread hilo1 = new Thread( () -> {
+            idPurchaseInserted = purchaseRepository.insertPurchase(purchase);
+        });
+        hilo1.start();
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //Recorro los tickets comprados y disminuyo la cantidad
         Log.i("Tickets", "Tickets: "+purchase.getPurchases().toString());
@@ -49,8 +57,9 @@ public class GestorPurchase {
             ticket.setAvailableQuantity(quantity);
             gestorTicket.updateTicket(ticket);
         });
-        purchase.setId((int) idPurchase);
-        //Purchase purchase1 = getPurchaseById((int) idPurchase);
+        Log.i("Purchase Id", "Purchase ID: "+idPurchaseInserted);
+        purchase.setId((int) idPurchaseInserted);
+
         return purchase;
     }
 
