@@ -1,5 +1,8 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apparty.databinding.FragmentOrganizedEventsBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
+import com.example.apparty.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -95,12 +99,11 @@ public class OrganizedEventsFragment extends Fragment implements ResultsRecycler
     }
 
     private void setEventList() {
-        // ACA DEBERIA OBTENER EL USUARIO QUE YA SE ENCUENTRA LOGUEADO (VER COMO HACER) !!!
-        int idUser = 1;
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loginInfo",MODE_PRIVATE);
+        int idUser = sharedPreferences.getInt("idUser", 0);
+
         myEvents = gestorEvent.getEventsOrganizedByUser(idUser);
-        Log.i("Eventos del organizador", myEvents.toString());
         todayEvents = myEvents.stream().filter(e -> e.getDate().isEqual(LocalDate.now())).collect(Collectors.toList());
-        Log.i("Eventos del dia", todayEvents.toString());
     }
 
     @Override

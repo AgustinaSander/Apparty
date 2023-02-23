@@ -1,7 +1,9 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -22,6 +24,7 @@ import com.example.apparty.gestores.GestorPurchase;
 import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
+import com.example.apparty.model.User;
 import com.example.apparty.model.Utils;
 
 import java.time.format.DateTimeFormatter;
@@ -90,8 +93,12 @@ public class DetailPurchaseFragment extends Fragment {
     }
 
     private void doPayment() {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loginInfo",MODE_PRIVATE);
+        int idUser = sharedPreferences.getInt("idUser", 0);
 
-        purchase.setUser(gestorUser.getUserById(1));
+        User user = gestorUser.getUserById(idUser);
+        purchase.setUser(user);
+
         purchase = gestorPurchase.savePurchase(purchase);
 
         Bundle bundle = new Bundle();
@@ -102,8 +109,6 @@ public class DetailPurchaseFragment extends Fragment {
     }
 
     private void setValues() {
-        //FALTA SETEAR EL USER QUE LO COMPRO
-
         setEventValues();
         setTicketPrices();
     }

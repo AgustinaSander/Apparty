@@ -1,6 +1,9 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +23,7 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private GestorUser gestorUser;
 
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,7 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         binding.loginBtn.setOnClickListener(view -> {
-            if (validateUser()) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
+            validateUser();
         });
 
         return binding.getRoot();
@@ -53,22 +52,17 @@ public class LoginFragment extends Fragment {
     }
 
 
-    private boolean validateUser() {
+    private void validateUser() {
         String email = String.valueOf(binding.emailInput.getText());
         String password = String.valueOf(binding.passwordInput.getText());
 
         User user = gestorUser.getUserByEmailByPassword(email, password);
         if(user == null){
             binding.wrongCredentials.setVisibility(View.VISIBLE);
-            return false;
+
+        } else {
+            binding.wrongCredentials.setVisibility(View.INVISIBLE);
+            ((LoginActivity) getActivity()).setUserLogged(user.getId());
         }
-
-        binding.wrongCredentials.setVisibility(View.INVISIBLE);
-        //HAY QUE METER EL ID USER EN PREFERENCES PARA TENERLO EN TODA LA APP
-
-        return true;
     }
-
-
-
 }
