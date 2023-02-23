@@ -35,12 +35,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_edittext"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Nombre"
+        android:inputType="textPersonName"
         android:paddingStart="10dp"
-        android:textColorHint="@color/white"
-        android:background="@drawable/custom_edittext"/>
+        android:textColor="@color/white"
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/userSurname"
@@ -58,12 +59,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginVertical="10dp"
+        android:background="@drawable/custom_edittext"
         android:ems="10"
         android:hint="Apellido"
         android:paddingStart="10dp"
-        android:textColorHint="@color/white"
-        android:background="@drawable/custom_edittext"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/userDNI"
@@ -80,14 +81,14 @@
         android:id="@+id/editTextDNI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="number"
         android:layout_marginVertical="10dp"
-        android:hint="DNI"
-        android:paddingStart="10dp"
-        android:textColorHint="@color/white"
         android:background="@drawable/custom_edittext"
-        android:textColor="@color/white"/>
+        android:ems="10"
+        android:hint="DNI"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/userEmail"
@@ -110,8 +111,8 @@
         android:hint="hola@apparty.com.ar"
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/userPassword"
@@ -135,7 +136,7 @@
         android:inputType="textPassword"
         android:paddingStart="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/wrongCredentials"
@@ -148,7 +149,20 @@
         android:text="Ya hay un usuario registrado con ese email."
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:visibility="invisible" />
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/incompleteFields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_warning_amber_24"
+        android:drawablePadding="5sp"
+        android:gravity="center_vertical"
+        android:paddingRight="5sp"
+        android:text="Complete los campos obligatorios."
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/buttonEnter"

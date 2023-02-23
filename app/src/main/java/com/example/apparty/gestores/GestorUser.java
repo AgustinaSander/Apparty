@@ -74,4 +74,7 @@ public class GestorUser {
         return this.usersByEmail.size() > 0;
     }
 
+    public void createUser(User user) {
+        userRepository.insertUser(user);
+    }
 }

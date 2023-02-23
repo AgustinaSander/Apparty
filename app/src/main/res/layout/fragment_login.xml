@@ -44,7 +44,7 @@
         android:inputType="textEmailAddress"
         android:padding="8dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/userPassword"
@@ -70,7 +70,7 @@
         android:inputType="textPassword"
         android:padding="8dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="#46D0CFD1" />
 
     <TextView
         android:id="@+id/wrongCredentials"

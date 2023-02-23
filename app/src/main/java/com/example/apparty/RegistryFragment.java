@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.apparty.databinding.FragmentRegistryBinding;
 import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.User;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class RegistryFragment extends Fragment {
@@ -48,23 +49,26 @@ public class RegistryFragment extends Fragment {
     }
 
     private void createUser() {
-        String name = String.valueOf(binding.editTextPersonName);
-        String surname = String.valueOf(binding.editTextPersonSurname);
-        String dni = String.valueOf(binding.editTextDNI);
-        String email = String.valueOf(binding.emailInput);
-        String password = String.valueOf(binding.passwordInput);
+        String name = String.valueOf(binding.editTextPersonName.getText());
+        String surname = String.valueOf(binding.editTextPersonSurname.getText());
+        String dni = String.valueOf(binding.editTextDNI.getText());
+        String email = String.valueOf(binding.emailInput.getText());
+        String password = String.valueOf(binding.passwordInput.getText());
 
-        boolean userWithSameEmailExists = gestorUser.userWithEmailExists(email);
-        if(userWithSameEmailExists){
-            binding.wrongCredentials.setVisibility(View.VISIBLE);
-        } else {
-            binding.wrongCredentials.setVisibility(View.INVISIBLE);
+        if(name.length()>0 && surname.length()>0 && dni.length()>0 && email.length()>0 && password.length()>0){
+            binding.incompleteFields.setVisibility(View.GONE);
+            boolean userWithSameEmailExists = gestorUser.userWithEmailExists(email);
+            if(userWithSameEmailExists){
+                binding.wrongCredentials.setVisibility(View.VISIBLE);
+            } else {
+                binding.wrongCredentials.setVisibility(View.GONE);
+                User user = new User(name, surname, dni, email, password);
 
-            //ANTES VER QUE ME HAYAN LLENADO TODOS LOS CAMPOS!
-
-            User user = new User(name, surname, dni, email, password);
-            
+                gestorUser.createUser(user);
+                Snackbar.make(getView(), "Usuario registrado correctamente!", Snackbar.LENGTH_SHORT).show();
+            }
+        } else{
+            binding.incompleteFields.setVisibility(View.VISIBLE);
         }
-
     }
 }
