@@ -1,5 +1,7 @@
 package com.example.apparty.persistence.repos;
 
+import static com.example.apparty.persistence.room.RoomDB.EXECUTOR_DB;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -14,12 +16,15 @@ import com.example.apparty.persistence.room.mappers.PurchaseMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 public class PurchaseRepositoryImpl implements PurchaseRepository{
 
     private final PurchaseDAO purchaseDAO;
     private final UserDAO userDAO;
     private final EventRepositoryImpl eventRepository;
+    private ExecutorService executorService;
+    private long idPurchaseInserted;
 
 
     public PurchaseRepositoryImpl(Context context){
@@ -56,17 +61,15 @@ public class PurchaseRepositoryImpl implements PurchaseRepository{
 
     @Override
     public long insertPurchase(Purchase purchase) {
-        RoomDB.EXECUTOR_DB.execute(
 
-                () -> purchaseDAO.insertPurchase(PurchaseMapper.toEntity(purchase))
-        );
-        return purchase.getId();
+        long idPurchase = purchaseDAO.insertPurchase(PurchaseMapper.toEntity(purchase));
+
+        return idPurchase;
     }
 
     @Override
     public void deletePurchase(Purchase purchase) {
-        RoomDB.EXECUTOR_DB.execute(
-
+        EXECUTOR_DB.execute(
                 () -> purchaseDAO.deletePurchase(PurchaseMapper.toEntity(purchase))
         );
     }
@@ -74,8 +77,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository{
     @Override
     public void updatePurchase(Purchase purchase) {
         Log.i("PURCHASE EN EVENT DETAIL update", purchase.toString());
-        RoomDB.EXECUTOR_DB.execute(
-
+        EXECUTOR_DB.execute(
                 () -> purchaseDAO.updatePurchase(PurchaseMapper.toEntity(purchase))
         );
     }

@@ -4,8 +4,6 @@ import android.util.Pair;
 
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
-import com.example.apparty.persistence.room.daos.EventDAO;
-import com.example.apparty.persistence.room.daos.UserDAO;
 import com.example.apparty.persistence.room.entities.PurchaseEntity;
 import com.example.apparty.persistence.room.entities.UserEntity;
 
@@ -15,9 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 public class PurchaseMapper {
-
-    private static EventDAO eventDAO;
-    private static UserDAO userDAO;
 
     private PurchaseMapper() {
     }
@@ -45,7 +40,7 @@ public class PurchaseMapper {
 
     public static Purchase fromEntity(PurchaseEntity purchaseEntity, Event event, UserEntity user){
         return new Purchase(
-                purchaseEntity.getId(),
+                (int) purchaseEntity.getId(),
                 purchaseEntity.getQr(),
                 event,
                 UserMapper.fromEntity(user),

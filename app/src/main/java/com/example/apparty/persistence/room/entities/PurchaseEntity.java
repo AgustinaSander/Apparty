@@ -23,7 +23,7 @@ import lombok.ToString;
 public class PurchaseEntity {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_purchase")
-    private int id;
+    private long id;
     private String qr;
     @ColumnInfo(name = "id_event")
     private int idEvent;
