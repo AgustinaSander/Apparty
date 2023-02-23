@@ -10,9 +10,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,20 +29,21 @@ import com.example.apparty.persistence.room.daos.EventDAO;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private GestorUser gestorUser;
     private User user;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        SharedPreferences sharedPreferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
         int idUser = sharedPreferences.getInt("idUser", 0);
         gestorUser = GestorUser.getInstance(getApplicationContext());
         user = gestorUser.getUserById(idUser);
@@ -58,22 +61,34 @@ public class MainActivity extends AppCompatActivity{
         emailHeader.setText(user.getEmail());
         TextView nameHeader = headerView.findViewById(R.id.usernameHeader);
         nameHeader.setText(user.getName()+" "+user.getSurname());
+
+        Menu menu = navigationView.getMenu();
+        MenuItem closeSessionBtn = menu.findItem(R.id.nav_logout);
+        closeSessionBtn.setOnMenuItemClickListener(v -> {
+            closeSession();
+            return false;
+        });
+
         drawerLayout = binding.drawerLayout;
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();
 
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph())
-                        .setDrawerLayout(drawerLayout)
-                        .build();
-
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private void closeSession() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("idUser");
+        editor.commit();
+
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Log.i("chau", String.valueOf(item.getItemId()));
         NavController navController = Navigation.findNavController(this, R.id.fragmentContainerView);
         return NavigationUI.onNavDestinationSelected(item, navController)
                 || super.onOptionsItemSelected(item);

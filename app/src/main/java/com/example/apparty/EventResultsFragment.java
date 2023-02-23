@@ -82,7 +82,6 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     private void setEventList() {
         filteredEvents = new ArrayList<>();
         filteredEvents = gestorEvent.getFilteredEvents(wordsFilter, filters);
-        //filteredEvents = gestorEvent.getEventList();
     }
 
     @Override
