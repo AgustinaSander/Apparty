@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.apparty.model.User;
 import com.example.apparty.persistence.room.RoomDB;
 import com.example.apparty.persistence.room.daos.UserDAO;
+import com.example.apparty.persistence.room.entities.UserEntity;
 import com.example.apparty.persistence.room.mappers.UserMapper;
 
 import java.util.List;
@@ -45,5 +46,15 @@ public class UserRepositoryImpl implements UserRepository {
         );
     }
 
+    @Override
+    public User getUserByEmailByPassword(String email, String password) {
+        UserEntity userEntity = dao.getUserByEmailByPassword(email, password);
+        return userEntity == null ? null : UserMapper.fromEntity(userEntity);
+    }
 
+    @Override
+    public List<User> userWithEmailExists(String email) {
+        List<UserEntity> userEntities = dao.getUsersByEmail(email);
+        return UserMapper.fromEntityList(userEntities);
+    }
 }
