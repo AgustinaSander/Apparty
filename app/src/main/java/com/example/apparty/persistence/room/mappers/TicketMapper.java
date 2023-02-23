@@ -22,7 +22,7 @@ public class TicketMapper {
 
     public static Ticket fromEntity (TicketEntity ticket){
         return new Ticket(
-                ticket.getId(),
+                (int) ticket.getId(),
                 ticket.getType(),
                 ticket.getTotalQuantity(),
                 ticket.getAvailableQuantity(),

@@ -8,7 +8,7 @@ public interface TicketRepository {
 
     List<Ticket> getAllTickets();
     Ticket getTicketById(int id);
-    void insertTicket(Ticket ticket);
+    long insertTicket(Ticket ticket);
     void deleteTicket(Ticket ticket);
     void updateTicket(Ticket ticket);
 

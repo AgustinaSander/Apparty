@@ -19,7 +19,7 @@ public interface TicketDAO {
     TicketEntity getTicket(int id);
 
     @Insert
-    void insertTicket(TicketEntity ticket);
+    long insertTicket(TicketEntity ticket);
 
     @Delete
     void deleteTicket(TicketEntity ticket);
