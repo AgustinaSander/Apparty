@@ -19,13 +19,14 @@ import com.example.apparty.databinding.FragmentPurchasedEventsBinding;
 import com.example.apparty.gestores.GestorPurchase;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
+import com.google.android.material.tabs.TabLayout;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PurchasedEventsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener{
+public class PurchasedEventsFragment extends Fragment implements PurchasesRecyclerAdapter.OnNoteListener{
 
     private FragmentPurchasedEventsBinding binding;
     private RecyclerView recyclerView;
@@ -34,6 +35,7 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
     private RecyclerView recyclerViewPast;
     private RecyclerView.LayoutManager layoutManagerPast;
     private RecyclerView.Adapter adapterPast;
+    private TabLayout tabLayout;
 
     private GestorPurchase gestorPurchase;
 
@@ -51,6 +53,7 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPurchasedEventsBinding.inflate(inflater, container, false);
+        tabLayout = binding.tabLayout;
         return binding.getRoot();
     }
 
@@ -58,6 +61,22 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         gestorPurchase = GestorPurchase.getInstance(this.getContext());
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tabLayout.getSelectedTabPosition();
+                if(position==0){
+                    binding.purchasesLayout.setVisibility(View.VISIBLE);
+                    binding.pastPurchasesLayout.setVisibility(View.GONE);
+                } else {
+                    binding.purchasesLayout.setVisibility(View.GONE);
+                    binding.pastPurchasesLayout.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
         setPurchasesList();
 
@@ -70,9 +89,21 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
         layoutManagerPast = new LinearLayoutManager(view.getContext());
         recyclerViewPast.setLayoutManager(layoutManagerPast);
 
-        adapter = new ResultsRecyclerAdapter(myPurchases, this);
+        if(myPurchases.size()==0){
+            binding.noResultsPurchases.setVisibility(View.VISIBLE);
+        } else {
+            binding.noResultsPurchases.setVisibility(View.GONE);
+        }
+
+        if(myPastPurchases.size()==0){
+            binding.noResultsPastPurchases.setVisibility(View.VISIBLE);
+        } else {
+            binding.noResultsPastPurchases.setVisibility(View.GONE);
+        }
+
+        adapter = new PurchasesRecyclerAdapter(myPurchases, this);
         recyclerView.setAdapter(adapter);
-        adapterPast = new ResultsRecyclerAdapter(myPastPurchases, this);
+        adapterPast = new PurchasesRecyclerAdapter(myPastPurchases, this);
         recyclerViewPast.setAdapter(adapterPast);
 
         recyclerView.setClickable(true);
