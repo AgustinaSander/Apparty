@@ -1,6 +1,7 @@
 package com.example.apparty.persistence.room;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -31,7 +32,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {EventEntity.class, AddressEntity.class, DressCodeEntity.class, TicketEntity.class, UserEntity.class, PurchaseEntity.class}, version = 18, exportSchema = true)
+@Database(entities = {EventEntity.class, AddressEntity.class, DressCodeEntity.class, TicketEntity.class, UserEntity.class, PurchaseEntity.class}, version = 20, exportSchema = true)
 @TypeConverters({Converters.class})
 public abstract class RoomDB extends RoomDatabase {
 
@@ -73,7 +74,7 @@ public abstract class RoomDB extends RoomDatabase {
         public void onDestructiveMigration(@NonNull SupportSQLiteDatabase db) {
             super.onDestructiveMigration(db);
             EXECUTOR_DB.execute( () -> {
-                System.out.println("Executing");
+                Log.i("Database", "Executing destructive migration");
                 EventDAO eventDAO = instance.eventDAO();
                 AddressDAO addressDAO = instance.addressDAO();
                 DressCodeDAO dressCodeDAO = instance.dressCodeDAO();
@@ -131,7 +132,7 @@ public abstract class RoomDB extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             EXECUTOR_DB.execute( () -> {
-                System.out.println("Executing");
+                Log.i("Database", "Executing create db");
                 EventDAO eventDAO = instance.eventDAO();
                 AddressDAO addressDAO = instance.addressDAO();
                 DressCodeDAO dressCodeDAO = instance.dressCodeDAO();
@@ -181,6 +182,7 @@ public abstract class RoomDB extends RoomDatabase {
 
                 for (EventEntity event : Arrays.asList(eventEntity1, eventEntity2, eventEntity3, eventEntity4, eventEntity5, eventEntity6)) {
                     eventDAO.insertEvent(event);
+                    Log.i("Database", "EventEntity: "+event);
                 }
             });
 
