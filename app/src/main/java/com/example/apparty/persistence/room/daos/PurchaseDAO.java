@@ -26,4 +26,7 @@ public interface PurchaseDAO {
 
     @Update
     void updatePurchase(PurchaseEntity purchase);
+
+    @Query("SELECT * FROM purchase WHERE id_user = :idUser")
+    List<PurchaseEntity> getPurchasesByIdUser(int idUser);
 }
