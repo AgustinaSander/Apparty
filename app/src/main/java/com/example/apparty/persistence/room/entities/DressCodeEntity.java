@@ -4,14 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 @Entity(tableName = "dressCode")
 public class DressCodeEntity {
@@ -20,5 +18,7 @@ public class DressCodeEntity {
     private int id;
     private String dressCode;
 
-
+    public DressCodeEntity(String dressCode) {
+        this.dressCode = dressCode;
+    }
 }

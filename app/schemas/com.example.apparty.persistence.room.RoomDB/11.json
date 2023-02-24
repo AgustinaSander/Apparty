@@ -1,0 +1,380 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 11,
+    "identityHash": "cc0da1b91c65a66775326d1e65b0a113",
+    "entities": [
+      {
+        "tableName": "event",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_event` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `id_address` INTEGER NOT NULL, `tickets` TEXT, `date` TEXT, `time` TEXT, `id_dressCode` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `comments` TEXT, FOREIGN KEY(`id_address`) REFERENCES `address`(`id_address`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_dressCode`) REFERENCES `dressCode`(`id_dressCode`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_event",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idAddress",
+            "columnName": "id_address",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tickets",
+            "columnName": "tickets",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idDressCode",
+            "columnName": "id_dressCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idUserOrganizer",
+            "columnName": "id_user",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "comments",
+            "columnName": "comments",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_event"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_event_id_address_id_user_id_dressCode",
+            "unique": false,
+            "columnNames": [
+              "id_address",
+              "id_user",
+              "id_dressCode"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_event_id_address_id_user_id_dressCode` ON `${TABLE_NAME}` (`id_address`, `id_user`, `id_dressCode`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "address",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_address"
+            ],
+            "referencedColumns": [
+              "id_address"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_user"
+            ],
+            "referencedColumns": [
+              "id_user"
+            ]
+          },
+          {
+            "table": "dressCode",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_dressCode"
+            ],
+            "referencedColumns": [
+              "id_dressCode"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "address",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_address` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `address` TEXT, `country` TEXT, `province` TEXT, `localty` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_address",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "province",
+            "columnName": "province",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "localty",
+            "columnName": "localty",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_address"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "dressCode",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_dressCode` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dressCode` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_dressCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dressCode",
+            "columnName": "dressCode",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_dressCode"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ticket",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_ticket` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT, `totalQuantity` INTEGER NOT NULL, `availableQuantity` INTEGER NOT NULL, `price` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_ticket",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalQuantity",
+            "columnName": "totalQuantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "availableQuantity",
+            "columnName": "availableQuantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_ticket"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_user` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `surname` TEXT, `identification` TEXT, `email` TEXT, `password` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_user",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "surname",
+            "columnName": "surname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "identification",
+            "columnName": "identification",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_user"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "purchase",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_purchase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `qr` TEXT, `id_event` INTEGER NOT NULL, `id_user` INTEGER NOT NULL, `purchases` TEXT, `price` REAL NOT NULL, `isScanned` INTEGER NOT NULL, FOREIGN KEY(`id_event`) REFERENCES `event`(`id_event`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_user`) REFERENCES `user`(`id_user`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_purchase",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "qr",
+            "columnName": "qr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idEvent",
+            "columnName": "id_event",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idUser",
+            "columnName": "id_user",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "purchases",
+            "columnName": "purchases",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isScanned",
+            "columnName": "isScanned",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_purchase"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_purchase_id_event_id_user",
+            "unique": false,
+            "columnNames": [
+              "id_event",
+              "id_user"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_purchase_id_event_id_user` ON `${TABLE_NAME}` (`id_event`, `id_user`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "event",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_event"
+            ],
+            "referencedColumns": [
+              "id_event"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_user"
+            ],
+            "referencedColumns": [
+              "id_user"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cc0da1b91c65a66775326d1e65b0a113')"
+    ]
+  }
+}

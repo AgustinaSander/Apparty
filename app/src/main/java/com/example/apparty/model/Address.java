@@ -18,4 +18,10 @@ public class Address {
     private String province;
     private String localty;
 
+    public Address(String address, String country, String province, String localty) {
+        this.address = address;
+        this.country = country;
+        this.province = province;
+        this.localty = localty;
+    }
 }
