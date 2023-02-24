@@ -12,7 +12,6 @@ public class UserMapper {
 
     public static UserEntity toEntity (User user){
         return new UserEntity(
-                user.getId(),
                 user.getName(),
                 user.getSurname(),
                 user.getIdentification(),

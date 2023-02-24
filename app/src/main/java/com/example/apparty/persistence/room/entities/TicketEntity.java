@@ -4,13 +4,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity (tableName = "ticket")
 public class TicketEntity {
     @PrimaryKey(autoGenerate = true)
@@ -21,5 +19,10 @@ public class TicketEntity {
     private int availableQuantity;
     private double price;
 
-
+    public TicketEntity(String type, int totalQuantity, int availableQuantity, double price) {
+        this.type = type;
+        this.totalQuantity = totalQuantity;
+        this.availableQuantity = availableQuantity;
+        this.price = price;
+    }
 }

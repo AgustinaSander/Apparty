@@ -41,5 +41,15 @@ public class Event {
         this.date = date;
     }
 
+    public Event(String name, Address address, List<Ticket> tickets, LocalDate date, LocalTime time, DressCode dressCode, User organizer, String comments) {
+        this.name = name;
+        this.address = address;
+        this.tickets = tickets;
+        this.date = date;
+        this.time = time;
+        this.dressCode = dressCode;
+        this.organizer = organizer;
+        this.comments = comments;
+    }
 }
 

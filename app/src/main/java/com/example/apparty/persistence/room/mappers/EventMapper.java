@@ -27,7 +27,6 @@ public class EventMapper {
             tickets.add(Integer.toString(t.getId()));
         }
         return new EventEntity(
-                event.getId(),
                 event.getName(),
                 event.getAddress().getId(),
                 tickets,

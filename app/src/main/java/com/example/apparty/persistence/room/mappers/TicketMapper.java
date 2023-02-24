@@ -12,7 +12,6 @@ public class TicketMapper {
 
     public static TicketEntity toEntity (Ticket ticket){
         return new TicketEntity(
-                ticket.getId(),
                 ticket.getType(),
                 ticket.getTotalQuantity(),
                 ticket.getAvailableQuantity(),

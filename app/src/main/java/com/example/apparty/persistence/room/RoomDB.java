@@ -25,12 +25,13 @@ import com.example.apparty.persistence.room.mappers.Converters;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {EventEntity.class, AddressEntity.class, DressCodeEntity.class, TicketEntity.class, UserEntity.class, PurchaseEntity.class}, version = 9, exportSchema = true)
+@Database(entities = {EventEntity.class, AddressEntity.class, DressCodeEntity.class, TicketEntity.class, UserEntity.class, PurchaseEntity.class}, version = 18, exportSchema = true)
 @TypeConverters({Converters.class})
 public abstract class RoomDB extends RoomDatabase {
 
@@ -79,37 +80,50 @@ public abstract class RoomDB extends RoomDatabase {
                 TicketDAO ticketDAO = instance.ticketDAO();
                 UserDAO userDAO = instance.userDAO();
 
-                AddressEntity addressEntity1 = new AddressEntity(1, "Breas 6475", "Argentina", "Santa Fe", "Santa Fe");
+                AddressEntity addressEntity1 = new AddressEntity("Breas 6475", "Argentina", "Santa Fe", "Colastine");
                 addressDAO.insertAddress(addressEntity1);
+                AddressEntity addressEntity2 = new AddressEntity("Castelli 1621", "Argentina", "Santa Fe", "Santa Fe");
+                addressDAO.insertAddress(addressEntity2);
+                AddressEntity addressEntity3 = new AddressEntity("Pedro Vittori 3537", "Argentina", "Santa Fe", "Santa Fe");
+                addressDAO.insertAddress(addressEntity3);
 
-                UserEntity userEntity1 = new UserEntity(1, "Agustina","Sander","42331387","asander00@hotmail.com","Hola");
+                UserEntity userEntity1 = new UserEntity("Agustina","Sander","42331387","asander00@hotmail.com","Hola");
                 userDAO.insertUser(userEntity1);
+                UserEntity userEntity2 = new UserEntity("Araceli","Sarina","42271660","arasarina@hotmail.com","Chau");
+                userDAO.insertUser(userEntity2);
+                UserEntity userEntity3 = new UserEntity("Agustina","Vergara","42919685","agusv369@gmail.com","Aloha");
+                userDAO.insertUser(userEntity3);
 
-                DressCodeEntity dressCodeEntity1 = new DressCodeEntity(1, "Formal");
-                DressCodeEntity dressCodeEntity2 = new DressCodeEntity(2, "Informal");
-                DressCodeEntity dressCodeEntity3 = new DressCodeEntity(4, "Elegante Sport");
+                DressCodeEntity dressCodeEntity1 = new DressCodeEntity("Formal");
+                DressCodeEntity dressCodeEntity2 = new DressCodeEntity("Informal");
+                DressCodeEntity dressCodeEntity3 = new DressCodeEntity("Elegante Sport");
 
                 dressCodeDAO.insertDressCode(dressCodeEntity1);
                 dressCodeDAO.insertDressCode(dressCodeEntity2);
                 dressCodeDAO.insertDressCode(dressCodeEntity3);
 
 
-                ticketDAO.insertTicket(new TicketEntity(1, "Entrada basica", 10, 10, 1500));
-                ticketDAO.insertTicket(new TicketEntity(2, "Entrada vip", 5, 5, 1800));
-                ticketDAO.insertTicket(new TicketEntity(3, "Entrada vip + consumicion", 2, 2, 2000));
+                long ticket1 = ticketDAO.insertTicket(new TicketEntity("Entrada basica", 100, 100, 1500));
+                long ticket2 = ticketDAO.insertTicket(new TicketEntity("Entrada vip", 20, 20, 1800));
+                long ticket3 = ticketDAO.insertTicket(new TicketEntity("Entrada vip + consumicion", 5, 5, 2000));
+
 
                 Set<String> tickets = new HashSet<>();
-                tickets.add(Integer.toString(1));
-                tickets.add(Integer.toString(2));
-                tickets.add(Integer.toString(3));
+                tickets.add(Long.toString(ticket1));
+                tickets.add(Long.toString(ticket2));
+                tickets.add(Long.toString(ticket3));
 
-                EventEntity eventEntity1 = new EventEntity(1, "Fiesta en Salones del puerto", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), dressCodeEntity1.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity2 = new EventEntity(2, "Poolparty en ATE", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), dressCodeEntity2.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity3 = new EventEntity(3, "Fiesta en la playa", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), dressCodeEntity2.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
 
-                eventDAO.insertEvent(eventEntity1);
-                eventDAO.insertEvent(eventEntity2);
-                eventDAO.insertEvent(eventEntity3);
+                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+
+                for (EventEntity event : Arrays.asList(eventEntity1, eventEntity2, eventEntity3, eventEntity4, eventEntity5, eventEntity6)) {
+                    eventDAO.insertEvent(event);
+                }
             });
         }
 
@@ -124,38 +138,50 @@ public abstract class RoomDB extends RoomDatabase {
                 TicketDAO ticketDAO = instance.ticketDAO();
                 UserDAO userDAO = instance.userDAO();
 
-                AddressEntity addressEntity1 = new AddressEntity(1, "Breas 6475", "Argentina", "Santa Fe", "Santa Fe");
+                AddressEntity addressEntity1 = new AddressEntity("Breas 6475", "Argentina", "Santa Fe", "Colastine");
                 addressDAO.insertAddress(addressEntity1);
+                AddressEntity addressEntity2 = new AddressEntity("Castelli 1621", "Argentina", "Santa Fe", "Santa Fe");
+                addressDAO.insertAddress(addressEntity2);
+                AddressEntity addressEntity3 = new AddressEntity("Pedro Vittori 3537", "Argentina", "Santa Fe", "Santa Fe");
+                addressDAO.insertAddress(addressEntity3);
 
-                UserEntity userEntity1 = new UserEntity(1, "Agustina","Sander","42331387","asander00@hotmail.com","Hola");
+                UserEntity userEntity1 = new UserEntity("Agustina","Sander","42331387","asander00@hotmail.com","Hola");
                 userDAO.insertUser(userEntity1);
+                UserEntity userEntity2 = new UserEntity("Araceli","Sarina","42271660","arasarina@hotmail.com","Chau");
+                userDAO.insertUser(userEntity2);
+                UserEntity userEntity3 = new UserEntity("Agustina","Vergara","42919685","agusv369@gmail.com","Aloha");
+                userDAO.insertUser(userEntity3);
 
-                DressCodeEntity dressCodeEntity1 = new DressCodeEntity(1, "Formal");
-                DressCodeEntity dressCodeEntity2 = new DressCodeEntity(2, "Informal");
-                DressCodeEntity dressCodeEntity3 = new DressCodeEntity(4, "Elegante Sport");
+                DressCodeEntity dressCodeEntity1 = new DressCodeEntity("Formal");
+                DressCodeEntity dressCodeEntity2 = new DressCodeEntity("Informal");
+                DressCodeEntity dressCodeEntity3 = new DressCodeEntity("Elegante Sport");
 
                 dressCodeDAO.insertDressCode(dressCodeEntity1);
                 dressCodeDAO.insertDressCode(dressCodeEntity2);
                 dressCodeDAO.insertDressCode(dressCodeEntity3);
 
 
-                ticketDAO.insertTicket(new TicketEntity(1, "Entrada basica", 10, 10, 1500));
-                ticketDAO.insertTicket(new TicketEntity(2, "Entrada vip", 5, 5, 1800));
-                ticketDAO.insertTicket(new TicketEntity(3, "Entrada vip + consumicion", 2, 2, 2000));
+                long ticket1 = ticketDAO.insertTicket(new TicketEntity("Entrada basica", 100, 100, 1500));
+                long ticket2 = ticketDAO.insertTicket(new TicketEntity("Entrada vip", 20, 20, 1800));
+                long ticket3 = ticketDAO.insertTicket(new TicketEntity("Entrada vip + consumicion", 5, 5, 2000));
+
 
                 Set<String> tickets = new HashSet<>();
-                tickets.add(Integer.toString(1));
-                tickets.add(Integer.toString(2));
-                tickets.add(Integer.toString(3));
+                tickets.add(Long.toString(ticket1));
+                tickets.add(Long.toString(ticket2));
+                tickets.add(Long.toString(ticket3));
 
-                EventEntity eventEntity1 = new EventEntity(1, "Fiesta en Salones del puerto", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), dressCodeEntity1.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity2 = new EventEntity(2, "Poolparty en ATE", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), dressCodeEntity2.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity3 = new EventEntity(3, "Fiesta en la playa", addressEntity1.getId(), tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), dressCodeEntity2.getId(), userEntity1.getId(), "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
 
-                eventDAO.insertEvent(eventEntity1);
-                eventDAO.insertEvent(eventEntity2);
-                eventDAO.insertEvent(eventEntity3);
+                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
 
+                for (EventEntity event : Arrays.asList(eventEntity1, eventEntity2, eventEntity3, eventEntity4, eventEntity5, eventEntity6)) {
+                    eventDAO.insertEvent(event);
+                }
             });
 
         }

@@ -12,7 +12,6 @@ public class AddressMapper {
 
     public static AddressEntity toEntity (Address address){
         return new AddressEntity (
-                address.getId(),
                 address.getAddress(),
                 address.getCountry(),
                 address.getProvince(),

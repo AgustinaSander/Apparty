@@ -8,14 +8,12 @@ import androidx.room.PrimaryKey;
 
 import java.util.Set;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 @Entity(tableName = "event",
         indices = @Index(value = {"id_address", "id_user", "id_dressCode"}),
@@ -41,6 +39,17 @@ public class EventEntity {
     @ColumnInfo(name = "id_user")
     private int idUserOrganizer;
     private String comments;
+
+    public EventEntity(String name, int idAddress, Set<String> tickets, String date, String time, int idDressCode, int idUserOrganizer, String comments) {
+        this.name = name;
+        this.idAddress = idAddress;
+        this.tickets = tickets;
+        this.date = date;
+        this.time = time;
+        this.idDressCode = idDressCode;
+        this.idUserOrganizer = idUserOrganizer;
+        this.comments = comments;
+    }
 }
 /*    private int id;
     private String name;
