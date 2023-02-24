@@ -81,4 +81,17 @@ public class PurchaseRepositoryImpl implements PurchaseRepository{
                 () -> purchaseDAO.updatePurchase(PurchaseMapper.toEntity(purchase))
         );
     }
+
+    @Override
+    public List<Purchase> getPurchasesByIdUser(int idUser) {
+        List<PurchaseEntity> purchaseEntities = purchaseDAO.getPurchasesByIdUser(idUser);
+        List<Purchase> purchases = new ArrayList<>();
+
+        for(PurchaseEntity p: purchaseEntities){
+            Event event = eventRepository.getEventById(p.getIdEvent());
+            UserEntity user = userDAO.getUser(idUser);
+            purchases.add(PurchaseMapper.fromEntity(p, event, user));
+        }
+        return purchases;
+    }
 }

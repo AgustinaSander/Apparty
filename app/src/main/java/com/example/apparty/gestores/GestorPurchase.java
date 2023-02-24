@@ -10,6 +10,7 @@ import com.example.apparty.persistence.repos.EventRepositoryImpl;
 import com.example.apparty.persistence.repos.PurchaseRepositoryImpl;
 import com.example.apparty.persistence.repos.TicketRepositoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestorPurchase {
@@ -20,6 +21,7 @@ public class GestorPurchase {
     private EventRepositoryImpl eventRepository;
     private TicketRepositoryImpl ticketRepository;
     private Purchase purchaseById;
+    private List<Purchase> purchasesByIdUser = new ArrayList<>();
     private long idPurchaseInserted;
 
 
@@ -94,5 +96,19 @@ public class GestorPurchase {
 
         purchaseRepository.updatePurchase(purchase);
 
+    }
+
+    public List<Purchase> getPurchasesByIdUser(int idUser) {
+        Thread hilo1 = new Thread( () -> {
+            purchasesByIdUser = purchaseRepository.getPurchasesByIdUser(idUser);
+        });
+        hilo1.start();
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return purchasesByIdUser;
     }
 }

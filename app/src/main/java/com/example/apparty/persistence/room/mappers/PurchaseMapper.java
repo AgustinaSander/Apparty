@@ -50,13 +50,20 @@ public class PurchaseMapper {
         );
     }
 
-    private static List<android.util.Pair<Integer, Integer>> listOfStringToPair (Set<String> list) {
-
-        List<android.util.Pair<Integer, Integer>> pairList = new ArrayList<>();
-        for (String p : list) {
-            String [] par = p.split("=");
-
-            pairList.add(new Pair<>(Integer.parseInt(par[0]), Integer.parseInt(par[1])));
+    private static List<Pair<Integer, Integer>> listOfStringToPair (Set<String> list) {
+        String listParam = String.valueOf(list);
+        List<Pair<Integer, Integer>> pairList = new ArrayList<>();
+        System.out.println("ORIGINAL "+listParam);
+        String [] par = listParam.split(",");
+        for(String p: par){
+            System.out.println("TEXTO "+p);
+            String [] ints = p.trim().split("\\s+");
+            System.out.println(ints[0]+"  /   "+ints[1]);
+            int firstInt = Integer.parseInt(ints[0].replaceAll("[^0-9]", ""));
+            System.out.println("FIRST "+firstInt);
+            int secondInt = Integer.parseInt(ints[1].replaceAll("[^0-9]", ""));
+            System.out.println("SECOND "+secondInt);
+            pairList.add(new Pair<>(firstInt, secondInt));
         }
         return pairList;
     }
