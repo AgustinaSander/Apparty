@@ -11,7 +11,6 @@ public class DressCodeMapper {
 
     public static DressCodeEntity toEntity (DressCode dressCode){
         return new DressCodeEntity(
-                dressCode.getId(),
                 dressCode.getDressCode()
         );
     }

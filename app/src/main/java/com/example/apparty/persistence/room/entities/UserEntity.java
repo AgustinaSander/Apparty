@@ -4,13 +4,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity(tableName = "user")
 public class UserEntity {
     @PrimaryKey(autoGenerate = true)
@@ -22,5 +20,11 @@ public class UserEntity {
     private String email;
     private String password;
 
-
+    public UserEntity(String name, String surname, String identification, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.identification = identification;
+        this.email = email;
+        this.password = password;
+    }
 }
