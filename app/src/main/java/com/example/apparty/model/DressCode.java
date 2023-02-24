@@ -14,4 +14,8 @@ import lombok.ToString;
 public class DressCode {
     private int id;
     private String dressCode;
+
+    public DressCode(String dressCode) {
+        this.dressCode = dressCode;
+    }
 }
