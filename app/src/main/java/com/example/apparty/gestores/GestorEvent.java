@@ -78,6 +78,10 @@ public class GestorEvent {
     public List<Event> getFilteredEvents(String wordsFilter, Filter filters){
         List<Event> events = getEventList();
 
+        //Me quedo solo con los eventos que no pasaron
+        events = events.stream().filter(e -> e.getDate().isEqual(LocalDate.now()) || e.getDate().isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
+
         if(filters != null) {
             if (filters.getDressCodeList().size() > 0) {
                 for (Integer dc: filters.getDressCodeList()){
