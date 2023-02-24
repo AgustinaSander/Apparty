@@ -1,5 +1,8 @@
 package com.example.apparty;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apparty.databinding.FragmentPurchasedEventsBinding;
+import com.example.apparty.gestores.GestorPurchase;
 import com.example.apparty.model.Event;
+import com.example.apparty.model.Purchase;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PurchasedEventsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener{
 
@@ -24,8 +31,14 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerViewPast;
+    private RecyclerView.LayoutManager layoutManagerPast;
+    private RecyclerView.Adapter adapterPast;
 
-    private List<Event> myPurchases = new ArrayList<>();
+    private GestorPurchase gestorPurchase;
+
+    private List<Purchase> myPurchases = new ArrayList<>();
+    private List<Purchase> myPastPurchases = new ArrayList<>();
 
     public PurchasedEventsFragment() {}
 
@@ -44,22 +57,39 @@ public class PurchasedEventsFragment extends Fragment implements ResultsRecycler
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
+        gestorPurchase = GestorPurchase.getInstance(this.getContext());
+
         setPurchasesList();
 
-        recyclerView = binding.recyclerPurchasedEvents;
+        recyclerView = binding.recyclerPurchases;
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerViewPast = binding.recyclerPastPurchases;
+        recyclerViewPast.setHasFixedSize(true);
+        layoutManagerPast = new LinearLayoutManager(view.getContext());
+        recyclerViewPast.setLayoutManager(layoutManagerPast);
 
         adapter = new ResultsRecyclerAdapter(myPurchases, this);
         recyclerView.setAdapter(adapter);
+        adapterPast = new ResultsRecyclerAdapter(myPastPurchases, this);
+        recyclerViewPast.setAdapter(adapterPast);
 
-        //DESHABILITAR CLICK DE LOS ITEMS FUTUROS
         recyclerView.setClickable(true);
+        recyclerViewPast.setClickable(true);
     }
 
     private void setPurchasesList() {
-        //BUSCAR TODAS LAS COMPRAS QUE HAYA HECHO LA PERSONA LOGUEADA!!!!!!
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loginInfo",MODE_PRIVATE);
+        int idUser = sharedPreferences.getInt("idUser", 0);
+
+        List<Purchase> purchases = gestorPurchase.getPurchasesByIdUser(idUser);
+        myPurchases = purchases.stream()
+                .filter(p -> p.getEvent().getDate().isEqual(LocalDate.now()) || p.getEvent().getDate().isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
+        myPastPurchases = purchases.stream()
+                .filter(p -> p.getEvent().getDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
     }
 
     @Override

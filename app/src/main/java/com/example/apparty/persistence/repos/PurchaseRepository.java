@@ -12,4 +12,5 @@ public interface PurchaseRepository {
     void deletePurchase(Purchase purchase);
     void updatePurchase(Purchase purchase);
 
+    List<Purchase> getPurchasesByIdUser(int idUser);
 }
