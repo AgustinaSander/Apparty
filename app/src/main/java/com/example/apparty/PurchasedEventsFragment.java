@@ -106,6 +106,7 @@ public class PurchasedEventsFragment extends Fragment{
         adapterPast = new PurchasesRecyclerAdapter(myPastPurchases);
         recyclerViewPast.setAdapter(adapterPast);
 
+        //DESHABILITAR BOTONES EN EVENTOS PASADOS!
         recyclerView.setClickable(true);
         recyclerViewPast.setClickable(true);
     }
