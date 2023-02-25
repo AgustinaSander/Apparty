@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.persistence.room.RoomDB;
 import com.example.apparty.persistence.room.daos.TicketDAO;
+import com.example.apparty.persistence.room.entities.TicketEntity;
 import com.example.apparty.persistence.room.mappers.TicketMapper;
 
 import java.util.List;
@@ -37,15 +38,19 @@ public class TicketRepositoryImpl implements TicketRepository{
 
     @Override
     public void deleteTicket(Ticket ticket) {
+        TicketEntity ticketEntity = TicketMapper.toEntity(ticket);
+        ticketEntity.setId(ticket.getId());
         RoomDB.EXECUTOR_DB.execute(
-                () -> ticketDAO.deleteTicket(TicketMapper.toEntity(ticket))
+                () -> ticketDAO.deleteTicket(ticketEntity)
         );
     }
 
     @Override
     public void updateTicket(Ticket ticket) {
+        TicketEntity ticketEntity = TicketMapper.toEntity(ticket);
+        ticketEntity.setId(ticket.getId());
         RoomDB.EXECUTOR_DB.execute(
-                () -> ticketDAO.updateTicket(TicketMapper.toEntity(ticket))
+                () -> ticketDAO.updateTicket(ticketEntity)
         );
     }
 }

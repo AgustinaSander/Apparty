@@ -65,7 +65,6 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
         purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
 
         purchase.setQr(purchaseQR);
-        System.out.println(purchase.toString());
         gestorPurchase.updatePurchase(purchase);
 
         return binding.getRoot();
