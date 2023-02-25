@@ -71,9 +71,7 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
         Event event = this.eventList.get(position);
         resultHolder.name.setText(event.getName());
         resultHolder.date.setText(event.getDate().toString());
-        //resultHolder.date.setText("Date");
         resultHolder.dressCode.setText(event.getDressCode().getDressCode());
-        //resultHolder.dressCode.setText("Formalito");
         resultHolder.image.setImageResource(R.drawable.party1);
 
     }

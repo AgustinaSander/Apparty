@@ -110,7 +110,6 @@ public class ScanQRFragment extends Fragment {
     });
 
     private void completeScannedInfo(PurchaseInfoQR purchaseInfoQR){
-        //EDITAR PURCHASE Y PONER IS_SCANNED EN TRUE
         boolean isScanned = gestorPurchase.isPurchaseScannedById(purchaseInfoQR.getId());
         binding.alreadyScanned.setVisibility(isScanned ? View.VISIBLE : View.GONE);
         binding.ticketInfo.setVisibility(View.VISIBLE);
@@ -139,7 +138,6 @@ public class ScanQRFragment extends Fragment {
             binding.ticketContainer.addView(linearLayout);
         });
 
-        //ACTUALIZAR EL PURCHASE QR A SCANNED TRUE
         gestorPurchase.updateQrToScanned(purchaseInfoQR.getId());
 
     }

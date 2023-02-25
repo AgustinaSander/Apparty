@@ -76,7 +76,6 @@ public class PurchaseRepositoryImpl implements PurchaseRepository{
 
     @Override
     public void updatePurchase(Purchase purchase) {
-        Log.i("PURCHASE EN EVENT DETAIL update", purchase.toString());
         EXECUTOR_DB.execute(
                 () -> purchaseDAO.updatePurchase(PurchaseMapper.toEntity(purchase))
         );

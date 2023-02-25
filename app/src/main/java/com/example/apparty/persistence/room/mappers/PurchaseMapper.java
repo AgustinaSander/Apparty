@@ -19,7 +19,7 @@ public class PurchaseMapper {
 
     public static PurchaseEntity toEntity(Purchase purchase) {
         return new PurchaseEntity(
-                //purchase.getId(),
+                purchase.getId(),
                 purchase.getQr(),
                 purchase.getEvent().getId(),
                 purchase.getUser().getId(),
@@ -53,42 +53,14 @@ public class PurchaseMapper {
     private static List<Pair<Integer, Integer>> listOfStringToPair (Set<String> list) {
         String listParam = String.valueOf(list);
         List<Pair<Integer, Integer>> pairList = new ArrayList<>();
-        System.out.println("ORIGINAL "+listParam);
         String [] par = listParam.split(",");
         for(String p: par){
-            System.out.println("TEXTO "+p);
             String [] ints = p.trim().split("\\s+");
-            System.out.println(ints[0]+"  /   "+ints[1]);
             int firstInt = Integer.parseInt(ints[0].replaceAll("[^0-9]", ""));
-            System.out.println("FIRST "+firstInt);
             int secondInt = Integer.parseInt(ints[1].replaceAll("[^0-9]", ""));
-            System.out.println("SECOND "+secondInt);
             pairList.add(new Pair<>(firstInt, secondInt));
         }
         return pairList;
     }
 }
-/*
-    Entity
 
-    private int id;
-    private String qr;
-    private int idEvent;
-    private int idUser;
-    //Lista tickets y cantidad asociada en un string que se genera
-    private Set<String> purchases;
-    private double price;
-    private boolean isScanned;
-
-    Model
-
-    private int id;
-    private String qr;
-    private Event event;
-    private User user;
-    //Lista tickets y cantidad asociada
-    private List<Pair<Integer, Integer>> purchases;
-    private double price;
-    private boolean isScanned;
-}
- */
