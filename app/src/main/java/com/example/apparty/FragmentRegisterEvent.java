@@ -10,13 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.apparty.databinding.FragmentRegisterEventBinding;
 import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.gestores.GestorTicket;
 import com.example.apparty.model.DressCode;
+import com.example.apparty.model.Ticket;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
@@ -42,6 +45,7 @@ public class FragmentRegisterEvent extends Fragment {
     private ArrayAdapter adapter;
 
     private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
 
     public FragmentRegisterEvent() {
     }
@@ -69,6 +73,7 @@ public class FragmentRegisterEvent extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         gestorEvent = GestorEvent.getInstance(this.getContext());
+        gestorTicket = GestorTicket.getInstance(this.getContext());
         setClickEvents();
         setDrescodeOptions();
     }
@@ -92,6 +97,14 @@ public class FragmentRegisterEvent extends Fragment {
         MaterialButton TimeBtn = binding.TimeBtn;
         TimeText = binding.textViewTime;
         TimeBtn.setOnClickListener(e -> showTimePickerDialog());
+
+        Button addTicket = binding.addTicketBtn;
+        addTicket.setOnClickListener(e -> registerTicket());
+    }
+
+    private void registerTicket() {
+       // List<Ticket> tickets = (List<Ticket>) gestorTicket.getTicketById();
+
     }
 
     private void showTimePickerDialog() {

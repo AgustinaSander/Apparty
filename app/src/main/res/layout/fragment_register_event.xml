@@ -377,7 +377,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addTicketBtn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"

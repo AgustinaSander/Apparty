@@ -10,7 +10,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity (tableName = "ticket")
 public class TicketEntity {
     @PrimaryKey(autoGenerate = true)
@@ -21,5 +20,10 @@ public class TicketEntity {
     private int availableQuantity;
     private double price;
 
-
+    public TicketEntity(String type, int totalQuantity, int availableQuantity, double price) {
+        this.type = type;
+        this.totalQuantity = totalQuantity;
+        this.availableQuantity = availableQuantity;
+        this.price = price;
+    }
 }
