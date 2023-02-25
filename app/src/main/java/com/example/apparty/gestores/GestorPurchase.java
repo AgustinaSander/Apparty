@@ -51,7 +51,6 @@ public class GestorPurchase {
         }
 
         //Recorro los tickets comprados y disminuyo la cantidad
-        Log.i("Tickets", "Tickets: "+purchase.getPurchases().toString());
         List<Pair<Integer, Integer>> purchaseList = purchase.getPurchases();
         purchaseList.stream().forEach(p -> {
             Ticket ticket = gestorTicket.getTicketById(p.first);
@@ -59,7 +58,6 @@ public class GestorPurchase {
             ticket.setAvailableQuantity(quantity);
             gestorTicket.updateTicket(ticket);
         });
-        Log.i("Purchase Id", "Purchase ID: "+idPurchaseInserted);
         purchase.setId((int) idPurchaseInserted);
 
         return purchase;
