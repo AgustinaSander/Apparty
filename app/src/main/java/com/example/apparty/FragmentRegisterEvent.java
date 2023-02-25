@@ -1,7 +1,5 @@
 package com.example.apparty;
 
-import static android.text.format.DateFormat.is24HourFormat;
-
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
@@ -11,24 +9,30 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.apparty.databinding.FragmentFilterDialogBinding;
 import com.example.apparty.databinding.FragmentRegisterEventBinding;
+import com.example.apparty.gestores.GestorEvent;
+import com.example.apparty.gestores.GestorTicket;
+import com.example.apparty.model.DressCode;
+import com.example.apparty.model.Ticket;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 
@@ -37,6 +41,11 @@ public class FragmentRegisterEvent extends Fragment {
     private TextView DateText;
     private TextView TimeText;
     private Date Date;
+    private Spinner dresscodeSpinner;
+    private ArrayAdapter adapter;
+
+    private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
 
     public FragmentRegisterEvent() {
     }
@@ -63,8 +72,21 @@ public class FragmentRegisterEvent extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        gestorEvent = GestorEvent.getInstance(this.getContext());
+        gestorTicket = GestorTicket.getInstance(this.getContext());
         setClickEvents();
+        setDrescodeOptions();
+    }
 
+    private void setDrescodeOptions() {
+        List<DressCode> dresscodes = gestorEvent.getDressCodeList();
+        ArrayList<String> dresscodeOptions = new ArrayList<String>();
+        for(DressCode d : dresscodes){
+            dresscodeOptions.add(d.getDressCode());
+        }
+        dresscodeSpinner = binding.spinnerDresscode;
+        adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, dresscodeOptions);
+        dresscodeSpinner.setAdapter(adapter);
     }
 
     private void setClickEvents() {
@@ -75,6 +97,14 @@ public class FragmentRegisterEvent extends Fragment {
         MaterialButton TimeBtn = binding.TimeBtn;
         TimeText = binding.textViewTime;
         TimeBtn.setOnClickListener(e -> showTimePickerDialog());
+
+        Button addTicket = binding.addTicketBtn;
+        addTicket.setOnClickListener(e -> registerTicket());
+    }
+
+    private void registerTicket() {
+       // List<Ticket> tickets = (List<Ticket>) gestorTicket.getTicketById();
+
     }
 
     private void showTimePickerDialog() {
