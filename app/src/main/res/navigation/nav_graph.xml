@@ -82,7 +82,11 @@
         android:id="@+id/purchasedEventsFragment"
         android:name="com.example.apparty.PurchasedEventsFragment"
         android:label="fragment_purchased_events"
-        tools:layout="@layout/fragment_purchased_events" />
+        tools:layout="@layout/fragment_purchased_events" >
+        <action
+            android:id="@+id/action_purchasedEventsFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
 
     <action
         android:id="@+id/action_global_purchasedEventsFragment"
