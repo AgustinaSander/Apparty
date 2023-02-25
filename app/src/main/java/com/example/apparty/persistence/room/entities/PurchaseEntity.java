@@ -34,7 +34,8 @@ public class PurchaseEntity {
     private double price;
     private boolean isScanned;
 
-    public PurchaseEntity(String qr, int idEvent, int idUser, Set<String> purchases, double price, boolean isScanned) {
+    public PurchaseEntity(long id, String qr, int idEvent, int idUser, Set<String> purchases, double price, boolean isScanned) {
+        this.id = id;
         this.qr = qr;
         this.idEvent = idEvent;
         this.idUser = idUser;

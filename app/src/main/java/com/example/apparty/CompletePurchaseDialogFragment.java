@@ -60,11 +60,13 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
         purchaseJson = getArguments().getString("purchase");
         purchase = Utils.getGsonParser().fromJson(purchaseJson, Purchase.class);
         gestorPurchase = GestorPurchase.getInstance(getContext());
-        purchase.setQr(purchaseQR);
-        gestorPurchase.updatePurchase(purchase);
 
         purchaseInfo = new PurchaseInfoQR(purchase.getId(), purchase.getEvent().getId(),purchase.getUser().getName()+" "+purchase.getUser().getSurname(), purchase.getPurchases());
         purchaseQR = Utils.getGsonParser().toJson(purchaseInfo);
+
+        purchase.setQr(purchaseQR);
+        System.out.println(purchase.toString());
+        gestorPurchase.updatePurchase(purchase);
 
         return binding.getRoot();
     }
@@ -73,9 +75,7 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         generateQR();
 
-        if (checkPermission()) {
-            Toast.makeText(getContext(), "Permisos brindados.", Toast.LENGTH_SHORT).show();
-        } else {
+        if (!checkPermission()) {
             requestPermission();
         }
 

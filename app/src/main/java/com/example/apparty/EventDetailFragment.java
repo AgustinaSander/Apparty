@@ -29,6 +29,7 @@ import com.example.apparty.model.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,14 +97,13 @@ public class EventDetailFragment extends Fragment {
     private void setTicketsInfo() {
         List<Ticket> tickets = event.getTickets();
         quantityList = new ArrayList<>();
-        //Si no hay tickets disponibles
-        if(tickets.stream().filter(t -> t.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 ){
+        //Si hay tickets disponibles y si no paso el evento
+        if(tickets.stream().filter(t -> t.getAvailableQuantity() > 0).collect(Collectors.toList()).size() > 0 && !eventIsPast()){
             binding.ticketsAvailable.setVisibility(View.VISIBLE);
             binding.notTicketsAvailable.setVisibility(View.GONE);
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             for(int i = 0; i < tickets.size(); i++){
-                //NO MOSTRAR SI NO HAY STOCK DE UN TIPO Y DESHABILITAR ADD CUANDO SE LLEGUE AL MAX
                 Ticket s = tickets.get(i);
                 View view =  inflater.inflate(R.layout.fragment_detail_event_item, null);
                 TextView ticketName = view.findViewById(R.id.ticketName);
@@ -125,6 +125,10 @@ public class EventDetailFragment extends Fragment {
             binding.ticketsAvailable.setVisibility(View.GONE);
             binding.notTicketsAvailable.setVisibility(View.VISIBLE);
         }
+    }
+
+    private boolean eventIsPast() {
+        return event.getDate().isBefore(LocalDate.now());
     }
 
     private void addQuantity(View view, int idItem, int availableQuantity){

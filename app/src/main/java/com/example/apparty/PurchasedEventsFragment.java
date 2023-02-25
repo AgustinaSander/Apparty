@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PurchasedEventsFragment extends Fragment implements PurchasesRecyclerAdapter.OnNoteListener{
+public class PurchasedEventsFragment extends Fragment{
 
     private FragmentPurchasedEventsBinding binding;
     private RecyclerView recyclerView;
@@ -101,9 +101,9 @@ public class PurchasedEventsFragment extends Fragment implements PurchasesRecycl
             binding.noResultsPastPurchases.setVisibility(View.GONE);
         }
 
-        adapter = new PurchasesRecyclerAdapter(myPurchases, this);
+        adapter = new PurchasesRecyclerAdapter(myPurchases);
         recyclerView.setAdapter(adapter);
-        adapterPast = new PurchasesRecyclerAdapter(myPastPurchases, this);
+        adapterPast = new PurchasesRecyclerAdapter(myPastPurchases);
         recyclerViewPast.setAdapter(adapterPast);
 
         recyclerView.setClickable(true);
@@ -121,12 +121,5 @@ public class PurchasedEventsFragment extends Fragment implements PurchasesRecycl
         myPastPurchases = purchases.stream()
                 .filter(p -> p.getEvent().getDate().isBefore(LocalDate.now()))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void onNoteClick(int idEvent) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("idEvent", idEvent);
-        //NavHostFragment.findNavController(PurchasedEventsFragment.this).navigate(R.id, bundle);
     }
 }
