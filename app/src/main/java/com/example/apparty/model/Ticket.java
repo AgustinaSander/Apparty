@@ -21,4 +21,11 @@ public class Ticket {
     private int totalQuantity;
     private int availableQuantity;
     private double price;
+
+    public Ticket(String type, int totalQuantity, int availableQuantity, double price) {
+        this.type = type;
+        this.totalQuantity = totalQuantity;
+        this.availableQuantity = availableQuantity;
+        this.price = price;
+    }
 }
