@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -28,8 +27,6 @@ import com.example.apparty.model.Event;
 import com.example.apparty.model.Ticket;
 import com.example.apparty.model.User;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -53,7 +50,7 @@ public class FragmentRegisterEvent extends Fragment {
     private Date Date;
     private Spinner dresscodeSpinner;
     private ArrayAdapter adapter;
-    private List<Ticket> ticketsList;
+    private List<Ticket> ticketsList = new ArrayList<>();
     private User organizer;
 
     private GestorEvent gestorEvent;
@@ -129,19 +126,8 @@ public class FragmentRegisterEvent extends Fragment {
         String country = String.valueOf(binding.editTextEventCountry);
         LocalDate date = LocalDate.parse(String.valueOf(binding.textViewDate));
         LocalTime time = LocalTime.parse(String.valueOf(binding.textViewTime));
-
         DressCode item = (DressCode) adapter.getItem(dresscodeSpinner.getSelectedItemPosition());
-        /*binding.spinnerDresscode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //DressCode item = (DressCode) adapterView.getItemAtPosition(i);
-                DressCode item = (DressCode) adapter.getItem(i);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });*/
 
         String description = String.valueOf(binding.editTextEventDescription);
 
@@ -154,8 +140,13 @@ public class FragmentRegisterEvent extends Fragment {
             int idUser = sharedPreferences.getInt("idUser", 0);
             organizer = gestorUser.getUserById(idUser);
 
-            Event newEvent = new Event(eventName,location,ticketsList,date,time,item,organizer,description);
+            List<Ticket> ticketsEventList = null;
+            for(int i=0; i < ticketsList.size(); i++) {
+                Ticket newTicket = gestorTicket.saveTicket(ticketsList.get(i));
+                ticketsEventList.add(newTicket);
+            }
 
+            Event newEvent = new Event(eventName,location,ticketsEventList,date,time,item,organizer,description);
             gestorEvent.insertEvent(newEvent);
             Snackbar.make(getView(), "Evento creado correctamente!", Snackbar.LENGTH_SHORT).show();
         } else{
@@ -170,8 +161,6 @@ public class FragmentRegisterEvent extends Fragment {
 
         if(name.length() > 0 && price >= 0 && quantity > 0){
             Ticket newTicket = new Ticket(name, quantity, quantity, price);
-
-            gestorTicket.saveTicket(newTicket);
             ticketsList.add(newTicket);
             Snackbar.make(getView(), "Ticket cargado!", Snackbar.LENGTH_SHORT).show();
 
