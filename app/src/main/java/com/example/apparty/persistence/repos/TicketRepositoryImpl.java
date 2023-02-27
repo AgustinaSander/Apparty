@@ -32,7 +32,7 @@ public class TicketRepositoryImpl implements TicketRepository{
     public long insertTicket(Ticket ticket) {
 
         long idTicket = ticketDAO.insertTicket(TicketMapper.toEntity(ticket));
-        return ticket.getId();
+        return idTicket;
     }
 
 

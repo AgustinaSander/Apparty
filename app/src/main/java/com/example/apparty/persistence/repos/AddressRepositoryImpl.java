@@ -20,6 +20,7 @@ public class AddressRepositoryImpl implements AddressRepository {
     AddressDAO dao;
     DressCodeDAO dressCodeDAO;
     TicketDAO ticketDAO;
+    long idAddress;
 
 
     public AddressRepositoryImpl(Context context){
@@ -40,8 +41,10 @@ public class AddressRepositoryImpl implements AddressRepository {
     }
 
     @Override
-    public void insertAddress(Address address) {
-        dao.insertAddress(AddressMapper.toEntity(address));
+    public long insertAddress(Address address) {
+        long idAddress = dao.insertAddress(AddressMapper.toEntity(address));
+        return idAddress;
+
     }
 
     @Override
