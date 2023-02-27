@@ -85,7 +85,6 @@ public class ScanQRFragment extends Fragment {
         if(result.getContents() == null) {
         } else {
             String scanned = result.getContents();
-            Log.i("ESCANEADO", scanned);
             PurchaseInfoQR purchaseInfoQR = new PurchaseInfoQR();
             purchaseInfoQR.setId(-1);
             try{
