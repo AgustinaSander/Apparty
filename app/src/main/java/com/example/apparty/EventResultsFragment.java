@@ -15,13 +15,15 @@ import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.NonNull;
 
-public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener {
+public class EventResultsFragment extends Fragment implements ResultsRecyclerAdapter.OnNoteListener, OnMapReadyCallback {
 
     private GestorEvent gestorEvent;
     private Filter filters;
@@ -33,6 +35,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+
     public EventResultsFragment() {
     }
 
@@ -40,6 +43,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -91,4 +95,8 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         NavHostFragment.findNavController(EventResultsFragment.this).navigate(R.id.action_eventResultsFragment_to_eventDetailFragment, bundle);
     }
 
+    @Override
+    public void onMapReady(@androidx.annotation.NonNull GoogleMap googleMap) {
+
+    }
 }
