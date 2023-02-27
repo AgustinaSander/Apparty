@@ -71,9 +71,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void insertEvent(Event event) {
-
         RoomDB.EXECUTOR_DB.execute(
-
                 () -> dao.insertEvent(EventMapper.toEntity(event))
         );
     }
