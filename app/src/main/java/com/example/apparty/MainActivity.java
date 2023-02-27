@@ -11,7 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private GestorUser gestorUser;
     private User user;
     private SharedPreferences sharedPreferences;
+
+    private GpsLocationReceiver gpsLocationReceiver = new GpsLocationReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,4 +99,16 @@ public class MainActivity extends AppCompatActivity {
                 || super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        IntentFilter filter = new IntentFilter("android.intent.action.AIRPLANE_MODE");
+        registerReceiver(gpsLocationReceiver, filter);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        unregisterReceiver(gpsLocationReceiver);
+    }
 }

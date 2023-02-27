@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -51,11 +52,13 @@ import lombok.NonNull;
 public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecyclerAdapter.PurchasesViewHolder> {
 
     private List<Purchase> purchaseList;
+    private boolean isPast;
     private GestorPurchase gestorPurchase;
     private GestorEvent gestorEvent;
 
-    public PurchasesRecyclerAdapter(List<Purchase> purchaseList) {
+    public PurchasesRecyclerAdapter(List<Purchase> purchaseList, boolean isPast) {
         this.purchaseList = purchaseList;
+        this.isPast = isPast;
     }
 
     public class PurchasesViewHolder extends RecyclerView.ViewHolder{
@@ -68,6 +71,7 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
         TableLayout purchaseTable;
         Button showEventBtn;
         Button qrBtn;
+        LinearLayout btnContainer;
         View root;
 
         public PurchasesViewHolder(PurchaseItemBinding binding){
@@ -107,6 +111,8 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
         String date = purchase.getEvent().getDate().format(dateFormat);
         date = date.substring(0, 1).toUpperCase() + date.substring(1);
         purchasesHolder.date.setText(date);
+
+        purchasesHolder.qrBtn.setEnabled(!isPast);
 
         purchasesHolder.showEventBtn.setOnClickListener(e -> {
             Bundle bundle = new Bundle();
