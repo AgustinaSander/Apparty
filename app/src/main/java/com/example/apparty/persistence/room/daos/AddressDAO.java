@@ -18,7 +18,7 @@ public interface AddressDAO {
     AddressEntity getAddress(int id);
 
     @Insert
-    void insertAddress(AddressEntity address);
+    long insertAddress(AddressEntity address);
 
     @Delete
     void deleteAddress(AddressEntity address);

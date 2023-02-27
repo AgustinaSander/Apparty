@@ -10,7 +10,7 @@ public interface AddressRepository {
 
     List<Address> getAllAddresses();
     Address getAddressById(int id);
-    void insertAddress(Address address);
+    long insertAddress(Address address);
     void deleteAddress(Address address);
 
     DressCode getDressCodeById(int id);

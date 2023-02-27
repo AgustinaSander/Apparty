@@ -38,7 +38,6 @@ public class GestorTicket {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         ticket.setId((int) idTicketInserted);
         return ticket;
     }
