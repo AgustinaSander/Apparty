@@ -36,10 +36,30 @@ public class EventRepositoryImpl implements EventRepository {
         this.dressCodeDAO = db.dressCodeDAO();
         this.userDAO = db.userDAO();
     }
+
     @Override
     public List<Event> getAllEvents() {
 
         List<EventEntity> eventList = dao.getAllEvents();
+        List<Event> events = new ArrayList<>();
+
+        for (EventEntity e : eventList) {
+            AddressEntity address = addressDAO.getAddress(e.getIdAddress());
+            List<TicketEntity> tickets = new ArrayList<>();
+            for (String t: e.getTickets()){
+                tickets.add(ticketDAO.getTicket(Integer.parseInt(t)));
+            }
+            DressCodeEntity dressCode = dressCodeDAO.getDressCode(e.getIdDressCode());
+            UserEntity user = userDAO.getUser(e.getIdUserOrganizer());
+            events.add(EventMapper.fromEntity(e, address, tickets, dressCode, user));
+        }
+
+        return events;
+    }
+
+    @Override
+    public List<Event> getAllEventsSorted(){
+        List<EventEntity> eventList = dao.getAllEventsSorted();
         List<Event> events = new ArrayList<>();
 
         for (EventEntity e : eventList) {

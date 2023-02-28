@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         gestorUser = GestorUser.getInstance(getApplicationContext());
         user = gestorUser.getUserById(idUser);
 
-        //EventDAO dao = RoomDB.getInstance(this).eventDAO();
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.topAppBar);
