@@ -1,6 +1,12 @@
 package com.example.apparty.gestores;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.graphics.Matrix;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.apparty.model.DressCode;
@@ -10,6 +16,8 @@ import com.example.apparty.model.Ticket;
 import com.example.apparty.persistence.repos.DressCodeRepositoryImpl;
 import com.example.apparty.persistence.repos.EventRepositoryImpl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -202,5 +210,26 @@ public class GestorEvent {
             e.printStackTrace();
         }
         return this.eventList;
+    }
+
+    public void addPicture(Bitmap selectedImageBitmap){
+        Event event = getEventById(1);
+
+        updateEvent(event);
+        event = getEventById(1);
+    }
+
+    public void updateEvent(Event event) {
+        Thread hilo1 = new Thread( () -> {
+            eventRepository.updateEvent(event);
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }

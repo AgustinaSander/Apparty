@@ -28,10 +28,12 @@
 
                 <!-- Media -->
                 <ImageView
+                    android:id="@+id/eventImage"
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
+                    android:adjustViewBounds="true"
                     android:contentDescription="Fiesta en la playa muy buena"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     app:srcCompat="@drawable/party1" />
 
                 <LinearLayout

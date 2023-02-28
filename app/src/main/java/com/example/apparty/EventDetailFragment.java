@@ -91,6 +91,10 @@ public class EventDetailFragment extends Fragment {
         binding.eventAddress.setText(address.getLocalty()+", "+address.getProvince()+", "+address.getCountry());
         binding.eventOrganizer.setText(event.getOrganizer().getName() + " " + event.getOrganizer().getSurname());
 
+        if(event.getImage() != null){
+            binding.eventImage.setImageBitmap(Utils.getBitmapFromString(event.getImage()));
+        }
+
         setTicketsInfo();
     }
 

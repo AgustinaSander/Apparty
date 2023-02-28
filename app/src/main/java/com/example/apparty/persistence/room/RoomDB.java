@@ -115,12 +115,12 @@ public abstract class RoomDB extends RoomDatabase {
                 tickets.add(Long.toString(ticket3));
 
 
-                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
 
                 for (EventEntity event : Arrays.asList(eventEntity1, eventEntity2, eventEntity3, eventEntity4, eventEntity5, eventEntity6)) {
                     eventDAO.insertEvent(event);
@@ -173,12 +173,12 @@ public abstract class RoomDB extends RoomDatabase {
                 tickets.add(Long.toString(ticket3));
 
 
-                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
-                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas");
+                EventEntity eventEntity1 = new EventEntity("Fiesta en Salones del puerto", 2, tickets, LocalDate.of(2023, 1, 15).toString(), LocalTime.of(17,30).toString(), 1, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity2 = new EventEntity("Poolparty en ATE", 1, tickets, LocalDate.of(2023, 1, 20).toString(), LocalTime.of(17,30).toString(), 2, 1, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity3 = new EventEntity("Fiesta en la playa", 1, tickets, LocalDate.of(2023, 1, 13).toString(), LocalTime.of(17,30).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity4 = new EventEntity("Evento privado", 2, tickets, LocalDate.now().toString(), LocalTime.of(22,30).toString(), 3, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity5 = new EventEntity("Bresh", 3, tickets, LocalDate.of(2023, 3, 11).toString(), LocalTime.of(23,15).toString(), 2, 3, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
+                EventEntity eventEntity6 = new EventEntity("BlackTie Party", 2, tickets, LocalDate.now().plusDays(3).toString(), LocalTime.of(23,15).toString(), 1, 2, "Aca irian los comentarios acerca de la fiesta, descripcion, caracteristicas", null);
 
                 for (EventEntity event : Arrays.asList(eventEntity1, eventEntity2, eventEntity3, eventEntity4, eventEntity5, eventEntity6)) {
                     eventDAO.insertEvent(event);

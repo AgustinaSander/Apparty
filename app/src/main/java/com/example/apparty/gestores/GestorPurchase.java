@@ -91,9 +91,7 @@ public class GestorPurchase {
     }
 
     public void updatePurchase(Purchase purchase) {
-
         purchaseRepository.updatePurchase(purchase);
-
     }
 
     public List<Purchase> getPurchasesByIdUser(int idUser) {
