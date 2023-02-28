@@ -51,14 +51,3 @@ public class EventEntity {
         this.comments = comments;
     }
 }
-/*    private int id;
-    private String name;
-    private Address address;
-    private List<Ticket> tickets; -- Esta relación la hago en la entity Ticket, con referencia al evento.
-                                     Después en la consulta, junto las tablas y obtengo la lista de tickets del evento?
-    private LocalDate date;       -- Cómo convierto la fecha a long?
-    private LocalTime time;
-    private DressCode dressCode;
-    private User organizer;
-    private String comments;
-*/

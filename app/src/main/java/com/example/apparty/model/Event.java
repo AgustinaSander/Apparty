@@ -28,7 +28,6 @@ public class Event {
     private User organizer;
     private String comments;
 
-
     public Event(int id, String name, Address address, Date date, Time time, DressCode dressCode, User user, String comments){
         this.id = id;
         this.name = name;

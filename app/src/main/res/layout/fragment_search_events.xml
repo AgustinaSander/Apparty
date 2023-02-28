@@ -95,6 +95,18 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <Button
+        android:id="@+id/addImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBIR FOTO" />
+
+    <ImageView
+        android:id="@+id/uploadImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        tools:src="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -133,5 +145,11 @@
         android:layout_marginVertical="20sp"
         app:captionTextSize="16sp"
         />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </LinearLayout>
