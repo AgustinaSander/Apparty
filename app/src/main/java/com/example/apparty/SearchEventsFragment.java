@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -144,7 +146,13 @@ public class SearchEventsFragment extends Fragment {
 
         if(mostRecentEvents.size() > 0) {
             mostRecentEvents.stream().forEach(e -> {
-                carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+                if(e.getImage() != null){
+                    //ESTO NO ESTA BIEN
+                    Drawable d = new BitmapDrawable(getResources(), Utils.getBitmapFromString(e.getImage()));
+                    carouselInfo.add(Pair.create(e.getId(), Pair.create(d.getAlpha(), e.getName())));
+                } else {
+                    carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+                }
             });
 
             for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {

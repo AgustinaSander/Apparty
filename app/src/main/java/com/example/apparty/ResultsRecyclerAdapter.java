@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apparty.databinding.EventItemBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
+import com.example.apparty.model.Utils;
 
 import java.util.List;
 
@@ -72,8 +73,11 @@ public class ResultsRecyclerAdapter extends RecyclerView.Adapter<ResultsRecycler
         resultHolder.name.setText(event.getName());
         resultHolder.date.setText(event.getDate().toString());
         resultHolder.dressCode.setText(event.getDressCode().getDressCode());
-        resultHolder.image.setImageResource(R.drawable.party1);
-
+        if(event.getImage() != null){
+            resultHolder.image.setImageBitmap(Utils.getBitmapFromString(event.getImage()));
+        } else {
+            resultHolder.image.setImageResource(R.drawable.party1);
+        }
     }
 
     @Override
