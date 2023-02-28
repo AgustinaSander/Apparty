@@ -7,6 +7,9 @@ import java.util.List;
 public interface EventRepository {
 
     List<Event> getAllEvents();
+
+    List<Event> getAllEventsSorted();
+
     Event getEventById(int id);
     void insertEvent(Event event);
     void deleteEvent(Event event);

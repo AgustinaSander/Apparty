@@ -63,7 +63,6 @@ public class GestorEvent {
     public List<Event> getEventList(){
         Thread hilo1 = new Thread( () -> {
             this.eventList = eventRepository.getAllEvents();
-
         });
         hilo1.start();
 
@@ -133,10 +132,8 @@ public class GestorEvent {
     }
 
     public Event getEventById(int idEvent) {
-
         Thread hilo1 = new Thread( () -> {
             eventById = eventRepository.getEventById(idEvent);
-
         });
         hilo1.start();
 
@@ -180,5 +177,30 @@ public class GestorEvent {
 
     public List<Event> getEventsOrganizedByUser(int idUser){
         return getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList());
+    }
+
+    public List<Event> getMostRecentEvents() {
+        List<Event> events = getAllEventsSorted();
+
+        //Me quedo con los eventos que no pasaron
+        events = events.stream().filter(e -> e.getDate().isEqual(LocalDate.now()) || e.getDate().isAfter(LocalDate.now()))
+                .collect(Collectors.toList());
+
+        //Obtengo los 5 primeros eventos mas proximos
+        return events.stream().limit(5).collect(Collectors.toList());
+    }
+
+    private List<Event> getAllEventsSorted() {
+        Thread hilo1 = new Thread( () -> {
+            this.eventList = eventRepository.getAllEventsSorted();
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.eventList;
     }
 }

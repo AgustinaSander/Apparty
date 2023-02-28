@@ -30,4 +30,6 @@ public interface EventDAO {
     @Delete
     void deleteEvent(EventEntity event);
 
+    @Query("SELECT * FROM event  ORDER BY date ASC")
+    List<EventEntity> getAllEventsSorted();
 }
