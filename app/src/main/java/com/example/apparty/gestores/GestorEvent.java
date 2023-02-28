@@ -1,6 +1,12 @@
 package com.example.apparty.gestores;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.graphics.Matrix;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.apparty.model.DressCode;
@@ -10,6 +16,8 @@ import com.example.apparty.model.Ticket;
 import com.example.apparty.persistence.repos.DressCodeRepositoryImpl;
 import com.example.apparty.persistence.repos.EventRepositoryImpl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -203,4 +211,52 @@ public class GestorEvent {
         }
         return this.eventList;
     }
+
+    public void addPicture(Bitmap selectedImageBitmap){
+        Event event = getEventById(1);
+        Bitmap resizedBitmap = getResizedBitmap(selectedImageBitmap, 480, 640);
+        event.setImage(getStringFromBitmap(resizedBitmap));
+        updateEvent(event);
+        event = getEventById(1);
+    }
+
+    public void updateEvent(Event event) {
+        Thread hilo1 = new Thread( () -> {
+            eventRepository.updateEvent(event);
+        });
+        hilo1.start();
+
+        try {
+            hilo1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        return Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+    }
+
+    public static byte[] getStringFromBitmap(Bitmap bitmapPicture){
+        ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
+        bitmapPicture.compress(Bitmap.CompressFormat.PNG, 0, byteArrayBitmapStream);
+        return byteArrayBitmapStream.toByteArray();
+    }
+
+    public static Bitmap getBitmapFromString(byte[] b){
+        return BitmapFactory.decodeByteArray(b, 0, b.length);
+    }
+
 }

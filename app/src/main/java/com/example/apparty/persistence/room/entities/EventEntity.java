@@ -39,8 +39,10 @@ public class EventEntity {
     @ColumnInfo(name = "id_user")
     private int idUserOrganizer;
     private String comments;
+    @ColumnInfo(name = "image", typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
 
-    public EventEntity(String name, int idAddress, Set<String> tickets, String date, String time, int idDressCode, int idUserOrganizer, String comments) {
+    public EventEntity(String name, int idAddress, Set<String> tickets, String date, String time, int idDressCode, int idUserOrganizer, String comments, byte[] image) {
         this.name = name;
         this.idAddress = idAddress;
         this.tickets = tickets;
@@ -49,5 +51,6 @@ public class EventEntity {
         this.idDressCode = idDressCode;
         this.idUserOrganizer = idUserOrganizer;
         this.comments = comments;
+        this.image = image;
     }
 }

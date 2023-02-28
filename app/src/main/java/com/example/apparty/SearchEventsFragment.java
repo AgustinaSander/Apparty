@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -97,14 +98,20 @@ public class SearchEventsFragment extends Fragment {
         uploadPictureLauncher.launch(intent);
     }
 
-    private final ActivityResultLauncher<Intent> uploadPictureLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
+    private final ActivityResultLauncher<Intent> uploadPictureLauncher =
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Uri selectedImageUri = result.getData().getData();
                     binding.uploadImage.setImageURI(selectedImageUri);
+                    ImageDecoder.Source source = ImageDecoder.createSource(getContext().getContentResolver(), selectedImageUri);
+                    try {
+                        Bitmap bitmap = ImageDecoder.decodeBitmap(source);
+                        gestorEvent.addPicture(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            });
+        });
 
     private void showEvents(String wordsFilter) {
         Bundle bundle = new Bundle();

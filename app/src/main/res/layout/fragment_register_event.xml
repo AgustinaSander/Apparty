@@ -9,18 +9,18 @@
     android:background="@color/dark_blue"
     android:paddingTop="30dp"
     android:paddingBottom="10dp"
-    tools:context=".FragmentRegisterEvent" >
+    tools:context=".RegisterEventFragment" >
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Organizá tu nuevo evento"
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
+        android:text="Organizá tu nuevo evento"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardInfo"
@@ -60,19 +60,20 @@
                     android:paddingHorizontal="5dp"
                     android:text="Nombre del evento"
                     android:textColor="@color/dark_blue"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextEventName"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="Nombre"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/eventAddress"
@@ -82,19 +83,20 @@
                     android:paddingHorizontal="5dp"
                     android:text="Dirección"
                     android:textColor="@color/dark_blue"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextEventAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="Dirección"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/eventLocalty"
@@ -104,19 +106,20 @@
                     android:paddingHorizontal="5dp"
                     android:text="Localidad"
                     android:textColor="@color/dark_blue"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextEventLocalty"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="Localidad"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/eventProvince"
@@ -126,19 +129,20 @@
                     android:paddingHorizontal="5dp"
                     android:text="Provincia"
                     android:textColor="@color/dark_blue"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextEventProvince"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="Provincia"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/eventCountry"
@@ -148,90 +152,85 @@
                     android:paddingHorizontal="5dp"
                     android:text="País"
                     android:textColor="@color/dark_blue"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextEventCountry"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="País"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginVertical="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal">
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/DateBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:padding="32dp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@android:color/white"
-                    app:backgroundTint="@color/dark_pink">
-                </com.google.android.material.button.MaterialButton>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/DateBtn"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@android:color/white"
+                        android:padding="32dp"
+                        app:backgroundTint="@color/dark_pink"></com.google.android.material.button.MaterialButton>
 
-                <TextView
-                    android:id="@+id/textViewDate"
-                    android:layout_width="140dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingRight="60dp"
-                    android:paddingLeft="5dp"
-                    android:hint="Fecha"
-                    android:textColorHint="@color/gray"
-                    android:textColor="@color/dark_blue"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/custom_edittext_background_white"
-                    />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewDate"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_edittext_background_white"
+                        android:gravity="center_vertical"
+                        android:hint="Fecha"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/dark_blue"
+                        android:textColorHint="@color/gray" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginVertical="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/TimeBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:padding="32dp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_baseline_access_time_24"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@android:color/white"
-                    app:backgroundTint="@color/dark_pink">
-                </com.google.android.material.button.MaterialButton>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/TimeBtn"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@android:color/white"
+                        android:padding="32dp"
+                        app:backgroundTint="@color/dark_pink"></com.google.android.material.button.MaterialButton>
 
-                <TextView
-                    android:id="@+id/textViewTime"
-                    android:layout_width="140dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingRight="60dp"
-                    android:paddingLeft="5dp"
-                    android:hint="Hora"
-                    android:textColorHint="@color/gray"
-                    android:textColor="@color/dark_blue"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/custom_edittext_background_white"
-                    />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewTime"
+                        android:layout_width="140dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_edittext_background_white"
+                        android:gravity="center_vertical"
+                        android:hint="Hora"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/dark_blue"
+                        android:textColorHint="@color/gray" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/eventDresscode"
@@ -249,7 +248,7 @@
                 <Spinner
                     android:id="@+id/spinnerDresscode"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/custom_edittext_background_white"
                     android:dropDownSelector="@color/dark_pink" />
@@ -269,12 +268,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_marginVertical="10dp"
+                    android:background="@drawable/custom_edittext_background_white"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:hint="Descripción"
+                    android:inputType="textPersonName"
                     android:paddingStart="10dp"
                     android:textColorHint="@color/gray"
-                    android:background="@drawable/custom_edittext_background_white"/>
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/incompleteFields"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_warning_amber_24"
+                    android:drawablePadding="5sp"
+                    android:drawableTint="@color/dark_blue"
+                    android:gravity="center_vertical"
+                    android:paddingRight="5sp"
+                    android:text="Complete los campos obligatorios."
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/noTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_warning_amber_24"
+                    android:drawablePadding="5sp"
+                    android:drawableTint="@color/dark_blue"
+                    android:gravity="center_vertical"
+                    android:paddingRight="5sp"
+                    android:text="Agregue al menos un tipo de ticket."
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -314,19 +344,20 @@
                 android:paddingHorizontal="5dp"
                 android:text="Nombre del ticket"
                 android:textColor="@color/dark_blue"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/editTextTicketName"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:layout_marginVertical="10dp"
+                android:background="@drawable/custom_edittext_background_white"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="Ej: General, VIP, ..."
+                android:inputType="textPersonName"
                 android:paddingStart="10dp"
                 android:textColorHint="@color/gray"
-                android:background="@drawable/custom_edittext_background_white"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/ticketPrice"
@@ -336,19 +367,20 @@
                 android:paddingHorizontal="5dp"
                 android:text="Precio"
                 android:textColor="@color/dark_blue"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/editTextNumberTicketPrice"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
+                android:layout_height="45dp"
                 android:layout_marginVertical="10dp"
-                android:hint="$00.00"
+                android:background="@drawable/custom_edittext_background_white"
+                android:ems="10"
+                android:hint="$0.00"
+                android:inputType="numberDecimal"
                 android:paddingStart="10dp"
                 android:textColorHint="@color/gray"
-                android:background="@drawable/custom_edittext_background_white"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/ticketQuantity"
@@ -358,19 +390,20 @@
                 android:paddingHorizontal="5dp"
                 android:text="Cantidad de tickets disponible"
                 android:textColor="@color/dark_blue"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/editTextNumberTicketQuantity"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="number"
+                android:layout_height="45dp"
                 android:layout_marginVertical="10dp"
+                android:background="@drawable/custom_edittext_background_white"
+                android:ems="10"
                 android:hint="Ej: 500"
+                android:inputType="number"
                 android:paddingStart="10dp"
                 android:textColorHint="@color/gray"
-                android:background="@drawable/custom_edittext_background_white"/>
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/addTicketBtn"
@@ -384,19 +417,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/incompleteFields"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_baseline_warning_amber_24"
-        android:drawablePadding="5sp"
-        android:gravity="center_vertical"
-        android:paddingRight="5sp"
-        android:text="Complete los campos obligatorios."
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:visibility="gone" />
-
     <Button
         android:id="@+id/saveNewEventBtn"
         android:layout_width="match_parent"
@@ -404,7 +424,5 @@
         android:layout_weight="1"
         android:text=" Guardar evento"
         android:layout_marginVertical="5dp" />
-
-
 
 </LinearLayout>

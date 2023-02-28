@@ -34,12 +34,12 @@ public class EventMapper {
                 event.getTime().toString(),
                 event.getDressCode().getId(),
                 event.getOrganizer().getId(),
-                event.getComments()
+                event.getComments(),
+                event.getImage()
         );
     }
 
     public static Event fromEntity (EventEntity event, AddressEntity address, List<TicketEntity> tickets, DressCodeEntity dressCode, UserEntity user){
-        Log.i("Event List", event.getDate());
         LocalDate localDate = LocalDate.parse(event.getDate());
         LocalTime localTime = LocalTime.parse(event.getTime());
 
@@ -52,8 +52,8 @@ public class EventMapper {
                 localTime,
                 DressCodeMapper.fromEntity(dressCode),
                 UserMapper.fromEntity(user),
-                event.getComments()
-        );
+                event.getComments(),
+                event.getImage());
     }
 
     public static List<EventEntity> toEntityList (List<Event> events){
