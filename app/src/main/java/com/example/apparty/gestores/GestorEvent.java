@@ -89,7 +89,6 @@ public class GestorEvent {
                             .filter(event -> dc == event.getDressCode().getId())
                             .collect(Collectors.toList());
                 }
-                Log.i("Event List", "Filtered Events: " + events.toString());
             }
             if (filters.getFromDate() != null && filters.getFromDate() != "" && filters.getFromDate().length() != 0) {
                 LocalDate fromDate = LocalDate.parse(filters.getFromDate(), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
@@ -180,7 +179,6 @@ public class GestorEvent {
     }
 
     public List<Event> getEventsOrganizedByUser(int idUser){
-        Log.i("Event List",getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList()).toString());
         return getEventList().stream().filter(e -> e.getOrganizer().getId() == idUser).collect(Collectors.toList());
     }
 }
