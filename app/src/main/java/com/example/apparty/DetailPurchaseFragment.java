@@ -165,5 +165,8 @@ public class DetailPurchaseFragment extends Fragment {
         date = date.substring(0, 1).toUpperCase() + date.substring(1);
         binding.textEventDate.setText(date);
         binding.textEventDressCode.setText("Dresscode "+purchase.getEvent().getDressCode().getDressCode());
+        if(purchase.getEvent().getImage() != null){
+            binding.imageResult.setImageBitmap(Utils.getBitmapFromString(purchase.getEvent().getImage()));
+        }
     }
 }

@@ -1,11 +1,23 @@
 package com.example.apparty;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,11 +30,14 @@ import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
 import com.google.android.material.snackbar.Snackbar;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +72,6 @@ public class SearchEventsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         gestorEvent = GestorEvent.getInstance(getContext());
-
         filters = null;
         setClickEvents();
         setCarousels();
@@ -132,7 +146,13 @@ public class SearchEventsFragment extends Fragment {
 
         if(mostRecentEvents.size() > 0) {
             mostRecentEvents.stream().forEach(e -> {
-                carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+                if(e.getImage() != null){
+                    //ESTO NO ESTA BIEN
+                    Drawable d = new BitmapDrawable(getResources(), Utils.getBitmapFromString(e.getImage()));
+                    carouselInfo.add(Pair.create(e.getId(), Pair.create(d.getAlpha(), e.getName())));
+                } else {
+                    carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+                }
             });
 
             for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {

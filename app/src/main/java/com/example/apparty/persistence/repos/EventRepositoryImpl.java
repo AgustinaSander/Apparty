@@ -98,9 +98,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void deleteEvent(Event event) {
-
         RoomDB.EXECUTOR_DB.execute(
-
                 () -> dao.deleteEvent(EventMapper.toEntity(event))
         );
 
@@ -108,8 +106,10 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void updateEvent(Event event) {
+        EventEntity eventEntity = EventMapper.toEntity(event);
+        eventEntity.setId(event.getId());
         RoomDB.EXECUTOR_DB.execute(
-                () -> dao.updateEvent(EventMapper.toEntity(event))
+                () -> dao.updateEvent(eventEntity)
         );
     }
 

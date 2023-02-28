@@ -74,7 +74,7 @@
 
     <fragment
         android:id="@+id/fragmentRegisterEvent"
-        android:name="com.example.apparty.FragmentRegisterEvent"
+        android:name="com.example.apparty.RegisterEventFragment"
         android:label="fragment_register_event"
         tools:layout="@layout/fragment_register_event" />
 

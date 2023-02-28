@@ -75,6 +75,8 @@
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
                 app:srcCompat="@drawable/party1" />
 

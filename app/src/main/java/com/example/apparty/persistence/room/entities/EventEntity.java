@@ -39,8 +39,10 @@ public class EventEntity {
     @ColumnInfo(name = "id_user")
     private int idUserOrganizer;
     private String comments;
+    @ColumnInfo(name = "image", typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
 
-    public EventEntity(String name, int idAddress, Set<String> tickets, String date, String time, int idDressCode, int idUserOrganizer, String comments) {
+    public EventEntity(String name, int idAddress, Set<String> tickets, String date, String time, int idDressCode, int idUserOrganizer, String comments, byte[] image) {
         this.name = name;
         this.idAddress = idAddress;
         this.tickets = tickets;
@@ -49,16 +51,6 @@ public class EventEntity {
         this.idDressCode = idDressCode;
         this.idUserOrganizer = idUserOrganizer;
         this.comments = comments;
+        this.image = image;
     }
 }
-/*    private int id;
-    private String name;
-    private Address address;
-    private List<Ticket> tickets; -- Esta relación la hago en la entity Ticket, con referencia al evento.
-                                     Después en la consulta, junto las tablas y obtengo la lista de tickets del evento?
-    private LocalDate date;       -- Cómo convierto la fecha a long?
-    private LocalTime time;
-    private DressCode dressCode;
-    private User organizer;
-    private String comments;
-*/
