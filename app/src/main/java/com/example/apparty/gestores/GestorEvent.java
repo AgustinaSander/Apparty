@@ -214,8 +214,7 @@ public class GestorEvent {
 
     public void addPicture(Bitmap selectedImageBitmap){
         Event event = getEventById(1);
-        Bitmap resizedBitmap = getResizedBitmap(selectedImageBitmap, 480, 640);
-        event.setImage(getStringFromBitmap(resizedBitmap));
+
         updateEvent(event);
         event = getEventById(1);
     }
@@ -233,30 +232,4 @@ public class GestorEvent {
         }
 
     }
-
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        // "RECREATE" THE NEW BITMAP
-        return Bitmap.createBitmap(
-                bm, 0, 0, width, height, matrix, false);
-    }
-
-    public static byte[] getStringFromBitmap(Bitmap bitmapPicture){
-        ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
-        bitmapPicture.compress(Bitmap.CompressFormat.PNG, 0, byteArrayBitmapStream);
-        return byteArrayBitmapStream.toByteArray();
-    }
-
-    public static Bitmap getBitmapFromString(byte[] b){
-        return BitmapFactory.decodeByteArray(b, 0, b.length);
-    }
-
 }

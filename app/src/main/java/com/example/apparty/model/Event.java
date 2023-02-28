@@ -41,7 +41,7 @@ public class Event {
         this.date = date;
     }
 
-    public Event(String name, Address address, List<Ticket> tickets, LocalDate date, LocalTime time, DressCode dressCode, User organizer, String comments) {
+    public Event(String name, Address address, List<Ticket> tickets, LocalDate date, LocalTime time, DressCode dressCode, User organizer, String comments, byte[] image) {
         this.name = name;
         this.address = address;
         this.tickets = tickets;
@@ -50,6 +50,7 @@ public class Event {
         this.dressCode = dressCode;
         this.organizer = organizer;
         this.comments = comments;
+        this.image = image;
     }
 
     public Event(int id, String name, Address address, List<Ticket> tickets, LocalDate date, LocalTime time, DressCode dressCode, User organizer, String comments) {

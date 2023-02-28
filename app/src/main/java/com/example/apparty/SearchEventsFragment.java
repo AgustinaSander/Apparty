@@ -70,7 +70,6 @@ public class SearchEventsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         gestorEvent = GestorEvent.getInstance(getContext());
-
         filters = null;
         setClickEvents();
         setCarousels();
@@ -86,32 +85,7 @@ public class SearchEventsFragment extends Fragment {
             String wordsFilter = binding.searchInputEditText.getText().toString();
             showEvents(wordsFilter);
         });
-
-        //SUBIR FOTO
-        binding.addImage.setOnClickListener(e -> {
-            uploadImage();
-        });
     }
-
-    private void uploadImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        uploadPictureLauncher.launch(intent);
-    }
-
-    private final ActivityResultLauncher<Intent> uploadPictureLauncher =
-        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    Uri selectedImageUri = result.getData().getData();
-                    binding.uploadImage.setImageURI(selectedImageUri);
-                    ImageDecoder.Source source = ImageDecoder.createSource(getContext().getContentResolver(), selectedImageUri);
-                    try {
-                        Bitmap bitmap = ImageDecoder.decodeBitmap(source);
-                        gestorEvent.addPicture(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-        });
 
     private void showEvents(String wordsFilter) {
         Bundle bundle = new Bundle();
