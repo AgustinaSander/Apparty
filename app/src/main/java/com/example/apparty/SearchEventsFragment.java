@@ -17,6 +17,7 @@ import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
@@ -24,11 +25,13 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchEventsFragment extends Fragment {
     private Filter filters;
     private FragmentSearchEventsBinding binding;
-    private List<CarouselItem> carouselItemList;
+    private List<CarouselItem> carouselMostRecentItemList;
+    private List<CarouselItem> carouselCloseItemList;
     private GestorEvent gestorEvent;
 
     public SearchEventsFragment() {
@@ -81,48 +84,28 @@ public class SearchEventsFragment extends Fragment {
     }
 
     private void setCarousels() {
-        carouselItemList = new ArrayList<>();
-        ImageCarousel carousel1 = binding.carousel;
+        setMostRecentEventsCarousel();
+        setCloseEventsCarousel();
+    }
+
+    private void setCloseEventsCarousel() {
+        carouselCloseItemList = new ArrayList<>();
         ImageCarousel carousel2 = binding.carousel2;
-        carousel1.registerLifecycle(getLifecycle());
         carousel2.registerLifecycle(getLifecycle());
 
+        //ACA SE AGREGARIAN LOS EVENTOS MAS CERCANOS SEGUN UBICACION!!!!!!
+        List<Event> events = gestorEvent.getEventList(); //ESTO SE TIENE QUE CAMBIAR
         List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
-        //INICIALIZAR CAROUSEL
-        List<Event> events = gestorEvent.getEventList();
 
-        events.stream().forEach(e -> {
+        events.stream().limit(5).forEach(e -> {
             carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
         });
+
         for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
-            carouselItemList.add(new CarouselItem(info.second.first, info.second.second));
+            carouselCloseItemList.add(new CarouselItem(info.second.first, info.second.second));
         }
-        carousel1.setData(carouselItemList);
-        carousel2.setData(carouselItemList);
 
-        carousel1.setCarouselListener(new CarouselListener() {
-            @Override
-            public void onClick(int i, @NonNull CarouselItem carouselItem) {
-                int idEvent = carouselInfo.get(i).first;
-                Bundle bundle = new Bundle();
-                bundle.putInt("idEvent", idEvent);
-                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
-            }
-
-            @Override
-            public void onLongClick(int i, @NonNull CarouselItem carouselItem) {
-            }
-
-            @Nullable
-            @Override
-            public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
-            }
-        });
+        carousel2.setData(carouselCloseItemList);
 
         carousel2.setCarouselListener(new CarouselListener() {
             @Override
@@ -132,21 +115,48 @@ public class SearchEventsFragment extends Fragment {
                 bundle.putInt("idEvent", idEvent);
                 NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
             }
-
-            @Override
-            public void onLongClick(int i, @NonNull CarouselItem carouselItem) {
-            }
-
-            @Nullable
-            @Override
-            public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
+            @Override public void onLongClick(int i, @NonNull CarouselItem carouselItem) {}
+            @Nullable @Override public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {return null;}
+            @Override public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
             }
         });
+    }
+
+    private void setMostRecentEventsCarousel() {
+        carouselMostRecentItemList = new ArrayList<>();
+        ImageCarousel carousel1 = binding.carousel;
+        carousel1.registerLifecycle(getLifecycle());
+
+        List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
+        List<Event> mostRecentEvents = gestorEvent.getMostRecentEvents();
+
+        if(mostRecentEvents.size() > 0) {
+            mostRecentEvents.stream().forEach(e -> {
+                carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
+            });
+
+            for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
+                carouselMostRecentItemList.add(new CarouselItem(info.second.first, info.second.second));
+            }
+
+            carousel1.setData(carouselMostRecentItemList);
+
+            carousel1.setCarouselListener(new CarouselListener() {
+                @Override
+                public void onClick(int i, @NonNull CarouselItem carouselItem) {
+                    int idEvent = carouselInfo.get(i).first;
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("idEvent", idEvent);
+                    NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
+                }
+                @Override public void onLongClick(int i, @NonNull CarouselItem carouselItem) {}
+                @Nullable @Override public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {return null;}
+                @Override public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {}
+            });
+
+        } else {
+            Snackbar.make(getView(), "No hay eventos proximos", Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     private void showFilterDialog() {

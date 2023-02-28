@@ -174,8 +174,6 @@ public class EventDetailFragment extends Fragment {
         ticketQuantity.setText(String.valueOf(quantity));
     }
 
-    //CUANDO NO HAY MAS ENTRADAS MOSTRAR UN MENSAJE DE ERROR
-
     private void setClickEvents() {
         binding.ticketBtn.setOnClickListener(e -> showTickets());
         binding.profileBtn.setOnClickListener(e -> Snackbar.make(getView(), "Funcionalidad de Perfil Organizador no implementada", Snackbar.LENGTH_SHORT).show());
