@@ -9,12 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class GpsLocationReceiver extends BroadcastReceiver {
+public class AirplaneModeReceiver extends BroadcastReceiver {
     private static final String CHANNEL_ID= "notification_channel";
 
     @Override

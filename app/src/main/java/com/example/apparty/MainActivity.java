@@ -7,15 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,8 +22,6 @@ import android.widget.TextView;
 import com.example.apparty.databinding.ActivityMainBinding;
 import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.User;
-import com.example.apparty.persistence.room.RoomDB;
-import com.example.apparty.persistence.room.daos.EventDAO;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private User user;
     private SharedPreferences sharedPreferences;
 
-    private GpsLocationReceiver gpsLocationReceiver = new GpsLocationReceiver();
+    private AirplaneModeReceiver airplaneModeReceiver = new AirplaneModeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         IntentFilter filter = new IntentFilter("android.intent.action.AIRPLANE_MODE");
-        registerReceiver(gpsLocationReceiver, filter);
+        registerReceiver(airplaneModeReceiver, filter);
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        unregisterReceiver(gpsLocationReceiver);
+        unregisterReceiver(airplaneModeReceiver);
     }
 }
