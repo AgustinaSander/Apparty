@@ -205,12 +205,15 @@ public class RegisterEventFragment extends Fragment {
     }
 
     private void registerTicket() {
-        String name = String.valueOf(binding.editTextTicketName.getText());
-        double price = Double.parseDouble(String.valueOf(binding.editTextNumberTicketPrice.getText()));
-        int quantity = Integer.parseInt(String.valueOf(binding.editTextNumberTicketQuantity.getText()));
+        String nameString = String.valueOf(binding.editTextTicketName.getText());
+        String priceString = String.valueOf(binding.editTextNumberTicketPrice.getText());
+        String quantityString = String.valueOf(binding.editTextNumberTicketQuantity.getText());
 
-        if(name.length() > 0 && price >= 0 && quantity > 0){
-            Ticket newTicket = new Ticket(name, quantity, quantity, price);
+        if(nameString.length() > 0 && priceString.length() > 0 && quantityString.length() > 0){
+            double price = Double.parseDouble(priceString);
+            int quantity = Integer.parseInt(quantityString);
+
+            Ticket newTicket = new Ticket(nameString, quantity, quantity, price);
             ticketsList.add(newTicket);
             Snackbar.make(getView(), "Ticket cargado!", Snackbar.LENGTH_SHORT).show();
 
@@ -219,13 +222,25 @@ public class RegisterEventFragment extends Fragment {
             binding.editTextNumberTicketQuantity.setText("");
 
             binding.ticketContainer.setVisibility(View.VISIBLE);
+            
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view =  inflater.inflate(R.layout.fragment_register_type_ticket, null);
             TextView ticketName = view.findViewById(R.id.ticketName);
             ticketName.setText(newTicket.getType());
             TextView ticketPrice = view.findViewById(R.id.ticketPrice);
             ticketPrice.setText("$ "+newTicket.getPrice());
-
+            FloatingActionButton deleteBtn = view.findViewById(R.id.deleteTicketBtn);
+            deleteBtn.setOnClickListener(e -> {
+                ticketsList = ticketsList.stream()
+                        .filter(t -> !(t.getType() == newTicket.getType() &&
+                                       t.getPrice()== newTicket.getPrice() &&
+                                       t.getTotalQuantity() == newTicket.getTotalQuantity()))
+                        .collect(Collectors.toList());
+                binding.ticketLayout.removeView(view);
+                if(ticketsList.size() == 0){
+                    binding.ticketContainer.setVisibility(View.GONE);
+                }
+            });
             binding.ticketLayout.addView(view);
         }
 
