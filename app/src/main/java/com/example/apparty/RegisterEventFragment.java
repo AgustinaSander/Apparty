@@ -41,6 +41,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -54,6 +55,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 
 public class RegisterEventFragment extends Fragment {
@@ -215,7 +217,18 @@ public class RegisterEventFragment extends Fragment {
             binding.editTextTicketName.setText("");
             binding.editTextNumberTicketPrice.setText("");
             binding.editTextNumberTicketQuantity.setText("");
+
+            binding.ticketContainer.setVisibility(View.VISIBLE);
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view =  inflater.inflate(R.layout.fragment_register_type_ticket, null);
+            TextView ticketName = view.findViewById(R.id.ticketName);
+            ticketName.setText(newTicket.getType());
+            TextView ticketPrice = view.findViewById(R.id.ticketPrice);
+            ticketPrice.setText("$ "+newTicket.getPrice());
+
+            binding.ticketLayout.addView(view);
         }
+
     }
 
     private void showTimePickerDialog() {
