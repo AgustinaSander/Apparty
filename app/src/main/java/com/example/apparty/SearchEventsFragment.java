@@ -53,10 +53,6 @@ public class SearchEventsFragment extends Fragment implements CarouselRecyclerAd
     private RecyclerView.Adapter adapterRecent;
     private RecyclerView.LayoutManager layoutManagerRecent;
 
-    private RecyclerView recyclerViewNear;
-    private RecyclerView.Adapter adapterNear;
-    private RecyclerView.LayoutManager layoutManagerNear;
-
     public SearchEventsFragment() {
     }
 
@@ -82,7 +78,7 @@ public class SearchEventsFragment extends Fragment implements CarouselRecyclerAd
         gestorEvent = GestorEvent.getInstance(getContext());
         filters = null;
         setClickEvents();
-        setCarousels();
+        setMostRecentEventsCarousel();
     }
 
 
@@ -103,30 +99,6 @@ public class SearchEventsFragment extends Fragment implements CarouselRecyclerAd
         bundle.putString("wordsFilter", wordsFilter);
 
         NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment, bundle);
-    }
-
-    private void setCarousels() {
-        setMostRecentEventsCarousel();
-        setCloseEventsCarousel();
-    }
-
-    private void setCloseEventsCarousel() {
-        //ACA SE AGREGARIAN LOS EVENTOS MAS CERCANOS SEGUN UBICACION!!!!!!
-        List<Event> events = gestorEvent.getEventList(); //ESTO SE TIENE QUE CAMBIAR
-        events = events.stream().limit(5).collect(Collectors.toList());
-
-        recyclerViewNear = binding.nearCarousel;
-        recyclerViewNear.setHasFixedSize(true);
-        layoutManagerNear = new LinearLayoutManager(getView().getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewNear.setLayoutManager(layoutManagerNear);
-
-        if(events.size() > 0) {
-            adapterNear = new CarouselRecyclerAdapter(events, this);
-            recyclerViewNear.setAdapter(adapterNear);
-            recyclerViewNear.setClickable(true);
-        } else {
-            Snackbar.make(getView(), "No hay eventos cercanos", Snackbar.LENGTH_SHORT).show();
-        }
     }
 
     private void setMostRecentEventsCarousel() {
