@@ -33,7 +33,7 @@
                     android:layout_height="194dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Fiesta en la playa muy buena"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/party1" />
 
                 <LinearLayout

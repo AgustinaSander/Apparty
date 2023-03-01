@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
 import com.example.apparty.databinding.FragmentSearchEventsBinding;
@@ -42,12 +44,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchEventsFragment extends Fragment {
+public class SearchEventsFragment extends Fragment implements CarouselRecyclerAdapter.OnNoteListener{
     private Filter filters;
     private FragmentSearchEventsBinding binding;
-    private List<CarouselItem> carouselMostRecentItemList;
-    private List<CarouselItem> carouselCloseItemList;
     private GestorEvent gestorEvent;
+
+    private RecyclerView recyclerViewRecent;
+    private RecyclerView.Adapter adapterRecent;
+    private RecyclerView.LayoutManager layoutManagerRecent;
 
     public SearchEventsFragment() {
     }
@@ -74,7 +78,7 @@ public class SearchEventsFragment extends Fragment {
         gestorEvent = GestorEvent.getInstance(getContext());
         filters = null;
         setClickEvents();
-        setCarousels();
+        setMostRecentEventsCarousel();
     }
 
 
@@ -97,83 +101,18 @@ public class SearchEventsFragment extends Fragment {
         NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventResultsFragment, bundle);
     }
 
-    private void setCarousels() {
-        setMostRecentEventsCarousel();
-        setCloseEventsCarousel();
-    }
-
-    private void setCloseEventsCarousel() {
-        carouselCloseItemList = new ArrayList<>();
-        ImageCarousel carousel2 = binding.carousel2;
-        carousel2.registerLifecycle(getLifecycle());
-
-        //ACA SE AGREGARIAN LOS EVENTOS MAS CERCANOS SEGUN UBICACION!!!!!!
-        List<Event> events = gestorEvent.getEventList(); //ESTO SE TIENE QUE CAMBIAR
-        List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
-
-        events.stream().limit(5).forEach(e -> {
-            carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
-        });
-
-        for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
-            carouselCloseItemList.add(new CarouselItem(info.second.first, info.second.second));
-        }
-
-        carousel2.setData(carouselCloseItemList);
-
-        carousel2.setCarouselListener(new CarouselListener() {
-            @Override
-            public void onClick(int i, @NonNull CarouselItem carouselItem) {
-                int idEvent = carouselInfo.get(i).first;
-                Bundle bundle = new Bundle();
-                bundle.putInt("idEvent", idEvent);
-                NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
-            }
-            @Override public void onLongClick(int i, @NonNull CarouselItem carouselItem) {}
-            @Nullable @Override public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {return null;}
-            @Override public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {
-            }
-        });
-    }
-
     private void setMostRecentEventsCarousel() {
-        carouselMostRecentItemList = new ArrayList<>();
-        ImageCarousel carousel1 = binding.carousel;
-        carousel1.registerLifecycle(getLifecycle());
+        recyclerViewRecent = binding.mostRecentCarousel;
+        recyclerViewRecent.setHasFixedSize(true);
+        layoutManagerRecent = new LinearLayoutManager(getView().getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewRecent.setLayoutManager(layoutManagerRecent);
 
-        List<Pair<Integer, Pair<Integer, String>>> carouselInfo = new ArrayList<>();
         List<Event> mostRecentEvents = gestorEvent.getMostRecentEvents();
 
         if(mostRecentEvents.size() > 0) {
-            mostRecentEvents.stream().forEach(e -> {
-                if(e.getImage() != null){
-                    //ESTO NO ESTA BIEN
-                    Drawable d = new BitmapDrawable(getResources(), Utils.getBitmapFromString(e.getImage()));
-                    carouselInfo.add(Pair.create(e.getId(), Pair.create(d.getAlpha(), e.getName())));
-                } else {
-                    carouselInfo.add(Pair.create(e.getId(), Pair.create(R.drawable.party1, e.getName())));
-                }
-            });
-
-            for (Pair<Integer, Pair<Integer, String>> info : carouselInfo) {
-                carouselMostRecentItemList.add(new CarouselItem(info.second.first, info.second.second));
-            }
-
-            carousel1.setData(carouselMostRecentItemList);
-
-            carousel1.setCarouselListener(new CarouselListener() {
-                @Override
-                public void onClick(int i, @NonNull CarouselItem carouselItem) {
-                    int idEvent = carouselInfo.get(i).first;
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("idEvent", idEvent);
-                    NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
-                }
-                @Override public void onLongClick(int i, @NonNull CarouselItem carouselItem) {}
-                @Nullable @Override public ViewBinding onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup viewGroup) {return null;}
-                @Override public void onBindViewHolder(@NonNull ViewBinding viewBinding, @NonNull CarouselItem carouselItem, int i) {}
-            });
-
+            adapterRecent = new CarouselRecyclerAdapter(mostRecentEvents, this);
+            recyclerViewRecent.setAdapter(adapterRecent);
+            recyclerViewRecent.setClickable(true);
         } else {
             Snackbar.make(getView(), "No hay eventos proximos", Snackbar.LENGTH_SHORT).show();
         }
@@ -182,5 +121,12 @@ public class SearchEventsFragment extends Fragment {
     private void showFilterDialog() {
         new FilterDialogFragment().show(getChildFragmentManager(), null);
 
+    }
+
+    @Override
+    public void onNoteClick(int idEvent) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("idEvent", idEvent);
+        NavHostFragment.findNavController(SearchEventsFragment.this).navigate(R.id.action_searchEvents_to_eventDetailFragment, bundle);
     }
 }
