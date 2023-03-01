@@ -8,15 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.apparty.databinding.FragmentDetailEventItemBinding;
 import com.example.apparty.databinding.FragmentRegisterTypeTicketBinding;
 
 
-public class registerTypeTicketFragment extends Fragment {
+public class RegisterTypeTicketFragment extends Fragment {
 
     private FragmentRegisterTypeTicketBinding binding;
 
-    public registerTypeTicketFragment() {}
+    public RegisterTypeTicketFragment() {}
 
 
     @Override
