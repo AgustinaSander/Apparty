@@ -1,14 +1,5 @@
 package com.example.apparty;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -18,11 +9,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.apparty.databinding.ActivityMainBinding;
 import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.User;
-
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.topAppBar);
         getSupportActionBar().setElevation(0);
+
 
         navigationView = binding.navigationView;
         View headerView = navigationView.getHeaderView(0);
@@ -104,4 +103,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         unregisterReceiver(airplaneModeReceiver);
     }
+
+
 }
