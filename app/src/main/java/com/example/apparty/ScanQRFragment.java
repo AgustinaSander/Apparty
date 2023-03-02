@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.apparty.databinding.FragmentScanQRBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
+import com.example.apparty.gestores.GestorTicket;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.PurchaseInfoQR;
 import com.example.apparty.model.Ticket;
@@ -33,6 +34,7 @@ public class ScanQRFragment extends Fragment {
     private FragmentScanQRBinding binding;
     private Event event;
     private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
     private GestorPurchase gestorPurchase;
 
     public ScanQRFragment() {}
@@ -48,6 +50,7 @@ public class ScanQRFragment extends Fragment {
         binding = FragmentScanQRBinding.inflate(inflater, container, false);
         int idEvent = getArguments().getInt("idEvent");
         gestorEvent = GestorEvent.getInstance(getContext());
+        gestorTicket = GestorTicket.getInstance(getContext());
         event = gestorEvent.getEventById(idEvent);
         return binding.getRoot();
     }
@@ -118,7 +121,7 @@ public class ScanQRFragment extends Fragment {
         List<Pair<Integer, Integer>> tickets = purchaseInfoQR.getPurchases();
         binding.ticketContainer.removeAllViews();
         tickets.stream().forEach(t -> {
-            Ticket ticket = gestorEvent.getTicketByIdByEvent(t.first, event.getId());
+            Ticket ticket = gestorTicket.getTicketById(t.first);
 
             LinearLayout linearLayout = new LinearLayout(getContext());
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

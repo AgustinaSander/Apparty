@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.apparty.databinding.FragmentDetailPurchaseBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
+import com.example.apparty.gestores.GestorTicket;
 import com.example.apparty.gestores.GestorUser;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
@@ -36,7 +37,7 @@ public class DetailPurchaseFragment extends Fragment {
 
     private FragmentDetailPurchaseBinding binding;
     private GestorPurchase gestorPurchase;
-    private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
     private GestorUser gestorUser;
     private Purchase purchase;
 
@@ -45,7 +46,6 @@ public class DetailPurchaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gestorPurchase = GestorPurchase.getInstance(getContext());
         getChildFragmentManager().setFragmentResultListener("purchaseCompleted", this, (requestKey, bundle) -> {
             String result = bundle.getString("purchase");
             purchase = Utils.getGsonParser().fromJson(result, Purchase.class);
@@ -65,8 +65,9 @@ public class DetailPurchaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
-        gestorEvent = GestorEvent.getInstance(this.getContext());
         gestorUser = GestorUser.getInstance(this.getContext());
+        gestorPurchase = GestorPurchase.getInstance(this.getContext());
+        gestorTicket = GestorTicket.getInstance(this.getContext());
         setValues();
         setClickEvents();
     }
@@ -117,7 +118,7 @@ public class DetailPurchaseFragment extends Fragment {
         double servicePrice = 3000;
         AtomicReference<Double> total = new AtomicReference<>((double) servicePrice);
         ticketsList.stream().forEach(t -> {
-            Ticket ticket= gestorEvent.getTicketByIdByEvent(t.first, purchase.getEvent().getId());
+            Ticket ticket= gestorTicket.getTicketById(t.first);
             total.updateAndGet(v -> new Double((double) (v + ticket.getPrice() * t.second)));
             //Create row
             TableRow tableRow = new TableRow(getActivity());

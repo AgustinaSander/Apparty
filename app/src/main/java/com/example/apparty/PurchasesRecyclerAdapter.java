@@ -32,6 +32,7 @@ import com.example.apparty.databinding.EventItemBinding;
 import com.example.apparty.databinding.PurchaseItemBinding;
 import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.gestores.GestorPurchase;
+import com.example.apparty.gestores.GestorTicket;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Purchase;
 import com.example.apparty.model.Ticket;
@@ -54,7 +55,7 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
     private List<Purchase> purchaseList;
     private boolean isPast;
     private GestorPurchase gestorPurchase;
-    private GestorEvent gestorEvent;
+    private GestorTicket gestorTicket;
 
     public PurchasesRecyclerAdapter(List<Purchase> purchaseList, boolean isPast) {
         this.purchaseList = purchaseList;
@@ -98,7 +99,7 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
     @Override
     public PurchasesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         gestorPurchase = GestorPurchase.getInstance(parent.getContext());
-        gestorEvent = GestorEvent.getInstance(parent.getContext());
+        gestorTicket = GestorTicket.getInstance(parent.getContext());
         return new PurchasesViewHolder (PurchaseItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -178,7 +179,7 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
         });
 
         purchase.getPurchases().stream().forEach(t -> {
-            Ticket ticket= gestorEvent.getTicketByIdByEvent(t.first, purchase.getEvent().getId());
+            Ticket ticket= gestorTicket.getTicketById(t.first);
 
             TableRow tableRow = new TableRow(purchasesHolder.root.getContext());
             tableRow.setPadding(0,10,0,10);
