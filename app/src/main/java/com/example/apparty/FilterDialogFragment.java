@@ -130,7 +130,6 @@ public class FilterDialogFragment extends DialogFragment {
         double maxPriceSelected = binding.rangeSlider.getValues().get(1);
 
         List<Integer> dresscodeIds = getCheckedChips();
-        //VER UBICACION
 
         String fromDateString = "";
         String toDateString = "";
