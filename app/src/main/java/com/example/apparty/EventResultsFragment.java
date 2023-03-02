@@ -1,11 +1,16 @@
 package com.example.apparty;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -18,13 +23,22 @@ import com.example.apparty.gestores.GestorEvent;
 import com.example.apparty.model.Event;
 import com.example.apparty.model.Filter;
 import com.example.apparty.model.Utils;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +56,8 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private MapView mapView;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
-    private GoogleMap mMap;
-    private MapView mMapView;
 
     public EventResultsFragment() {
     }
@@ -54,6 +66,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getActivity());
 
     }
 
@@ -61,10 +74,10 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentEventResultsBinding.inflate(inflater, container, false);
 
-        MapsInitializer.initialize(getActivity());
-        mMapView = binding.mapView;
-        mMapView.onCreate(savedInstanceState);
-        mMapView.getMapAsync(this::onMapReady);
+        //Initialize map
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
+        //Async map
+        supportMapFragment.getMapAsync(this::onMapReady);
 
         String filterString = getArguments().getString("filters");
         wordsFilter = getArguments().getString("wordsFilter");
@@ -78,7 +91,7 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         super.onViewCreated(view, savedInstanceState);
         gestorEvent = GestorEvent.getInstance(this.getContext());
         recyclerView = binding.recyclerResult;
-        mapView = binding.mapView;
+        //mapView = binding.mapView;
 
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(view.getContext());
@@ -113,23 +126,58 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         NavHostFragment.findNavController(EventResultsFragment.this).navigate(R.id.action_eventResultsFragment_to_eventDetailFragment, bundle);
     }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-            mMap = googleMap;
-            updateMap();
-            LatLng city = new LatLng(-31.618695, -60.701956);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(city,5));
-    }
 
-    private void updateMap() {
+    private void updateMap(GoogleMap googleMap) {
         if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 9999);
             return;
         }
-        mMap.setMyLocationEnabled(true);
+        googleMap.setMyLocationEnabled(true);
     }
 
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        //When map is loaded
+        updateMap(googleMap);
 
+        for (Event e: filteredEvents){
+            String address = e.getAddress().getAddress() + ", " + e.getAddress().getLocalty() + ", " + e.getAddress().getProvince();
+            LatLng location = getLocationFromAddress(this.getContext(), address);
+            ///Initialize marker options
+            MarkerOptions markerOptions = new MarkerOptions();
+            //Set position of marker
+            markerOptions.position(location);
+            //Color
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)); 
+            //Set title of marker
+            markerOptions.title(e.getName());
+            //Add marer on map
+            googleMap.addMarker(markerOptions);
+        }
+    }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
+    }
 
 }
