@@ -30,20 +30,17 @@ public class GestorEvent {
     private static GestorEvent gestorEvent;
     private DressCodeRepositoryImpl dresscodeRepository;
     private EventRepositoryImpl eventRepository;
-
     private List<Event> eventList;
     private List<DressCode> dressCodeList;
     private Event eventById;
 
-    public GestorEvent(Context context){
-
-        eventRepository = new EventRepositoryImpl(context);
-        dresscodeRepository = new DressCodeRepositoryImpl(context);
-    }
+    public GestorEvent(Context context){}
 
     public static GestorEvent getInstance(Context context){
         if(gestorEvent == null){
             gestorEvent = new GestorEvent(context);
+            gestorEvent.eventRepository = new EventRepositoryImpl(context);
+            gestorEvent.dresscodeRepository = new DressCodeRepositoryImpl(context);
         }
         return gestorEvent;
     }
@@ -125,14 +122,14 @@ public class GestorEvent {
         return events;
     }
 
-    private boolean hasMoreExpensiveTickets(List<Ticket> tickets, double minPrice) {
+    public boolean hasMoreExpensiveTickets(List<Ticket> tickets, double minPrice) {
         Optional<Ticket> hasMoreExpensiveTickets = tickets.stream()
                 .filter(t -> t.getPrice() >= minPrice && t.getAvailableQuantity() > 0)
                 .findAny();
         return hasMoreExpensiveTickets.isPresent();
     }
 
-    private boolean hasCheaperTickets(List<Ticket> tickets, double maxPrice) {
+    public boolean hasCheaperTickets(List<Ticket> tickets, double maxPrice) {
         Optional<Ticket> hasCheaperTickets = tickets.stream()
                 .filter(t -> t.getPrice() <= maxPrice && t.getAvailableQuantity() > 0)
                 .findAny();
@@ -171,16 +168,6 @@ public class GestorEvent {
 
     public double getMaxPrice() {
         return Collections.max(getPrices());
-    }
-
-    public Ticket getTicketByIdByEvent(int idTicket, int idEvent) {
-        Event event = getEventById(idEvent);
-        if(event != null){
-            List<Ticket> ticketList = event.getTickets();
-            List<Ticket> filteredTicket = ticketList.stream().filter(s -> s.getId()==idTicket).collect(Collectors.toList());
-            return filteredTicket.size() > 0 ? filteredTicket.get(0) : null;
-        }
-        return null;
     }
 
     public List<Event> getEventsOrganizedByUser(int idUser){
