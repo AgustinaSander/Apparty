@@ -35,10 +35,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
-import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
-import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener;
-import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
