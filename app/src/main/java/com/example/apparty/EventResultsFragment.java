@@ -138,16 +138,18 @@ public class EventResultsFragment extends Fragment implements ResultsRecyclerAda
         for (Event e: filteredEvents){
             String address = e.getAddress().getAddress() + ", " + e.getAddress().getLocalty() + ", " + e.getAddress().getProvince();
             LatLng location = getLocationFromAddress(this.getContext(), address);
-            ///Initialize marker options
-            MarkerOptions markerOptions = new MarkerOptions();
-            //Set position of marker
-            markerOptions.position(location);
-            //Color
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)); 
-            //Set title of marker
-            markerOptions.title(e.getName());
-            //Add marer on map
-            googleMap.addMarker(markerOptions);
+            if(location != null) {
+                ///Initialize marker options
+                MarkerOptions markerOptions = new MarkerOptions();
+                //Set position of marker
+                markerOptions.position(location);
+                //Color
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                //Set title of marker
+                markerOptions.title(e.getName());
+                //Add marer on map
+                googleMap.addMarker(markerOptions);
+            }
         }
     }
 
