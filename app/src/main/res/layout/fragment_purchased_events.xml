@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".PurchasedEventsFragment">
 
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         app:tabIndicatorColor="@color/dark_pink"
@@ -106,5 +114,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>
