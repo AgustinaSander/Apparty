@@ -132,7 +132,7 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
 
         pdfDocument.finishPage(myPage);
 
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        String path = getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString();
         File file = new File(path, purchaseInfo.getId()+"-EntradaQRApparty.pdf");
 
         if (!checkPermission()) {

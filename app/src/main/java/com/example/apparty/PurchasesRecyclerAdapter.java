@@ -167,17 +167,16 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
 
                 pdfDocument.finishPage(myPage);
 
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-                File file = new File(path, purchase.getId()+"-EntradaQRApparty.pdf");
+                //String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+                String path = purchasesHolder.root.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString();
 
+                File file = new File(path, purchase.getId()+"-EntradaQRApparty.pdf");
 
                 if (!checkPermission(purchasesHolder.root.getContext())) {
                     requestPermission(purchasesHolder.root.getContext());
                 } else {
                     try {
-
                         pdfDocument.writeTo(new FileOutputStream(file));
-
                         Toast.makeText(purchasesHolder.root.getContext(), "PDF descargado correctamente.", Toast.LENGTH_SHORT).show();
                     } catch (IOException ex) {
                         ex.printStackTrace();
