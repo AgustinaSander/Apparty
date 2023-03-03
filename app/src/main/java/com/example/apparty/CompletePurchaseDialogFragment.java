@@ -73,11 +73,6 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         generateQR();
-
-        if (!checkPermission()) {
-            requestPermission();
-        }
-
         setClickEvents();
     }
 
@@ -137,17 +132,22 @@ public class CompletePurchaseDialogFragment extends DialogFragment {
 
         pdfDocument.finishPage(myPage);
 
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        String path = getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString();
         File file = new File(path, purchaseInfo.getId()+"-EntradaQRApparty.pdf");
 
-        try {
-            pdfDocument.writeTo(new FileOutputStream(file));
+        if (!checkPermission()) {
+            requestPermission();
+        } else {
+            try {
+                pdfDocument.writeTo(new FileOutputStream(file));
 
-            Toast.makeText(getContext(), "PDF descargado correctamente.", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
+                Toast.makeText(getContext(), "PDF descargado correctamente.", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pdfDocument.close();
         }
-        pdfDocument.close();
+
     }
 
     private boolean checkPermission() {
