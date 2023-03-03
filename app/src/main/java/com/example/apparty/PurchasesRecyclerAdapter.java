@@ -1,7 +1,12 @@
 package com.example.apparty;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
@@ -161,17 +167,22 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
 
                 pdfDocument.finishPage(myPage);
 
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+                //String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+                String path = purchasesHolder.root.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString();
+
                 File file = new File(path, purchase.getId()+"-EntradaQRApparty.pdf");
 
-                try {
-                    pdfDocument.writeTo(new FileOutputStream(file));
-
-                    Toast.makeText(purchasesHolder.root.getContext(), "PDF descargado correctamente.", Toast.LENGTH_SHORT).show();
-                } catch (IOException exc) {
-                    exc.printStackTrace();
+                if (!checkPermission(purchasesHolder.root.getContext())) {
+                    requestPermission(purchasesHolder.root.getContext());
+                } else {
+                    try {
+                        pdfDocument.writeTo(new FileOutputStream(file));
+                        Toast.makeText(purchasesHolder.root.getContext(), "PDF descargado correctamente.", Toast.LENGTH_SHORT).show();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    pdfDocument.close();
                 }
-                pdfDocument.close();
             } catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -218,5 +229,15 @@ public class PurchasesRecyclerAdapter extends RecyclerView.Adapter<PurchasesRecy
     @Override
     public int getItemCount() {
         return this.purchaseList.size();
+    }
+
+    private boolean checkPermission(Context context) {
+        int permission1 = ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(context, READ_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission(Context context) {
+        ActivityCompat.requestPermissions((Activity) context, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 200);
     }
 }
